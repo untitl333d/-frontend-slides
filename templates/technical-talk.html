@@ -1,0 +1,228 @@
+<!doctype html>
+<!-- Template: technical-talk.html
+     A dark-themed template for technical talks with code, diagrams, and demos.
+     Replace {{PLACEHOLDERS}} before use.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TITLE}} — {{AUTHOR}}</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/dracula.css" id="theme">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/monokai.css">
+  <style>
+    .reveal { font-size: 36px; }
+    .reveal h1, .reveal h2 { color: #bd93f9; }
+    .reveal h3 { color: #8be9fd; }
+    .reveal pre { width: 100%; box-shadow: 0 4px 24px rgba(0,0,0,0.5); }
+    .reveal .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+    .reveal .callout { border-left: 4px solid #bd93f9; padding: .8rem 1.2rem; background: rgba(189,147,249,0.1); border-radius: 4px; margin: 1rem 0; }
+    .reveal .tag { display: inline-block; background: rgba(189,147,249,0.2); border: 1px solid #bd93f9; border-radius: 3px; padding: .1em .5em; font-size: .8em; font-family: monospace; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+  <!-- Title -->
+  <section>
+    <h1>{{TITLE}}</h1>
+    <h3>{{SUBTITLE}}</h3>
+    <p>
+      <small>{{AUTHOR}} &bull; {{CONFERENCE}} &bull; {{DATE}}</small>
+    </p>
+    <aside class="notes">Introduce yourself, the talk topic, and what the audience will learn.</aside>
+  </section>
+
+  <!-- $ whoami -->
+  <section>
+    <h2><code>$ whoami</code></h2>
+    <ul>
+      <li>{{AUTHOR_ROLE}} at {{COMPANY}}</li>
+      <li>Working on {{DOMAIN}} for {{YEARS}} years</li>
+      <li>{{FUN_FACT}}</li>
+    </ul>
+    <aside class="notes">Brief personal intro — keep it under 30 seconds.</aside>
+  </section>
+
+  <!-- Agenda -->
+  <section>
+    <h2>What we'll cover</h2>
+    <ul>
+      <li class="fragment">Problem statement</li>
+      <li class="fragment">Existing approaches &amp; their trade-offs</li>
+      <li class="fragment">Our solution</li>
+      <li class="fragment">Live demo</li>
+      <li class="fragment">Results &amp; lessons learned</li>
+    </ul>
+  </section>
+
+  <!-- Problem -->
+  <section>
+    <section>
+      <h2>The Problem</h2>
+      <p class="fragment">{{PROBLEM_STATEMENT}}</p>
+      <div class="callout fragment">
+        Key insight: {{KEY_INSIGHT}}
+      </div>
+    </section>
+    <section>
+      <h2>Why This Matters</h2>
+      <ul>
+        <li class="fragment">{{IMPACT_1}}</li>
+        <li class="fragment">{{IMPACT_2}}</li>
+        <li class="fragment">{{IMPACT_3}}</li>
+      </ul>
+    </section>
+  </section>
+
+  <!-- Prior art -->
+  <section>
+    <h2>Existing Approaches</h2>
+    <div class="cols">
+      <div>
+        <h4>Approach A <span class="tag">current</span></h4>
+        <ul>
+          <li>✓ {{PRO_A}}</li>
+          <li>✗ {{CON_A}}</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Approach B <span class="tag">common</span></h4>
+        <ul>
+          <li>✓ {{PRO_B}}</li>
+          <li>✗ {{CON_B}}</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solution -->
+  <section>
+    <section>
+      <h2>Our Solution</h2>
+      <p>{{SOLUTION_OVERVIEW}}</p>
+    </section>
+    <section>
+      <h2>Architecture</h2>
+      <!-- Replace with an actual diagram image -->
+      <img src="img/architecture.png" alt="Architecture diagram" style="max-height:400px">
+      <aside class="notes">Walk through the components left to right.</aside>
+    </section>
+    <section>
+      <h2>Key Implementation</h2>
+      <pre><code class="language-{{LANG}}" data-trim data-noescape>
+{{CODE_EXAMPLE}}
+      </code></pre>
+      <p class="fragment"><small>{{CODE_EXPLANATION}}</small></p>
+    </section>
+  </section>
+
+  <!-- Demo -->
+  <section data-background="#1a1a2e">
+    <h2>Demo Time</h2>
+    <p>🎬 Live demonstration</p>
+    <aside class="notes">
+      Demo steps:
+      1. {{DEMO_STEP_1}}
+      2. {{DEMO_STEP_2}}
+      3. {{DEMO_STEP_3}}
+      Fallback: show screenshot at img/demo-screenshot.png if live demo fails.
+    </aside>
+  </section>
+
+  <!-- Results -->
+  <section>
+    <h2>Results</h2>
+    <div class="cols">
+      <div>
+        <h4>Before</h4>
+        <ul>
+          <li>{{METRIC_BEFORE_1}}</li>
+          <li>{{METRIC_BEFORE_2}}</li>
+        </ul>
+      </div>
+      <div>
+        <h4>After</h4>
+        <ul>
+          <li>{{METRIC_AFTER_1}}</li>
+          <li>{{METRIC_AFTER_2}}</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lessons learned -->
+  <section>
+    <h2>Lessons Learned</h2>
+    <ul>
+      <li class="fragment">{{LESSON_1}}</li>
+      <li class="fragment">{{LESSON_2}}</li>
+      <li class="fragment">{{LESSON_3}}</li>
+    </ul>
+  </section>
+
+  <!-- Conclusion -->
+  <section>
+    <h2>Key Takeaways</h2>
+    <ol>
+      <li class="fragment">{{TAKEAWAY_1}}</li>
+      <li class="fragment">{{TAKEAWAY_2}}</li>
+      <li class="fragment">{{TAKEAWAY_3}}</li>
+    </ol>
+    <div class="callout fragment">
+      {{CALL_TO_ACTION}}
+    </div>
+  </section>
+
+  <!-- Resources -->
+  <section>
+    <h2>Resources</h2>
+    <ul>
+      <li>Slides: <code>{{SLIDES_URL}}</code></li>
+      <li>Repo: <code>{{REPO_URL}}</code></li>
+      <li>Docs: <code>{{DOCS_URL}}</code></li>
+    </ul>
+  </section>
+
+  <!-- Thank you -->
+  <section>
+    <h2>Thank You!</h2>
+    <p>Questions?</p>
+    <br>
+    <p>
+      <small>
+        {{AUTHOR}} &bull;
+        <a href="https://{{SOCIAL_HANDLE}}">@{{SOCIAL_HANDLE}}</a> &bull;
+        {{EMAIL}}
+      </small>
+    </p>
+    <aside class="notes">Open the floor. Have a few backup slides after this if needed.</aside>
+  </section>
+
+  <!-- Backup slides (hidden from main flow) -->
+  <section data-visibility="hidden">
+    <h2>Appendix: {{APPENDIX_TOPIC}}</h2>
+    <p>Additional detail for curious audience members.</p>
+  </section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/markdown/markdown.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    progress: true,
+    transition: 'slide',
+    plugins: [ RevealNotes, RevealHighlight, RevealMarkdown ]
+  });
+</script>
+</body>
+</html>

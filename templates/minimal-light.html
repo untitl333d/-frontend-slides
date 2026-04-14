@@ -1,0 +1,178 @@
+<!doctype html>
+<!-- Template: minimal-light.html
+     A clean, minimal light-themed template for product, business, or educational talks.
+     Replace {{PLACEHOLDERS}} before use.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TITLE}}</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/white.css" id="theme">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/github.css">
+  <style>
+    :root { --accent: {{BRAND_COLOR, e.g. #0070f3}}; }
+    .reveal { font-size: 34px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .reveal h1, .reveal h2, .reveal h3 { color: var(--accent); font-weight: 700; }
+    .reveal pre { box-shadow: 0 2px 12px rgba(0,0,0,0.12); width: 100%; }
+    .reveal .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+    .reveal .cols-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; }
+    .reveal .card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.2rem; text-align: center; }
+    .reveal .card h4 { color: var(--accent); margin-bottom: .5rem; }
+    .reveal .big-number { font-size: 4rem; font-weight: 800; color: var(--accent); }
+    .reveal .section-divider { background: var(--accent); color: white; }
+    .reveal .section-divider h2 { color: white; }
+    .reveal blockquote { border-left: 4px solid var(--accent); background: #f8f9fa; border-radius: 4px; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+  <!-- Cover -->
+  <section class="section-divider">
+    <br><br>
+    <h1>{{TITLE}}</h1>
+    <h3>{{SUBTITLE}}</h3>
+    <br>
+    <p><small>{{AUTHOR}} &bull; {{DATE}}</small></p>
+  </section>
+
+  <!-- Agenda -->
+  <section>
+    <h2>Today's Agenda</h2>
+    <div class="cols-3">
+      <div class="card fragment">
+        <div style="font-size:2rem">01</div>
+        <h4>{{SECTION_1}}</h4>
+        <p style="font-size:.7em">{{SECTION_1_BRIEF}}</p>
+      </div>
+      <div class="card fragment">
+        <div style="font-size:2rem">02</div>
+        <h4>{{SECTION_2}}</h4>
+        <p style="font-size:.7em">{{SECTION_2_BRIEF}}</p>
+      </div>
+      <div class="card fragment">
+        <div style="font-size:2rem">03</div>
+        <h4>{{SECTION_3}}</h4>
+        <p style="font-size:.7em">{{SECTION_3_BRIEF}}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section divider -->
+  <section class="section-divider">
+    <h2>01. {{SECTION_1}}</h2>
+  </section>
+
+  <!-- Quote / inspiration -->
+  <section>
+    <blockquote>
+      "{{QUOTE}}"
+      <br><small>— {{QUOTE_AUTHOR}}</small>
+    </blockquote>
+  </section>
+
+  <!-- Content with stats -->
+  <section>
+    <h2>{{SLIDE_TITLE}}</h2>
+    <div class="cols">
+      <div>
+        <ul>
+          <li class="fragment">{{POINT_1}}</li>
+          <li class="fragment">{{POINT_2}}</li>
+          <li class="fragment">{{POINT_3}}</li>
+        </ul>
+      </div>
+      <div style="text-align:center">
+        <div class="big-number fragment">{{STAT}}</div>
+        <p style="font-size:.7em">{{STAT_LABEL}}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image full-bleed -->
+  <section data-background-image="img/{{IMAGE}}.jpg" data-background-opacity="0.15">
+    <h2>{{SLIDE_TITLE}}</h2>
+    <p>{{SLIDE_CONTENT}}</p>
+  </section>
+
+  <!-- Section divider -->
+  <section class="section-divider">
+    <h2>02. {{SECTION_2}}</h2>
+  </section>
+
+  <!-- Three cards -->
+  <section>
+    <h2>{{SLIDE_TITLE}}</h2>
+    <div class="cols-3">
+      <div class="card fragment">
+        <div style="font-size:2.5rem">{{ICON_1}}</div>
+        <h4>{{CARD_1_TITLE}}</h4>
+        <p style="font-size:.7em">{{CARD_1_BODY}}</p>
+      </div>
+      <div class="card fragment">
+        <div style="font-size:2.5rem">{{ICON_2}}</div>
+        <h4>{{CARD_2_TITLE}}</h4>
+        <p style="font-size:.7em">{{CARD_2_BODY}}</p>
+      </div>
+      <div class="card fragment">
+        <div style="font-size:2.5rem">{{ICON_3}}</div>
+        <h4>{{CARD_3_TITLE}}</h4>
+        <p style="font-size:.7em">{{CARD_3_BODY}}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section divider -->
+  <section class="section-divider">
+    <h2>03. {{SECTION_3}}</h2>
+  </section>
+
+  <!-- Timeline -->
+  <section>
+    <h2>{{TIMELINE_TITLE}}</h2>
+    <table style="font-size:.8em;width:100%">
+      <tr class="fragment"><td style="color:var(--accent);font-weight:bold;width:20%">{{DATE_1}}</td><td>{{EVENT_1}}</td></tr>
+      <tr class="fragment"><td style="color:var(--accent);font-weight:bold">{{DATE_2}}</td><td>{{EVENT_2}}</td></tr>
+      <tr class="fragment"><td style="color:var(--accent);font-weight:bold">{{DATE_3}}</td><td>{{EVENT_3}}</td></tr>
+      <tr class="fragment"><td style="color:var(--accent);font-weight:bold">{{DATE_4}} ★</td><td><strong>{{EVENT_4}}</strong></td></tr>
+    </table>
+  </section>
+
+  <!-- Call to action -->
+  <section class="section-divider">
+    <h2>{{CTA_HEADING}}</h2>
+    <p style="font-size:1.2em">{{CTA_BODY}}</p>
+    <br>
+    <p><code style="background:rgba(255,255,255,0.2);padding:.3em .6em;border-radius:4px">{{CTA_LINK_OR_CODE}}</code></p>
+  </section>
+
+  <!-- Thank you -->
+  <section>
+    <br><br>
+    <h1>Thank You</h1>
+    <p>{{AUTHOR}}</p>
+    <p><small>{{CONTACT}}</small></p>
+  </section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: false,
+    progress: true,
+    transition: 'fade',
+    transitionSpeed: 'fast',
+    plugins: [ RevealNotes, RevealHighlight ]
+  });
+</script>
+</body>
+</html>
