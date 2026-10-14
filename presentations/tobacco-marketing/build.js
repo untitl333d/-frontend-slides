@@ -153,7 +153,7 @@ const chartBase = () => ({
     const s = addContent("Flashback", "The most famous ad in history", "SPLIT_PICTURE");
     previewSlots(s, [SPLIT]);
     txt(s, "1954", { x: TX, y: 1.6, w: TW, h: 0.8, fontSize: 44, bold: true, color: RED });
-    txt(s, "Marlboro was a “ladies’” cigarette, sold with the slogan “Mild as May”.", { x: TX, y: 2.55, w: TW, h: 1.0, fontSize: 20, color: BODY });
+    txt(s, "Marlboro was a “ladies” cigarette, sold with the slogan “Mild as May”.", { x: TX, y: 2.55, w: TW, h: 1.0, fontSize: 20, color: BODY });
     txt(s, "Then an ad agency gave it a cowboy.", { x: TX, y: 3.7, w: TW, h: 0.9, fontSize: 24, bold: true, color: NAVY });
     txt(s, "Same cigarette. New story. It became one of the best-selling brands in the world.", { x: TX, y: 4.8, w: TW, h: 1.0, fontSize: 18, color: BODY });
     s.addNotes("(~50 s) Meet the Marlboro Man. In the early 1950s Marlboro was a cigarette for women, sold with the slogan 'Mild as May'. Then in 1954 the Leo Burnett agency did something brilliant: they didn't change the cigarette at all. They changed the story. They gave it a cowboy: freedom, wide open spaces, a real man. Within a few years Marlboro became one of the best-selling brands in the world. That's the power of marketing: same product, new meaning.\n\nPicture suggestion: a classic Marlboro Man print ad.");
@@ -242,8 +242,8 @@ const chartBase = () => ({
     const sx = 8.85, sw = R - sx;
     txt(s, "Teenagers had almost stopped smoking.", { x: sx, y: 1.7, w: sw, h: 1.0, fontSize: 20, color: BODY });
     txt(s, "Then, in a few years, 1 in 4 high-schoolers was vaping.", { x: sx, y: 2.9, w: sw, h: 1.5, fontSize: 26, bold: true, color: RED });
-    txt(s, "When regulators banned the sweet flavours, the curve went down again.", { x: sx, y: 4.6, w: sw, h: 1.2, fontSize: 18, color: BODY });
-    s.addNotes("(~50 s) And now the plot twist. By the 2010s, teenagers had almost stopped smoking cigarettes. The story could have ended there. But then came the vape. Look at American high-school students: in 2011, almost nobody vaped. By 2019, one in four. That's not a product success, that's a marketing success. And look what happened when regulators banned most sweet flavours: the curve went down again. So how did vapes reach kids so fast?");
+    txt(s, "When regulators cracked down on sweet flavours, the curve went down again.", { x: sx, y: 4.6, w: sw, h: 1.2, fontSize: 18, color: BODY });
+    s.addNotes("(~50 s) And now the plot twist. By the 2010s, teenagers had almost stopped smoking cigarettes. The story could have ended there. But then came the vape. Look at American high-school students: in 2011, almost nobody vaped. By 2019, one in four. That's not a product success, that's a marketing success. And look what happened when regulators cracked down on sweet flavours: the curve went down again. So how did vapes reach kids so fast?");
   }
 
   // ===== 10. Why kids =====

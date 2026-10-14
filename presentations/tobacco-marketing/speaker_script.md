@@ -52,7 +52,7 @@ Picture suggestion: a capsule ('click') cigarette pack.
 
 ## 9. Then came the vape
 
-(~50 s) And now the plot twist. By the 2010s, teenagers had almost stopped smoking cigarettes. The story could have ended there. But then came the vape. Look at American high-school students: in 2011, almost nobody vaped. By 2019, one in four. That's not a product success, that's a marketing success. And look what happened when regulators banned most sweet flavours: the curve went down again. So how did vapes reach kids so fast?
+(~50 s) And now the plot twist. By the 2010s, teenagers had almost stopped smoking cigarettes. The story could have ended there. But then came the vape. Look at American high-school students: in 2011, almost nobody vaped. By 2019, one in four. That's not a product success, that's a marketing success. And look what happened when regulators cracked down on sweet flavours: the curve went down again. So how did vapes reach kids so fast?
 
 ## 10. Why vapes speak to kids
 
