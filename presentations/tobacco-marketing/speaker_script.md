@@ -5,7 +5,7 @@ Target length: about 10 minutes. The same text is in the PowerPoint speaker note
 
 ## 1. Title
 
-(~15 s) Good afternoon. I'm Amir, and my topic is tobacco marketing on international markets. But before I say anything about marketing, I want to show you some packs.
+(~15 s) Good afternoon. I'm Amir, and my topic is tobacco marketing on international markets: not the business side, but the marketing itself. Before I say anything, I want to show you some packs.
 
 Photo circle: right-click the circle > Format Shape > Fill > Picture fill to insert a portrait.
 
@@ -20,21 +20,21 @@ C = Kyrgyzstan: pack with the 50% picture warning in Kyrgyz/Russian (Eurasian Ec
 D = Australia: plain drab dark brown pack, 75% warning on the front.
 Click the picture icon in each box to insert a photo; it fills and crops automatically.
 
-## 3. Same cigarettes, four different rulebooks
+## 3. Same cigarettes, four ways to brand a pack
 
-(~45 s) A is the USA: the brand still owns the pack. B is Hungary, the pack you see in every Nemzeti Dohánybolt. C is Kyrgyzstan: half of the pack is a picture warning, under the common rules of the Eurasian Economic Union. D is Australia, the first country with plain packs. Same product, often the same company, but four completely different rulebooks. And that is the story I want to tell today: how the industry keeps selling when, one by one, the doors close.
+(~45 s) Here are the answers, and look at them as a marketer: how much of the pack is still yours? A is the USA: the whole front is still brand. B is Hungary, the pack you see in every Nemzeti Dohánybolt: no logo, no colours, just the name. C is Kyrgyzstan: half for the brand, half for the warning. D is Australia, the first plain pack: a quarter of the front, in the least attractive colour researchers could find. Same cigarettes, four completely different marketing toolboxes. That is today's story: how tobacco marketing keeps working when, one by one, its tools are taken away.
 
-## 4. The marketer’s problem
+## 4. The golden age of tobacco advertising
 
-(~40 s) Imagine you are the marketing manager. Your product has 1.2 billion customers, most of them in developing countries. But almost every country in the world has signed a treaty that says: you may not advertise. So how do you market it? Let me tell this story in three chapters.
+(~50 s) To understand tobacco marketing today, remember how powerful it used to be. In 1954 the Leo Burnett agency took Marlboro, a filter cigarette sold to women with the slogan 'Mild as May', and turned it into the Marlboro Man, one of the most successful repositionings in marketing history. From 1968, when Gold Leaf sponsored Team Lotus, cigarette brands were painted on Formula 1 cars. And in 1988 came Joe Camel, a cartoon: a 1991 study found that 91% of six-year-olds recognised him, as many as recognised Mickey Mouse. Then all of this was banned. So how do you market a product you're not allowed to advertise?
 
-## 5. One by one, the doors closed
+## 5. One by one, marketers lost their tools
 
-(~45 s) Chapter one: the doors close. In 2003 the WHO treaty bans advertising. In 2009 the US bans flavoured cigarettes, except menthol. In 2012 Australia takes the logo off the pack. In 2020 the EU bans menthol. And this year the UK passed a law that nobody born after 2008 can ever legally buy tobacco. Every time a door closed, marketers looked for the next one.
+(~45 s) Chapter one: the marketing toolbox is taken away, piece by piece. In 2003 the WHO treaty bans advertising, promotion and sponsorship. In 2009 the US bans sweet flavours in cigarettes. In 2012 Australia takes the logo off the pack. In 2020 the EU bans menthol. In 2025 Kyrgyzstan bans nicotine vapes completely. And this year the UK passed a law that anyone born after 2008 can never legally buy tobacco: a whole generation of customers gone. Every time a tool was lost, marketers looked for another one.
 
 ## 6. Did it work? Teenagers stopped smoking
 
-(~50 s) Did it work? Look at American high-school students. In 1999, almost 3 in 10 smoked. By 2019 it was under 6 in 100: five times fewer. Researchers found that the 2009 flavour ban alone cut the chance that a teenager smokes by about 17%. So the cigarette lost the teenagers. But, and this is the twist, nicotine didn't. Before we get there, let's look at what happened to the pack.
+(~50 s) Did it work? Look at American high-school students. In 1999, almost 3 in 10 smoked. By 2019 it was under 6 in 100: five times fewer. Researchers found that the 2009 flavour ban alone cut the chance that a teenager smokes by about 17%. Without ads, cartoons and sweet flavours, cigarettes lost the teenagers. But, and this is the twist, nicotine didn't. Before we get there, let's look at the last marketing tool cigarettes still have: the pack.
 
 ## 7. The pack became the last billboard
 
@@ -42,13 +42,13 @@ Click the picture icon in each box to insert a photo; it fills and crops automat
 
 ## 8. Every country has its own taste
 
-(~45 s) Chapter two: the sweet door. If you can't change the advertising, you change the product. In Kyrgyzstan the local habit is nasvay, a chewing tobacco: it is the only smokeless product the law still allows, and it has not been taxed like cigarettes. In Japan menthol is mainstream. In Latin America, capsule cigarettes let you click a ball in the filter and change the taste. And in the US, menthol was advertised so heavily in Black neighbourhoods that today about 85% of Black smokers use menthol.
+(~40 s) Chapter two: the sweet door. If you can't change the advertising, you change the product, and flavour is the easiest way to fit a local culture. In Kyrgyzstan the local habit is nasvay, a chewing tobacco: the only smokeless product the law still allows. In Japan menthol and 'ice' flavours are mainstream. In Latin America, capsule cigarettes let you click a ball in the filter and change the taste: product innovation as entertainment. In the Middle East it's flavoured shisha.
 
 Picture suggestion: a capsule ('click') pack or a pack of nasvay.
 
-## 9. Why governments ban flavours
+## 9. Why flavours work, and why they get banned
 
-(~50 s) Why do governments ban flavours? Menthol numbs the throat, so the first cigarette doesn't hurt. Sweet flavours make perfect starter products. And they were used to target specific groups. Here's my favourite story. In 2009 the US banned clove cigarettes, but kept menthol. Who makes clove cigarettes? Indonesia. Who makes menthol? American companies. Indonesia sued at the WTO and won in 2012. Health policy became trade policy, which is exactly why international marketers must watch regulation.
+(~50 s) Why do flavours work so well? Menthol numbs the throat, so the first cigarette doesn't hurt. Sweet flavours make perfect starter products. And a flavour can be built for one specific community. The clearest case is menthol in the United States. From the 1950s, companies advertised menthol brands in Black magazines, sponsored events like the Kool Jazz Festival, and handed out free samples in Black neighbourhoods. Today about 85% of Black American smokers use menthol. That is targeted marketing at its most effective, and exactly why governments started banning flavours.
 
 ## 10. Then came the vape
 
@@ -56,12 +56,12 @@ Picture suggestion: a capsule ('click') pack or a pack of nasvay.
 
 ## 11. Why vapes speak to kids
 
-(~50 s) Why did vapes reach kids so fast? Four reasons, and they are pure marketing. Flavours: bubblegum, mango, cotton candy. Design: colourful, looks like a USB stick, easy to hide from parents and teachers. Social media: influencers and TikTok, where tobacco ad bans were never written for. And price: cheap disposables at every kiosk. The companies say vapes are for adult smokers who want to quit. But JUUL paid 462 million dollars to six US states over marketing to young people, and the head of the WHO called it a 'candy-flavoured trap'.
+(~50 s) Why did vapes reach kids so fast? Four reasons, and every one of them is a marketing decision. Flavours: bubblegum, mango, cotton candy. Design: colourful, looks like a USB stick, easy to hide from parents and teachers. Social media: influencers and TikTok, a channel the old ad bans were never written for. And price: cheap disposables at every kiosk. The companies say vapes are for adult smokers who want to quit. But JUUL paid 462 million dollars to US states over marketing to young people, and the WHO calls it a 'candy-flavoured trap'. It is the Joe Camel playbook, just moved to the phone.
 
 ## 12. Marketing without advertising: the 4Ps
 
-(~40 s) So what did marketers learn? When mass media is closed, the other three Ps do the work. Product: new formats. Price: single sticks and cheap disposables. Place: kiosks and online. Promotion: sponsorships, influencers and the pack. And the big companies are not losing this game: Philip Morris already earns 41.5% of its revenue from heated tobacco and nicotine pouches.
+(~40 s) So what did marketers learn? When mass media is closed, the other three Ps do the work. Product: new formats like capsules, vapes and pouches. Price: single sticks and cheap disposables that fit a teenager's pocket money. Place: kiosks, shop displays, duty-free and online. And promotion didn't disappear, it moved: from TV, billboards and magazines to the pack, the shop and the phone.
 
 ## 13. The story in three chapters
 
-(~40 s) So, three chapters. First, the doors closed, and teenagers stopped smoking. Second, flavours became the sweet door, until governments closed that too. Third, vapes opened a new door straight into teenagers' phones. My conclusion: tobacco marketing didn't disappear, it moved. And my question for you: since July 2025 Kyrgyzstan has banned the import, sale and use of nicotine vapes completely. Should other countries follow, or are plain packs and no flavours enough? Thank you.
+(~40 s) So, three chapters. First, the marketing tools were taken away, and teenagers stopped smoking. Second, flavours became the sweet door, fitting the product to every culture and every target group. Third, vapes opened a new door straight into teenagers' phones. My conclusion: tobacco marketing didn't disappear, it moved. And my question for you: where is the line between marketing a legal product and marketing to children? Thank you.

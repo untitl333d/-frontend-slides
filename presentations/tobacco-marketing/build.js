@@ -133,11 +133,11 @@ const bullets = (s, items, o) => s.addText(
     const s = pres.addSlide({ masterName: "TITLE" });
     txt(s, "International Marketing  ·  Individual presentation", { x: 0.8, y: 1.15, w: 8.4, h: 0.4, fontSize: 14, color: LIGHT, bold: true, charSpacing: 1 });
     txt(s, "Tobacco Marketing on International Markets", { x: 0.8, y: 1.7, w: 8.2, h: 2.3, fontSize: 40, bold: true, color: WHITE });
-    txt(s, "How to sell a product nobody lets you advertise", { x: 0.8, y: 4.15, w: 8.0, h: 0.9, fontSize: 22, color: LIGHT });
+    txt(s, "How to market a product nobody lets you advertise", { x: 0.8, y: 4.15, w: 8.0, h: 0.9, fontSize: 22, color: LIGHT });
     txt(s, "Corvinus University of Budapest  ·  Fall 2026", { x: 0.8, y: 6.35, w: 7.4, h: 0.4, fontSize: 14, color: LIGHT });
     s.addShape(pres.shapes.OVAL, { x: 9.95, y: 2.0, w: 2.0, h: 2.0, fill: { color: "1B3A5C" }, line: { color: WHITE, width: 1.5 }, objectName: "Photo Amir Kenenbaev" });
     txt(s, "Amir Kenenbaev", { x: 9.65, y: 4.2, w: 2.6, h: 0.4, fontSize: 15, color: WHITE, bold: true, align: "center" });
-    s.addNotes("(~15 s) Good afternoon. I'm Amir, and my topic is tobacco marketing on international markets. But before I say anything about marketing, I want to show you some packs.\n\nPhoto circle: right-click the circle > Format Shape > Fill > Picture fill to insert a portrait.");
+    s.addNotes("(~15 s) Good afternoon. I'm Amir, and my topic is tobacco marketing on international markets: not the business side, but the marketing itself. Before I say anything, I want to show you some packs.\n\nPhoto circle: right-click the circle > Format Shape > Fill > Picture fill to insert a portrait.");
   }
 
   // ===== 2. Quiz =====
@@ -161,63 +161,65 @@ const bullets = (s, items, o) => s.addText(
 
   // ===== 3. Reveal =====
   {
-    const s = addContent("Prologue", "Same cigarettes, four different rulebooks", "PACK_REVEAL");
+    const s = addContent("Prologue", "Same cigarettes, four ways to brand a pack", "PACK_REVEAL");
     previewSlots(s, REVEAL);
     [
-      ["A  ·  USA", "Text only", "Small warning on the side. The brand owns the front."],
-      ["B  ·  Hungary", "65%", "Picture warnings and a plain pack since 2022."],
-      ["C  ·  Kyrgyzstan", "50%", "Picture warnings under Eurasian Economic Union rules."],
-      ["D  ·  Australia", "75%", "The world’s first plain packs (2012)."],
+      ["A  ·  USA", "100%", "The whole front is still brand: logo, colours, design."],
+      ["B  ·  Hungary", "35%", "No logo, no colours: only the name in a plain font."],
+      ["C  ·  Kyrgyzstan", "50%", "Half the front for the brand, half for a picture warning."],
+      ["D  ·  Australia", "25%", "The first plain packs (2012): name only, drab brown."],
     ].forEach(([h, n, b], i) => {
       const x = REVEAL[i].x, w = REVEAL[i].w;
       txt(s, h, { x, y: 3.95, w, h: 0.35, fontSize: 16, bold: true, color: RED });
       txt(s, n, { x, y: 4.35, w, h: 0.7, fontSize: 36, bold: true, color: NAVY });
       txt(s, b, { x, y: 5.15, w, h: 0.9, fontSize: 15, color: BODY });
     });
-    source(s, "Warning size = share of the pack front. Sources: Canadian Cancer Society (2025); Tobacco Control Laws (2025).");
-    s.addNotes("(~45 s) A is the USA: the brand still owns the pack. B is Hungary, the pack you see in every Nemzeti Dohánybolt. C is Kyrgyzstan: half of the pack is a picture warning, under the common rules of the Eurasian Economic Union. D is Australia, the first country with plain packs. Same product, often the same company, but four completely different rulebooks. And that is the story I want to tell today: how the industry keeps selling when, one by one, the doors close.");
+    source(s, "Share of the pack front left to the brand after the health warning. Sources: Canadian Cancer Society (2025); Tobacco Control Laws (2025).");
+    s.addNotes("(~45 s) Here are the answers, and look at them as a marketer: how much of the pack is still yours? A is the USA: the whole front is still brand. B is Hungary, the pack you see in every Nemzeti Dohánybolt: no logo, no colours, just the name. C is Kyrgyzstan: half for the brand, half for the warning. D is Australia, the first plain pack: a quarter of the front, in the least attractive colour researchers could find. Same cigarettes, four completely different marketing toolboxes. That is today's story: how tobacco marketing keeps working when, one by one, its tools are taken away.");
   }
 
-  // ===== 4. The marketer's problem =====
+  // ===== 4. The golden age =====
   {
-    const s = addContent("Prologue", "The marketer’s problem");
-    txt(s, "How do you sell a product to 1.2 billion people when most of the world won’t let you advertise it?", { x: L, y: 1.7, w: W, h: 1.6, fontSize: 32, bold: true, color: NAVY });
+    const s = addContent("Prologue", "The golden age of tobacco advertising");
     const cw = (W - 0.6) / 3;
     [
-      ["1.2 bn", "people use tobacco: about 1 adult in 5", "WHO, 2025"],
-      ["80%", "of them live in low- and middle-income countries", "WHO"],
-      ["183", "parties to the WHO treaty that bans tobacco ads", "WHO FCTC"],
-    ].forEach(([n, l, src], i) => {
+      ["1954", "The Marlboro Man", "A filter cigarette once sold to women as “Mild as May” became a symbol of the rugged cowboy."],
+      ["1968", "Formula 1", "Gold Leaf Lotus started it. Marlboro, Camel and others followed on the fastest cars in the world."],
+      ["1988", "Joe Camel", "A cartoon camel. 91% of 6-year-olds recognised him, as many as knew Mickey Mouse."],
+    ].forEach(([d, h, b], i) => {
       const x = L + i * (cw + 0.3);
-      card(s, x, 3.9, cw, 2.3, { fill: TINT, line: TINT });
-      txt(s, n, { x: x + 0.35, y: 4.1, w: cw - 0.7, h: 0.85, fontSize: 44, bold: true, color: RED });
-      txt(s, l, { x: x + 0.35, y: 5.0, w: cw - 0.7, h: 0.75, fontSize: 16, color: BODY });
-      txt(s, src, { x: x + 0.35, y: 5.8, w: cw - 0.7, h: 0.25, fontSize: 10, color: GREY, italic: true });
+      card(s, x, 1.5, cw, 3.55);
+      txt(s, d, { x: x + 0.35, y: 1.7, w: cw - 0.7, h: 0.75, fontSize: 36, bold: true, color: RED });
+      txt(s, h, { x: x + 0.35, y: 2.55, w: cw - 0.7, h: 0.45, fontSize: 21, bold: true, color: NAVY });
+      txt(s, b, { x: x + 0.35, y: 3.1, w: cw - 0.7, h: 1.8, fontSize: 16, color: BODY });
     });
-    s.addNotes("(~40 s) Imagine you are the marketing manager. Your product has 1.2 billion customers, most of them in developing countries. But almost every country in the world has signed a treaty that says: you may not advertise. So how do you market it? Let me tell this story in three chapters.");
+    banner(s, [{ text: "Then the ads were banned.  " }, { text: "How do you market a product you can’t advertise?", options: { color: "F2B8B8" } }], 5.4, 0.95, 20);
+    source(s, "Fischer et al., JAMA (1991); Marlboro Man: Leo Burnett for Philip Morris.", L, 6.5);
+    s.addNotes("(~50 s) To understand tobacco marketing today, remember how powerful it used to be. In 1954 the Leo Burnett agency took Marlboro, a filter cigarette sold to women with the slogan 'Mild as May', and turned it into the Marlboro Man, one of the most successful repositionings in marketing history. From 1968, when Gold Leaf sponsored Team Lotus, cigarette brands were painted on Formula 1 cars. And in 1988 came Joe Camel, a cartoon: a 1991 study found that 91% of six-year-olds recognised him, as many as recognised Mickey Mouse. Then all of this was banned. So how do you market a product you're not allowed to advertise?");
   }
 
   // ===== 5. Doors close =====
   {
-    const s = addContent("Chapter 1  ·  Closing the doors", "One by one, the doors closed");
+    const s = addContent("Chapter 1  ·  Closing the doors", "One by one, marketers lost their tools");
     const ms = [
-      ["2003", "WHO treaty", "Tobacco ads banned"],
-      ["2009", "USA", "Flavoured cigarettes banned (not menthol)"],
-      ["2012", "Australia", "World’s first plain packs"],
-      ["2020", "European Union", "Menthol banned"],
-      ["2026", "United Kingdom", "Nobody born after 2008 can ever buy"],
+      ["2003", "WHO treaty", "Lost: ads, promotion, sponsorship"],
+      ["2009", "USA", "Lost: sweet flavours"],
+      ["2012", "Australia", "Lost: the logo on the pack"],
+      ["2020", "European Union", "Lost: menthol"],
+      ["2025", "Kyrgyzstan", "Lost: the whole vape category"],
+      ["2026", "United Kingdom", "Lost: a whole generation of customers"],
     ];
-    const x0 = 2.0, x1 = 11.6, ly = 2.9, step = (x1 - x0) / (ms.length - 1);
+    const x0 = 1.9, x1 = 11.7, ly = 2.9, step = (x1 - x0) / (ms.length - 1);
     s.addShape(pres.shapes.LINE, { x: x0, y: ly, w: x1 - x0, h: 0, line: { color: LIGHT, width: 3 } });
     ms.forEach(([d, t, e], i) => {
       const cx = x0 + i * step, last = i === ms.length - 1, col = last ? RED : NAVY;
       s.addShape(pres.shapes.OVAL, { x: cx - 0.19, y: ly - 0.19, w: 0.38, h: 0.38, fill: { color: col }, line: { color: WHITE, width: 2 } });
-      txt(s, d, { x: cx - 1.1, y: ly - 1.0, w: 2.2, h: 0.55, fontSize: 26, bold: true, color: col, align: "center" });
-      txt(s, t, { x: cx - 1.1, y: ly + 0.45, w: 2.2, h: 0.4, fontSize: 17, bold: true, color: col, align: "center" });
-      txt(s, e, { x: cx - 1.1, y: ly + 0.9, w: 2.2, h: 0.85, fontSize: 15, color: BODY, align: "center" });
+      txt(s, d, { x: cx - 0.95, y: ly - 1.0, w: 1.9, h: 0.55, fontSize: 26, bold: true, color: col, align: "center" });
+      txt(s, t, { x: cx - 0.95, y: ly + 0.45, w: 1.9, h: 0.4, fontSize: 16, bold: true, color: col, align: "center" });
+      txt(s, e, { x: cx - 0.95, y: ly + 0.9, w: 1.9, h: 0.85, fontSize: 14, color: BODY, align: "center" });
     });
-    banner(s, "Every closed door pushed marketers to look for another one.", 5.55, 0.85, 20);
-    s.addNotes("(~45 s) Chapter one: the doors close. In 2003 the WHO treaty bans advertising. In 2009 the US bans flavoured cigarettes, except menthol. In 2012 Australia takes the logo off the pack. In 2020 the EU bans menthol. And this year the UK passed a law that nobody born after 2008 can ever legally buy tobacco. Every time a door closed, marketers looked for the next one.");
+    banner(s, "Every lost tool pushed marketers to look for another one.", 5.55, 0.85, 20);
+    s.addNotes("(~45 s) Chapter one: the marketing toolbox is taken away, piece by piece. In 2003 the WHO treaty bans advertising, promotion and sponsorship. In 2009 the US bans sweet flavours in cigarettes. In 2012 Australia takes the logo off the pack. In 2020 the EU bans menthol. In 2025 Kyrgyzstan bans nicotine vapes completely. And this year the UK passed a law that anyone born after 2008 can never legally buy tobacco: a whole generation of customers gone. Every time a tool was lost, marketers looked for another one.");
   }
 
   // ===== 6. Did it work? =====
@@ -236,7 +238,7 @@ const bullets = (s, items, o) => s.addText(
     txt(s, "lower chance that a teenager smokes after the 2009 US flavour ban", { x: sx, y: 4.1, w: sw, h: 0.7, fontSize: 16, color: BODY });
     txt(s, "Courtemanche, Palmer & Pesko (2017)", { x: sx, y: 4.85, w: sw, h: 0.25, fontSize: 10, color: GREY, italic: true });
     banner(s, [{ text: "Cigarettes lost the teenagers.  " }, { text: "But nicotine didn’t.", options: { color: "F2B8B8" } }], 5.75, 0.8, 20);
-    s.addNotes("(~50 s) Did it work? Look at American high-school students. In 1999, almost 3 in 10 smoked. By 2019 it was under 6 in 100: five times fewer. Researchers found that the 2009 flavour ban alone cut the chance that a teenager smokes by about 17%. So the cigarette lost the teenagers. But, and this is the twist, nicotine didn't. Before we get there, let's look at what happened to the pack.");
+    s.addNotes("(~50 s) Did it work? Look at American high-school students. In 1999, almost 3 in 10 smoked. By 2019 it was under 6 in 100: five times fewer. Researchers found that the 2009 flavour ban alone cut the chance that a teenager smokes by about 17%. Without ads, cartoons and sweet flavours, cigarettes lost the teenagers. But, and this is the twist, nicotine didn't. Before we get there, let's look at the last marketing tool cigarettes still have: the pack.");
   }
 
   // ===== 7. The pack =====
@@ -267,7 +269,7 @@ const bullets = (s, items, o) => s.addText(
       ["Kyrgyzstan", "Nasvay: local chewing tobacco, the only smokeless product allowed."],
       ["Japan", "Menthol and “ice” flavours are mainstream."],
       ["Latin America", "Capsules: click the filter, change the flavour."],
-      ["USA", "Menthol: used by ~85% of Black smokers after years of targeted ads."],
+      ["Middle East", "Flavoured shisha: apple, grape, mint."],
     ];
     const lw = 8.0, rh = 1.1, gap = 0.17;
     rows.forEach(([h, b], i) => {
@@ -276,18 +278,18 @@ const bullets = (s, items, o) => s.addText(
       txt(s, h, { x: L + 0.3, y: y + 0.1, w: 2.1, h: rh - 0.2, fontSize: 18, bold: true, color: RED, valign: "middle" });
       txt(s, b, { x: L + 2.45, y: y + 0.1, w: lw - 2.7, h: rh - 0.2, fontSize: 16, color: BODY, valign: "middle" });
     });
-    txt(s, "Flavour is the easiest way to adapt the product to a culture.", { x: L, y: 6.6, w: lw, h: 0.3, fontSize: 14, color: GREY, italic: true });
-    s.addNotes("(~45 s) Chapter two: the sweet door. If you can't change the advertising, you change the product. In Kyrgyzstan the local habit is nasvay, a chewing tobacco: it is the only smokeless product the law still allows, and it has not been taxed like cigarettes. In Japan menthol is mainstream. In Latin America, capsule cigarettes let you click a ball in the filter and change the taste. And in the US, menthol was advertised so heavily in Black neighbourhoods that today about 85% of Black smokers use menthol.\n\nPicture suggestion: a capsule ('click') pack or a pack of nasvay.");
+    txt(s, "When you can’t change the ad, you change the product.", { x: L, y: 6.6, w: lw, h: 0.3, fontSize: 14, color: GREY, italic: true });
+    s.addNotes("(~40 s) Chapter two: the sweet door. If you can't change the advertising, you change the product, and flavour is the easiest way to fit a local culture. In Kyrgyzstan the local habit is nasvay, a chewing tobacco: the only smokeless product the law still allows. In Japan menthol and 'ice' flavours are mainstream. In Latin America, capsule cigarettes let you click a ball in the filter and change the taste: product innovation as entertainment. In the Middle East it's flavoured shisha.\n\nPicture suggestion: a capsule ('click') pack or a pack of nasvay.");
   }
 
-  // ===== 9. Why flavours get banned =====
+  // ===== 9. Menthol: targeted marketing =====
   {
-    const s = addContent("Chapter 2  ·  The sweet door", "Why governments ban flavours");
+    const s = addContent("Chapter 2  ·  The sweet door", "Why flavours work, and why they get banned");
     const lw = 6.2;
     [
       [I.wind, "They hide the harshness", "Menthol numbs the throat. The first cigarette doesn’t hurt."],
       [I.user, "They attract beginners", "Sweet tastes make perfect starter products."],
-      [I.target, "They target groups", "Flavours were aimed at specific communities."],
+      [I.target, "They target groups", "One flavour can be built for one community."],
     ].forEach(([img, h, b], i) => {
       const y = 1.55 + i * 1.6;
       card(s, L, y, lw, 1.4, { fill: TINT, line: TINT });
@@ -297,14 +299,15 @@ const bullets = (s, items, o) => s.addText(
     });
     const sx = 7.6, sw = R - sx;
     card(s, sx, 1.55, sw, 4.6, { line: RED, lineW: 1.25 });
-    txt(s, "The clove war", { x: sx + 0.35, y: 1.75, w: sw - 0.7, h: 0.45, fontSize: 22, bold: true, color: RED });
-    [["2009", "USA bans clove cigarettes, but keeps menthol"], ["2010", "Indonesia sues the USA at the WTO"], ["2012", "Indonesia wins: it was discrimination"]].forEach(([d, t], i) => {
-      const y = 2.5 + i * 1.15;
-      txt(s, d, { x: sx + 0.35, y, w: 1.0, h: 0.45, fontSize: 20, bold: true, color: NAVY });
-      txt(s, t, { x: sx + 1.4, y: y + 0.03, w: sw - 1.75, h: 0.85, fontSize: 16, color: BODY });
-    });
-    txt(s, "Health policy became trade policy.", { x: sx + 0.35, y: 5.6, w: sw - 0.7, h: 0.35, fontSize: 15, color: GREY, italic: true });
-    s.addNotes("(~50 s) Why do governments ban flavours? Menthol numbs the throat, so the first cigarette doesn't hurt. Sweet flavours make perfect starter products. And they were used to target specific groups. Here's my favourite story. In 2009 the US banned clove cigarettes, but kept menthol. Who makes clove cigarettes? Indonesia. Who makes menthol? American companies. Indonesia sued at the WTO and won in 2012. Health policy became trade policy, which is exactly why international marketers must watch regulation.");
+    txt(s, "Case: menthol in the USA", { x: sx + 0.35, y: 1.75, w: sw - 0.7, h: 0.45, fontSize: 21, bold: true, color: RED });
+    s.addText([
+      { text: "Ads in Black magazines", options: { bullet: true, breakLine: true } },
+      { text: "Sponsorship: the Kool Jazz Festival", options: { bullet: true, breakLine: true } },
+      { text: "Free samples in neighbourhoods", options: { bullet: true } },
+    ], { isTextBox: true, x: sx + 0.35, y: 2.4, w: sw - 0.7, h: 1.6, fontSize: 16, color: BODY, margin: 0, valign: "top", paraSpaceAfter: 10 });
+    txt(s, "~85%", { x: sx + 0.35, y: 4.1, w: sw - 0.7, h: 0.75, fontSize: 40, bold: true, color: NAVY });
+    txt(s, "of Black American smokers use menthol today (FDA)", { x: sx + 0.35, y: 4.85, w: sw - 0.7, h: 0.7, fontSize: 15, color: BODY });
+    s.addNotes("(~50 s) Why do flavours work so well? Menthol numbs the throat, so the first cigarette doesn't hurt. Sweet flavours make perfect starter products. And a flavour can be built for one specific community. The clearest case is menthol in the United States. From the 1950s, companies advertised menthol brands in Black magazines, sponsored events like the Kool Jazz Festival, and handed out free samples in Black neighbourhoods. Today about 85% of Black American smokers use menthol. That is targeted marketing at its most effective, and exactly why governments started banning flavours.");
   }
 
   // ===== 10. Then came the vape =====
@@ -346,8 +349,8 @@ const bullets = (s, items, o) => s.addText(
       { text: "$462 million", options: { bold: true, fontSize: 30, color: WHITE } },
       { text: "   paid by JUUL (2023) to US states over marketing to young people", options: { fontSize: 17, color: WHITE } },
     ], { isTextBox: true, shape: pres.shapes.RECTANGLE, x: L, y: 4.85, w: W, h: 1.0, fill: { color: NAVY }, valign: "middle", margin: 16 });
-    txt(s, "“A candy-flavoured trap.”  — WHO Director-General, 2024", { x: L, y: 6.05, w: W, h: 0.4, fontSize: 16, color: RED, italic: true, bold: true });
-    s.addNotes("(~50 s) Why did vapes reach kids so fast? Four reasons, and they are pure marketing. Flavours: bubblegum, mango, cotton candy. Design: colourful, looks like a USB stick, easy to hide from parents and teachers. Social media: influencers and TikTok, where tobacco ad bans were never written for. And price: cheap disposables at every kiosk. The companies say vapes are for adult smokers who want to quit. But JUUL paid 462 million dollars to six US states over marketing to young people, and the head of the WHO called it a 'candy-flavoured trap'.");
+    txt(s, "The Joe Camel playbook, moved to a new channel: the phone.", { x: L, y: 6.05, w: W, h: 0.4, fontSize: 16, color: RED, italic: true, bold: true });
+    s.addNotes("(~50 s) Why did vapes reach kids so fast? Four reasons, and every one of them is a marketing decision. Flavours: bubblegum, mango, cotton candy. Design: colourful, looks like a USB stick, easy to hide from parents and teachers. Social media: influencers and TikTok, a channel the old ad bans were never written for. And price: cheap disposables at every kiosk. The companies say vapes are for adult smokers who want to quit. But JUUL paid 462 million dollars to US states over marketing to young people, and the WHO calls it a 'candy-flavoured trap'. It is the Joe Camel playbook, just moved to the phone.");
   }
 
   // ===== 12. 4Ps =====
@@ -357,7 +360,7 @@ const bullets = (s, items, o) => s.addText(
     [
       [I.box, "Product", "New formats: capsules, vapes, pouches"],
       [I.tag, "Price", "Single sticks and cheap disposables"],
-      [I.store, "Place", "Kiosks, warungs, duty-free, online"],
+      [I.store, "Place", "Kiosks, shop displays, duty-free, online"],
       [I.mega, "Promotion", "Sponsorships, influencers, the pack"],
     ].forEach(([img, h, b], i) => {
       const x = L + i * (cw + 0.3);
@@ -366,10 +369,14 @@ const bullets = (s, items, o) => s.addText(
       txt(s, h, { x: x + 0.35, y: 2.8, w: cw - 0.7, h: 0.45, fontSize: 20, bold: true, color: NAVY });
       txt(s, b, { x: x + 0.35, y: 3.3, w: cw - 0.7, h: 1.1, fontSize: 16, color: BODY });
     });
-    txt(s, "Big Tobacco now owns the new door too", { x: L, y: 4.9, w: W, h: 0.4, fontSize: 18, bold: true, color: NAVY });
-    txt(s, [{ text: "41.5%", options: { bold: true, color: RED, fontSize: 30 } }, { text: "  of Philip Morris revenue now comes from smoke-free products (IQOS, ZYN)", options: { color: BODY, fontSize: 16 } }], { x: L, y: 5.35, w: W, h: 0.9, valign: "middle" });
-    source(s, "PMI 2025 full-year results.");
-    s.addNotes("(~40 s) So what did marketers learn? When mass media is closed, the other three Ps do the work. Product: new formats. Price: single sticks and cheap disposables. Place: kiosks and online. Promotion: sponsorships, influencers and the pack. And the big companies are not losing this game: Philip Morris already earns 41.5% of its revenue from heated tobacco and nicotine pouches.");
+    txt(s, "Where promotion moved", { x: L, y: 4.85, w: W, h: 0.4, fontSize: 18, bold: true, color: NAVY });
+    const chip = (t, x, y, w, fill, color) => s.addText(t, { isTextBox: true, shape: pres.shapes.RECTANGLE, x, y, w, h: 0.6, fill: { color: fill }, line: { color: fill, width: 0 }, fontSize: 17, bold: true, color, align: "center", valign: "middle", margin: 0 });
+    const cwid = 1.55, gap = 0.12;
+    ["TV", "Billboards", "Magazines"].forEach((t, i) => chip(t, L + i * (cwid + gap), 5.45, cwid, TINT, GREY));
+    const ax = L + 3 * cwid + 2 * gap + 0.2;
+    s.addShape(pres.shapes.LINE, { x: ax, y: 5.75, w: 0.65, h: 0, line: { color: RED, width: 2.5, endArrowType: "triangle" } });
+    ["The pack", "The shop", "The phone"].forEach((t, i) => chip(t, ax + 0.85 + i * (cwid + gap), 5.45, cwid, NAVY, WHITE));
+    s.addNotes("(~40 s) So what did marketers learn? When mass media is closed, the other three Ps do the work. Product: new formats like capsules, vapes and pouches. Price: single sticks and cheap disposables that fit a teenager's pocket money. Place: kiosks, shop displays, duty-free and online. And promotion didn't disappear, it moved: from TV, billboards and magazines to the pack, the shop and the phone.");
   }
 
   // ===== 13. Epilogue =====
@@ -377,8 +384,8 @@ const bullets = (s, items, o) => s.addText(
     const s = addContent("Epilogue", "The story in three chapters");
     const cw = (W - 0.6) / 3;
     [
-      ["1", "The doors closed", "Ad bans and plain packs: teenage smoking fell five times."],
-      ["2", "The sweet door", "Flavours adapted the product to every culture, until they were banned."],
+      ["1", "The tools were taken", "Ads, logos and sponsorship disappeared, and teenage smoking fell five times."],
+      ["2", "The sweet door", "Flavours fitted the product to every culture and every target group."],
       ["3", "The new door", "Vapes reached kids through flavour, design and social media."],
     ].forEach(([n, h, b], i) => {
       const x = L + i * (cw + 0.3);
@@ -390,30 +397,29 @@ const bullets = (s, items, o) => s.addText(
     txt(s, "“Tobacco marketing didn’t disappear. It moved: into the pack, the flavour and the phone.”", { x: L, y: 4.3, w: W, h: 0.85, fontSize: 22, bold: true, color: RED, italic: true });
     s.addText([
       { text: "Question for you", options: { bold: true, fontSize: 14, color: LIGHT, breakLine: true } },
-      { text: "Kyrgyzstan banned nicotine vapes completely in 2025. Should others follow, or are plain packs and no flavours enough?", options: { fontSize: 20, bold: true, color: WHITE } },
+      { text: "Where is the line between marketing a legal product and marketing to children?", options: { fontSize: 20, bold: true, color: WHITE } },
     ], { isTextBox: true, shape: pres.shapes.RECTANGLE, x: L, y: 5.3, w: W, h: 1.4, fill: { color: NAVY }, valign: "middle", margin: 18, paraSpaceAfter: 4 });
-    s.addNotes("(~40 s) So, three chapters. First, the doors closed, and teenagers stopped smoking. Second, flavours became the sweet door, until governments closed that too. Third, vapes opened a new door straight into teenagers' phones. My conclusion: tobacco marketing didn't disappear, it moved. And my question for you: since July 2025 Kyrgyzstan has banned the import, sale and use of nicotine vapes completely. Should other countries follow, or are plain packs and no flavours enough? Thank you.");
+    s.addNotes("(~40 s) So, three chapters. First, the marketing tools were taken away, and teenagers stopped smoking. Second, flavours became the sweet door, fitting the product to every culture and every target group. Third, vapes opened a new door straight into teenagers' phones. My conclusion: tobacco marketing didn't disappear, it moved. And my question for you: where is the line between marketing a legal product and marketing to children? Thank you.");
   }
 
   // ===== 14. Bibliography =====
   {
     const s = addContent("Sources", "Bibliography");
     const refs = [
+      "Campaign for Tobacco-Free Kids. Tobacco Company Marketing to African Americans (fact sheet).",
       "Canadian Cancer Society (2025). Cigarette Package Health Warnings: International Status Report, 9th ed.",
-      "CDC (2015). Tobacco use among middle and high school students, 2011–2014. MMWR 64(14).",
-      "CDC (2019). Tobacco product use among middle and high school students, 2019. MMWR 68(SS-12).",
-      "CDC / FDA (2024). Tobacco product use among middle and high school students, 2024. MMWR 73(41).",
-      "Courtemanche, C., Palmer, M., Pesko, M. (2017). Influence of the flavored cigarette ban on adolescent tobacco use. American Journal of Preventive Medicine.",
+      "CDC (2015, 2019, 2024). Tobacco product use among middle and high school students. MMWR.",
+      "Courtemanche, C., Palmer, M., Pesko, M. (2017). Influence of the flavored cigarette ban on adolescent tobacco use. Am. J. of Preventive Medicine.",
       "Directive 2014/40/EU (Tobacco Products Directive). Official Journal of the EU.",
       "FDA (2026). 2025 National Youth Tobacco Survey findings.",
+      "Fischer, P. M. et al. (1991). Brand logo recognition by children aged 3 to 6 years: Mickey Mouse and Old Joe the Camel. JAMA 266(22).",
       "GOV.UK (2026). Tobacco and Vapes Bill becomes law, 29 April 2026.",
       "Keegan, W. J., & Green, M. C. (2020). Global Marketing, 10th ed. Pearson.",
-      "Philip Morris International (2026). 2025 Fourth-Quarter & Full-Year Results.",
-      "Tobacco Control Laws, Campaign for Tobacco-Free Kids (2025). Kyrgyzstan: packaging and labeling.",
-      "24.kg (2024). E-cigarettes banned in Kyrgyzstan: law to come into force in July 2025.",
+      "NPR (2022). How the tobacco industry targeted Black Americans with menthol smokes.",
+      "Tobacco Control Laws (2025). Kyrgyzstan: packaging and labeling; 24.kg (2024). E-cigarettes banned in Kyrgyzstan from July 2025.",
       "WHO (2024). Hooking the next generation: how the tobacco industry captures young customers.",
       "WHO (2025). Global report on trends in prevalence of tobacco use 2000–2024.",
-      "WTO (2012). US — Clove Cigarettes (DS406); New York AG (2023). JUUL settlement.",
+      "New York Attorney General (2023). JUUL settlement with six states and DC.",
     ];
     const half = Math.ceil(refs.length / 2);
     const colW = (W - 0.4) / 2;
