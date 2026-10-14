@@ -16,13 +16,13 @@ Photo circle: right-click the circle > Format Shape > Fill > Picture fill to ins
 PHOTOS TO INSERT (ideally the same brand, e.g. Marlboro, so only the rules differ):
 A = USA: full brand design, small text-only warning on the side.
 B = Hungary (EU): plain pack + 65% picture warning in Hungarian.
-C = Indonesia: kretek pack (e.g. Dji Sam Soe / Gudang Garam), 40% picture warning.
+C = Kyrgyzstan: pack with the 50% picture warning in Kyrgyz/Russian (Eurasian Economic Union rules).
 D = Australia: plain drab dark brown pack, 75% warning on the front.
 Click the picture icon in each box to insert a photo; it fills and crops automatically.
 
 ## 3. Same cigarettes, four different rulebooks
 
-(~45 s) A is the USA: the brand still owns the pack. B is Hungary, the pack you see in every Nemzeti Dohánybolt. C is Indonesia, home of clove cigarettes. D is Australia, the first country with plain packs. Same product, often the same company, but four completely different rulebooks. And that is the story I want to tell today: how the industry keeps selling when, one by one, the doors close.
+(~45 s) A is the USA: the brand still owns the pack. B is Hungary, the pack you see in every Nemzeti Dohánybolt. C is Kyrgyzstan: half of the pack is a picture warning, under the common rules of the Eurasian Economic Union. D is Australia, the first country with plain packs. Same product, often the same company, but four completely different rulebooks. And that is the story I want to tell today: how the industry keeps selling when, one by one, the doors close.
 
 ## 4. The marketer’s problem
 
@@ -42,9 +42,9 @@ Click the picture icon in each box to insert a photo; it fills and crops automat
 
 ## 8. Every country has its own taste
 
-(~45 s) Chapter two: the sweet door. If you can't change the advertising, you change the product. In Indonesia people smoke clove kretek, so when Philip Morris came in, it bought the local leader Sampoerna instead of pushing Marlboro. In Japan menthol is mainstream. In Latin America, capsule cigarettes let you click a ball in the filter and change the taste. And in the US, menthol was advertised so heavily in Black neighbourhoods that today about 85% of Black smokers use menthol.
+(~45 s) Chapter two: the sweet door. If you can't change the advertising, you change the product. In Kyrgyzstan the local habit is nasvay, a chewing tobacco: it is the only smokeless product the law still allows, and it has not been taxed like cigarettes. In Japan menthol is mainstream. In Latin America, capsule cigarettes let you click a ball in the filter and change the taste. And in the US, menthol was advertised so heavily in Black neighbourhoods that today about 85% of Black smokers use menthol.
 
-Picture suggestion: a capsule ('click') pack or an Indonesian kretek pack.
+Picture suggestion: a capsule ('click') pack or a pack of nasvay.
 
 ## 9. Why governments ban flavours
 
@@ -64,4 +64,4 @@ Picture suggestion: a capsule ('click') pack or an Indonesian kretek pack.
 
 ## 13. The story in three chapters
 
-(~40 s) So, three chapters. First, the doors closed, and teenagers stopped smoking. Second, flavours became the sweet door, until governments closed that too. Third, vapes opened a new door straight into teenagers' phones. My conclusion: tobacco marketing didn't disappear, it moved. And my question for you: should vapes be treated like cigarettes, with plain packs and no flavours? Thank you.
+(~40 s) So, three chapters. First, the doors closed, and teenagers stopped smoking. Second, flavours became the sweet door, until governments closed that too. Third, vapes opened a new door straight into teenagers' phones. My conclusion: tobacco marketing didn't disappear, it moved. And my question for you: since July 2025 Kyrgyzstan has banned the import, sale and use of nicotine vapes completely. Should other countries follow, or are plain packs and no flavours enough? Thank you.

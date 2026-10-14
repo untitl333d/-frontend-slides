@@ -47,7 +47,7 @@ const W = R - L;
 const QUIZ_W = 2.55, QUIZ_GAP = (W - 4 * QUIZ_W) / 3;
 const QUIZ = ["A", "B", "C", "D"].map((k, i) => ({ name: "pack" + k, label: "Insert photo: pack " + k, x: L + i * (QUIZ_W + QUIZ_GAP), y: 1.85, w: QUIZ_W, h: 3.9 }));
 const REV_W = (W - 0.9) / 4;
-const REVEAL = ["USA", "Hungary", "Indonesia", "Australia"].map((k, i) => ({ name: "photo" + k, label: "Insert photo: " + k + " pack", x: L + i * (REV_W + 0.3), y: 1.45, w: REV_W, h: 2.25 }));
+const REVEAL = ["USA", "Hungary", "Kyrgyzstan", "Australia"].map((k, i) => ({ name: "photo" + k, label: "Insert photo: " + k + " pack", x: L + i * (REV_W + 0.3), y: 1.45, w: REV_W, h: 2.25 }));
 const SIDE = { name: "picture", label: "Insert picture", x: 9.35, y: 1.55, w: 3.23, h: 5.1 };
 
 // ---------- layouts ----------
@@ -154,7 +154,7 @@ const bullets = (s, items, o) => s.addText(
       "PHOTOS TO INSERT (ideally the same brand, e.g. Marlboro, so only the rules differ):\n" +
       "A = USA: full brand design, small text-only warning on the side.\n" +
       "B = Hungary (EU): plain pack + 65% picture warning in Hungarian.\n" +
-      "C = Indonesia: kretek pack (e.g. Dji Sam Soe / Gudang Garam), 40% picture warning.\n" +
+      "C = Kyrgyzstan: pack with the 50% picture warning in Kyrgyz/Russian (Eurasian Economic Union rules).\n" +
       "D = Australia: plain drab dark brown pack, 75% warning on the front.\n" +
       "Click the picture icon in each box to insert a photo; it fills and crops automatically.");
   }
@@ -166,7 +166,7 @@ const bullets = (s, items, o) => s.addText(
     [
       ["A  ·  USA", "Text only", "Small warning on the side. The brand owns the front."],
       ["B  ·  Hungary", "65%", "Picture warnings and a plain pack since 2022."],
-      ["C  ·  Indonesia", "40%", "Small picture warning. Clove kretek culture."],
+      ["C  ·  Kyrgyzstan", "50%", "Picture warnings under Eurasian Economic Union rules."],
       ["D  ·  Australia", "75%", "The world’s first plain packs (2012)."],
     ].forEach(([h, n, b], i) => {
       const x = REVEAL[i].x, w = REVEAL[i].w;
@@ -174,8 +174,8 @@ const bullets = (s, items, o) => s.addText(
       txt(s, n, { x, y: 4.35, w, h: 0.7, fontSize: 36, bold: true, color: NAVY });
       txt(s, b, { x, y: 5.15, w, h: 0.9, fontSize: 15, color: BODY });
     });
-    source(s, "Warning size = share of the pack front. Sources: Canadian Cancer Society (2025); TPackSS (2023).");
-    s.addNotes("(~45 s) A is the USA: the brand still owns the pack. B is Hungary, the pack you see in every Nemzeti Dohánybolt. C is Indonesia, home of clove cigarettes. D is Australia, the first country with plain packs. Same product, often the same company, but four completely different rulebooks. And that is the story I want to tell today: how the industry keeps selling when, one by one, the doors close.");
+    source(s, "Warning size = share of the pack front. Sources: Canadian Cancer Society (2025); Tobacco Control Laws (2025).");
+    s.addNotes("(~45 s) A is the USA: the brand still owns the pack. B is Hungary, the pack you see in every Nemzeti Dohánybolt. C is Kyrgyzstan: half of the pack is a picture warning, under the common rules of the Eurasian Economic Union. D is Australia, the first country with plain packs. Same product, often the same company, but four completely different rulebooks. And that is the story I want to tell today: how the industry keeps selling when, one by one, the doors close.");
   }
 
   // ===== 4. The marketer's problem =====
@@ -264,7 +264,7 @@ const bullets = (s, items, o) => s.addText(
     const s = addContent("Chapter 2  ·  The sweet door", "Every country has its own taste", "CONTENT_PICTURE");
     previewSlots(s, [SIDE]);
     const rows = [
-      ["Indonesia", "Clove kretek. PMI bought local Sampoerna instead of pushing Marlboro."],
+      ["Kyrgyzstan", "Nasvay: local chewing tobacco, the only smokeless product allowed."],
       ["Japan", "Menthol and “ice” flavours are mainstream."],
       ["Latin America", "Capsules: click the filter, change the flavour."],
       ["USA", "Menthol: used by ~85% of Black smokers after years of targeted ads."],
@@ -277,7 +277,7 @@ const bullets = (s, items, o) => s.addText(
       txt(s, b, { x: L + 2.45, y: y + 0.1, w: lw - 2.7, h: rh - 0.2, fontSize: 16, color: BODY, valign: "middle" });
     });
     txt(s, "Flavour is the easiest way to adapt the product to a culture.", { x: L, y: 6.6, w: lw, h: 0.3, fontSize: 14, color: GREY, italic: true });
-    s.addNotes("(~45 s) Chapter two: the sweet door. If you can't change the advertising, you change the product. In Indonesia people smoke clove kretek, so when Philip Morris came in, it bought the local leader Sampoerna instead of pushing Marlboro. In Japan menthol is mainstream. In Latin America, capsule cigarettes let you click a ball in the filter and change the taste. And in the US, menthol was advertised so heavily in Black neighbourhoods that today about 85% of Black smokers use menthol.\n\nPicture suggestion: a capsule ('click') pack or an Indonesian kretek pack.");
+    s.addNotes("(~45 s) Chapter two: the sweet door. If you can't change the advertising, you change the product. In Kyrgyzstan the local habit is nasvay, a chewing tobacco: it is the only smokeless product the law still allows, and it has not been taxed like cigarettes. In Japan menthol is mainstream. In Latin America, capsule cigarettes let you click a ball in the filter and change the taste. And in the US, menthol was advertised so heavily in Black neighbourhoods that today about 85% of Black smokers use menthol.\n\nPicture suggestion: a capsule ('click') pack or a pack of nasvay.");
   }
 
   // ===== 9. Why flavours get banned =====
@@ -387,12 +387,12 @@ const bullets = (s, items, o) => s.addText(
       txt(s, h, { x: x + 0.35, y: 2.5, w: cw - 0.7, h: 0.45, fontSize: 20, bold: true, color: NAVY });
       txt(s, b, { x: x + 0.35, y: 3.0, w: cw - 0.7, h: 1.0, fontSize: 15, color: BODY });
     });
-    txt(s, "“Tobacco marketing didn’t disappear. It moved: into the pack, the flavour and the phone.”", { x: L, y: 4.4, w: W, h: 0.9, fontSize: 22, bold: true, color: RED, italic: true });
+    txt(s, "“Tobacco marketing didn’t disappear. It moved: into the pack, the flavour and the phone.”", { x: L, y: 4.3, w: W, h: 0.85, fontSize: 22, bold: true, color: RED, italic: true });
     s.addText([
       { text: "Question for you", options: { bold: true, fontSize: 14, color: LIGHT, breakLine: true } },
-      { text: "Should vapes be sold only in plain packs and only in tobacco flavour?", options: { fontSize: 20, bold: true, color: WHITE } },
-    ], { isTextBox: true, shape: pres.shapes.RECTANGLE, x: L, y: 5.45, w: W, h: 1.2, fill: { color: NAVY }, valign: "middle", margin: 18, paraSpaceAfter: 4 });
-    s.addNotes("(~40 s) So, three chapters. First, the doors closed, and teenagers stopped smoking. Second, flavours became the sweet door, until governments closed that too. Third, vapes opened a new door straight into teenagers' phones. My conclusion: tobacco marketing didn't disappear, it moved. And my question for you: should vapes be treated like cigarettes, with plain packs and no flavours? Thank you.");
+      { text: "Kyrgyzstan banned nicotine vapes completely in 2025. Should others follow, or are plain packs and no flavours enough?", options: { fontSize: 20, bold: true, color: WHITE } },
+    ], { isTextBox: true, shape: pres.shapes.RECTANGLE, x: L, y: 5.3, w: W, h: 1.4, fill: { color: NAVY }, valign: "middle", margin: 18, paraSpaceAfter: 4 });
+    s.addNotes("(~40 s) So, three chapters. First, the doors closed, and teenagers stopped smoking. Second, flavours became the sweet door, until governments closed that too. Third, vapes opened a new door straight into teenagers' phones. My conclusion: tobacco marketing didn't disappear, it moved. And my question for you: since July 2025 Kyrgyzstan has banned the import, sale and use of nicotine vapes completely. Should other countries follow, or are plain packs and no flavours enough? Thank you.");
   }
 
   // ===== 14. Bibliography =====
@@ -409,7 +409,8 @@ const bullets = (s, items, o) => s.addText(
       "GOV.UK (2026). Tobacco and Vapes Bill becomes law, 29 April 2026.",
       "Keegan, W. J., & Green, M. C. (2020). Global Marketing, 10th ed. Pearson.",
       "Philip Morris International (2026). 2025 Fourth-Quarter & Full-Year Results.",
-      "TPackSS, Johns Hopkins (2023). Indonesia: health warning label compliance.",
+      "Tobacco Control Laws, Campaign for Tobacco-Free Kids (2025). Kyrgyzstan: packaging and labeling.",
+      "24.kg (2024). E-cigarettes banned in Kyrgyzstan: law to come into force in July 2025.",
       "WHO (2024). Hooking the next generation: how the tobacco industry captures young customers.",
       "WHO (2025). Global report on trends in prevalence of tobacco use 2000–2024.",
       "WTO (2012). US — Clove Cigarettes (DS406); New York AG (2023). JUUL settlement.",
