@@ -1,59 +1,67 @@
-# Tobacco Marketing on International Markets — speaker script
+# Tobacco Marketing on International Markets: speaker script
 
 **Amir Kenenbaev · International Marketing, Corvinus · Fall 2026**  
-Target length: 10 minutes. The same text is in the PowerPoint speaker notes.
+Target length: about 10 minutes. The same text is in the PowerPoint speaker notes.
 
 ## 1. Title
 
-(~20 s) Good afternoon. My name is Amir Kenenbaev, and today I'll talk about tobacco marketing on international markets. Before I explain anything, let's start with a small game.
+(~15 s) Good afternoon. I'm Amir, and my topic is tobacco marketing on international markets. But before I say anything about marketing, I want to show you some packs.
 
 Photo circle: right-click the circle > Format Shape > Fill > Picture fill to insert a portrait.
 
-## 2. Guess the country: what is different about these packs?
+## 2. Guess the country
 
-(~1 min) Here are four cigarette packs from four countries. Two questions: which country is each pack from, and what is different about the packaging? Take 20 seconds and shout out your guesses.
+(~45 s) Here are four cigarette packs from four countries. Which country is each one from? And what is different about them? Take a few seconds and shout out your guesses.
 
 PHOTOS TO INSERT (ideally the same brand, e.g. Marlboro, so only the rules differ):
-A = USA: full brand design, small text-only Surgeon General warning on the side.
-B = Hungary (EU): plain pack + 65% picture-and-text warning in Hungarian.
-C = Indonesia: kretek pack (e.g. Dji Sam Soe / Gudang Garam) with a 40% picture warning.
+A = USA: full brand design, small text-only warning on the side.
+B = Hungary (EU): plain pack + 65% picture warning in Hungarian.
+C = Indonesia: kretek pack (e.g. Dji Sam Soe / Gudang Garam), 40% picture warning.
 D = Australia: plain drab dark brown pack, 75% warning on the front.
 Click the picture icon in each box to insert a photo; it fills and crops automatically.
 
-## 3. Same product, four different rulebooks
+## 3. Same cigarettes, four different rulebooks
 
-(~1 min) Here are the answers. A is the USA: the brand still owns the front of the pack. B is Hungary: 65% warnings and, since 2022, plain packaging, which is what you see in every Nemzeti Dohánybolt. C is Indonesia, home of clove kretek cigarettes, with only 40% warnings. D is Australia, the first country with plain packs in 2012, with a colour chosen because smokers found it the least attractive. Same product, same companies, four completely different rulebooks. That is exactly what international marketing is about: the environment shapes the marketing mix.
+(~45 s) A is the USA: the brand still owns the pack. B is Hungary, the pack you see in every Nemzeti Dohánybolt. C is Indonesia, home of clove cigarettes. D is Australia, the first country with plain packs. Same product, often the same company, but four completely different rulebooks. And that is the story I want to tell today: how the industry keeps selling when, one by one, the doors close.
 
-## 4. Why tobacco is a unique international marketing case
+## 4. The marketer’s problem
 
-(~1 min) Why is tobacco such an interesting case? 1.2 billion people use it, and 80% of them live in low- and middle-income countries, so this industry is international by necessity. China National Tobacco makes almost half of all cigarettes but sells them at home. So when we say 'international tobacco marketing', we really mean four companies: Philip Morris International, BAT, Japan Tobacco and Imperial. And they face a paradox: the product is legal, but in most countries they are not allowed to promote it.
+(~40 s) Imagine you are the marketing manager. Your product has 1.2 billion customers, most of them in developing countries. But almost every country in the world has signed a treaty that says: you may not advertise. So how do you market it? Let me tell this story in three chapters.
 
-## 5. The rules of the game
+## 5. One by one, the doors closed
 
-(~1 min) The rules come mainly from one treaty: the WHO Framework Convention on Tobacco Control from 2003, with 183 parties. It requires bans on advertising, promotion and sponsorship. Then came packaging: Australia introduced plain packs in 2012. Philip Morris sued Uruguay and lost in 2016; several countries took Australia to the WTO and lost in 2020. The EU banned menthol in 2020, and this year the UK passed a generational ban. Two big exceptions: the USA and Indonesia never joined the treaty, and we'll see both again when we talk about flavours.
+(~45 s) Chapter one: the doors close. In 2003 the WHO treaty bans advertising. In 2009 the US bans flavoured cigarettes, except menthol. In 2012 Australia takes the logo off the pack. In 2020 the EU bans menthol. And this year the UK passed a law that nobody born after 2008 can ever legally buy tobacco. Every time a door closed, marketers looked for the next one.
 
-## 6. The pack is the last billboard: EU vs USA
+## 6. Did it work? Teenagers stopped smoking
 
-(~1 min) When advertising is banned, the pack becomes the last billboard, and that is why regulators fight over it. In the EU, 65% of the front and back is a picture-and-text warning, and many countries, including Hungary, add plain packaging. In the US it is the opposite: only a small text warning on the side, and the FDA's graphic warnings from 2020 are still stuck in court. Flavours too: the EU banned everything including menthol; the US banned flavours in 2009 but kept menthol. Elsewhere it goes even further: in Türkiye 92.5% of the pack is warning, and Canada and Australia now print warnings on every single cigarette.
+(~50 s) Did it work? Look at American high-school students. In 1999, almost 3 in 10 smoked. By 2019 it was under 6 in 100: five times fewer. Researchers found that the 2009 flavour ban alone cut the chance that a teenager smokes by about 17%. So the cigarette lost the teenagers. But, and this is the twist, nicotine didn't. Before we get there, let's look at what happened to the pack.
 
-## 7. A world of flavours
+## 7. The pack became the last billboard
 
-(~1 min) Taste is local, so the product itself is adapted. In Indonesia clove kretek cigarettes are part of the culture; when Philip Morris entered, it bought the local leader Sampoerna instead of pushing Marlboro. In Japan and the Philippines menthol is mainstream. In Latin America and Asia, capsule cigarettes let you click a flavour ball in the filter: product innovation as entertainment. In the Middle East it's flavoured shisha. In the US, menthol was marketed so heavily to Black communities that today about 85% of Black smokers use menthol. And in the EU: no flavours at all.
+(~40 s) When there is no TV, no billboard and no magazine, the pack itself is the last billboard. That's why regulators fight over it. In the EU, two-thirds of the pack is a warning, and in Hungary the logo is gone too. In the US, the brand still owns the pack: just a small text warning on the side, and the picture warnings have been stuck in court since 2020. The record holders are Türkiye and Timor-Leste, where 92.5% of the pack is warning.
+
+## 8. Every country has its own taste
+
+(~45 s) Chapter two: the sweet door. If you can't change the advertising, you change the product. In Indonesia people smoke clove kretek, so when Philip Morris came in, it bought the local leader Sampoerna instead of pushing Marlboro. In Japan menthol is mainstream. In Latin America, capsule cigarettes let you click a ball in the filter and change the taste. And in the US, menthol was advertised so heavily in Black neighbourhoods that today about 85% of Black smokers use menthol.
 
 Picture suggestion: a capsule ('click') pack or an Indonesian kretek pack.
 
-## 8. Why flavours get banned
+## 9. Why governments ban flavours
 
-(~1 min) Why do governments ban flavours? Three reasons: menthol numbs the throat so the first cigarette doesn't hurt; sweet flavours attract beginners; and flavours were used to target specific groups. The most interesting fight: in 2009 the US banned clove cigarettes but kept menthol. Indonesia, the home of clove kretek, went to the WTO and won in 2012, because protecting the American flavour while banning the Indonesian one was discrimination. Health policy became trade policy. The EU banned menthol in 2020, while the US withdrew its menthol ban proposal in 2025.
+(~50 s) Why do governments ban flavours? Menthol numbs the throat, so the first cigarette doesn't hurt. Sweet flavours make perfect starter products. And they were used to target specific groups. Here's my favourite story. In 2009 the US banned clove cigarettes, but kept menthol. Who makes clove cigarettes? Indonesia. Who makes menthol? American companies. Indonesia sued at the WTO and won in 2012. Health policy became trade policy, which is exactly why international marketers must watch regulation.
 
-## 9. Marketing without advertising: the 4Ps adapted
+## 10. Then came the vape
 
-(~1 min) So how do you market without advertising? You adapt the 4Ps. Product: capsules, slim packs for women, heated tobacco, nicotine pouches. Price: in poorer markets cigarettes are sold one stick at a time, so the price fits a daily income. Place: dense informal retail like warungs and spaza shops; here in Hungary the state took control of retail in 2013 with the National Tobacco Shops, where you can't even see the products from outside. Promotion: sponsorships like Ferrari's 'Mission Winnow' and influencers on social media.
+(~50 s) Chapter three: the new door. Just as teenagers stopped smoking, the vape arrived. In 2011 only 1.5% of American high-schoolers vaped. In 2014 vapes overtook cigarettes. By 2019, more than one in four high-schoolers vaped. That is more than ever smoked cigarettes in the last decade. Then regulators reacted: in 2020 the FDA restricted flavoured cartridges, and use fell to under 8% by 2024. But even today about nine in ten young vapers use flavours, and worldwide 15 million children aged 13 to 15 vape.
 
-## 10. The smoke-free pivot: strategy or rebranding?
+## 11. Why vapes speak to kids
 
-(~1 min) The industry's answer to all these rules is the so-called smoke-free pivot. Philip Morris already earns 41.5% of its revenue from heated tobacco and nicotine pouches, and wants more than two-thirds by 2030. IQOS has three quarters of the heated-tobacco category, and Japan was its breakthrough market. Is this a real strategy or just rebranding? The industry says it is moving away from cigarettes. Critics say it is the same nicotine with new flavours, new devices and new young users.
+(~50 s) Why did vapes reach kids so fast? Four reasons, and they are pure marketing. Flavours: bubblegum, mango, cotton candy. Design: colourful, looks like a USB stick, easy to hide from parents and teachers. Social media: influencers and TikTok, where tobacco ad bans were never written for. And price: cheap disposables at every kiosk. The companies say vapes are for adult smokers who want to quit. But JUUL paid 462 million dollars to six US states over marketing to young people, and the head of the WHO called it a 'candy-flavoured trap'.
 
-## 11. Conclusion & discussion
+## 12. Marketing without advertising: the 4Ps
 
-(~1 min) To conclude: regulation shapes strategy country by country; the brands are global but the execution is local; and when advertising is banned, the pack, the price and the shop do the selling. My answer: tobacco marketing didn't disappear, it moved. And a question for you: should a global company follow its strictest home-market rules in every country it sells in, or is it fair to use weaker rules where they exist? Thank you.
+(~40 s) So what did marketers learn? When mass media is closed, the other three Ps do the work. Product: new formats. Price: single sticks and cheap disposables. Place: kiosks and online. Promotion: sponsorships, influencers and the pack. And the big companies are not losing this game: Philip Morris already earns 41.5% of its revenue from heated tobacco and nicotine pouches.
+
+## 13. The story in three chapters
+
+(~40 s) So, three chapters. First, the doors closed, and teenagers stopped smoking. Second, flavours became the sweet door, until governments closed that too. Third, vapes opened a new door straight into teenagers' phones. My conclusion: tobacco marketing didn't disappear, it moved. And my question for you: should vapes be treated like cigarettes, with plain packs and no flavours? Thank you.

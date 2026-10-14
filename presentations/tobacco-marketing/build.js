@@ -115,306 +115,304 @@ const bullets = (s, items, o) => s.addText(
   ]),
   { isTextBox: true, margin: 0, valign: "top", fontSize: 16, paraSpaceAfter: 10, ...o },
 );
-
 (async () => {
   const I = {
-    eye: await icon(Fi.FiEye), user: await icon(Fi.FiUsers), target: await icon(Fi.FiTarget),
+    user: await icon(Fi.FiUsers), target: await icon(Fi.FiTarget), wind: await icon(Fi.FiWind),
     box: await icon(Fi.FiPackage), tag: await icon(Fi.FiTag), store: await icon(Fi.FiShoppingBag), mega: await icon(Fi.FiSpeaker),
-    globe: await icon(Fi.FiGlobe), wind: await icon(Fi.FiWind), alert: await icon(Fi.FiAlertTriangle),
+    candy: await icon(Fi.FiDroplet), usb: await icon(Fi.FiSmartphone), phone: await icon(Fi.FiInstagram), coin: await icon(Fi.FiDollarSign),
   };
   const iconCircle = (s, img, x, y, d = 0.62, fill = NAVY) => {
     s.addShape(pres.shapes.OVAL, { x, y, w: d, h: d, fill: { color: fill }, line: { color: fill, width: 0 } });
     const p = d * 0.25;
     s.addImage({ data: img, x: x + p, y: y + p, w: d - 2 * p, h: d - 2 * p });
   };
+  const banner = (s, runs, y, h = 0.85, fontSize = 20) => s.addText(runs, { isTextBox: true, shape: pres.shapes.RECTANGLE, x: L, y, w: W, h, fill: { color: NAVY }, color: WHITE, fontSize, bold: true, valign: "middle", margin: 16 });
 
   // ===== 1. Title =====
   {
     const s = pres.addSlide({ masterName: "TITLE" });
     txt(s, "International Marketing  ·  Individual presentation", { x: 0.8, y: 1.15, w: 8.4, h: 0.4, fontSize: 14, color: LIGHT, bold: true, charSpacing: 1 });
     txt(s, "Tobacco Marketing on International Markets", { x: 0.8, y: 1.7, w: 8.2, h: 2.3, fontSize: 40, bold: true, color: WHITE });
-    txt(s, "One product, many rulebooks: how the industry sells where it can’t advertise", { x: 0.8, y: 4.15, w: 8.0, h: 0.9, fontSize: 22, color: LIGHT });
+    txt(s, "How to sell a product nobody lets you advertise", { x: 0.8, y: 4.15, w: 8.0, h: 0.9, fontSize: 22, color: LIGHT });
     txt(s, "Corvinus University of Budapest  ·  Fall 2026", { x: 0.8, y: 6.35, w: 7.4, h: 0.4, fontSize: 14, color: LIGHT });
     s.addShape(pres.shapes.OVAL, { x: 9.95, y: 2.0, w: 2.0, h: 2.0, fill: { color: "1B3A5C" }, line: { color: WHITE, width: 1.5 }, objectName: "Photo Amir Kenenbaev" });
     txt(s, "Amir Kenenbaev", { x: 9.65, y: 4.2, w: 2.6, h: 0.4, fontSize: 15, color: WHITE, bold: true, align: "center" });
-    s.addNotes("(~20 s) Good afternoon. My name is Amir Kenenbaev, and today I'll talk about tobacco marketing on international markets. Before I explain anything, let's start with a small game.\n\nPhoto circle: right-click the circle > Format Shape > Fill > Picture fill to insert a portrait.");
+    s.addNotes("(~15 s) Good afternoon. I'm Amir, and my topic is tobacco marketing on international markets. But before I say anything about marketing, I want to show you some packs.\n\nPhoto circle: right-click the circle > Format Shape > Fill > Picture fill to insert a portrait.");
   }
 
   // ===== 2. Quiz =====
   {
-    const s = addContent("Warm-up", "Guess the country: what is different about these packs?", "PACK_QUIZ");
-    txt(s, "Look at the warning size, the pictures, the logo and colours, and the flavour.", { x: L, y: 1.3, w: W, h: 0.4, fontSize: 16, color: BODY });
+    const s = addContent("Prologue", "Guess the country", "PACK_QUIZ");
+    txt(s, "Four packs, four countries. What is different?", { x: L, y: 1.3, w: W, h: 0.4, fontSize: 18, color: BODY });
     previewSlots(s, QUIZ);
     QUIZ.forEach((p, i) => {
-      const k = "ABCD"[i];
-      s.addText(k, { isTextBox: true, shape: pres.shapes.OVAL, x: p.x, y: 5.95, w: 0.5, h: 0.5, fill: { color: RED }, color: WHITE, bold: true, fontSize: 18, align: "center", valign: "middle", margin: 0 });
+      s.addText("ABCD"[i], { isTextBox: true, shape: pres.shapes.OVAL, x: p.x, y: 5.95, w: 0.5, h: 0.5, fill: { color: RED }, color: WHITE, bold: true, fontSize: 18, align: "center", valign: "middle", margin: 0 });
       txt(s, "Which country?", { x: p.x + 0.65, y: 6.03, w: p.w - 0.65, h: 0.36, fontSize: 15, color: GREY });
     });
     s.addNotes(
-      "(~1 min) Here are four cigarette packs from four countries. Two questions: which country is each pack from, and what is different about the packaging? Take 20 seconds and shout out your guesses.\n\n" +
+      "(~45 s) Here are four cigarette packs from four countries. Which country is each one from? And what is different about them? Take a few seconds and shout out your guesses.\n\n" +
       "PHOTOS TO INSERT (ideally the same brand, e.g. Marlboro, so only the rules differ):\n" +
-      "A = USA: full brand design, small text-only Surgeon General warning on the side.\n" +
-      "B = Hungary (EU): plain pack + 65% picture-and-text warning in Hungarian.\n" +
-      "C = Indonesia: kretek pack (e.g. Dji Sam Soe / Gudang Garam) with a 40% picture warning.\n" +
+      "A = USA: full brand design, small text-only warning on the side.\n" +
+      "B = Hungary (EU): plain pack + 65% picture warning in Hungarian.\n" +
+      "C = Indonesia: kretek pack (e.g. Dji Sam Soe / Gudang Garam), 40% picture warning.\n" +
       "D = Australia: plain drab dark brown pack, 75% warning on the front.\n" +
       "Click the picture icon in each box to insert a photo; it fills and crops automatically.");
   }
 
   // ===== 3. Reveal =====
   {
-    const s = addContent("Warm-up: the answer", "Same product, four different rulebooks", "PACK_REVEAL");
+    const s = addContent("Prologue", "Same cigarettes, four different rulebooks", "PACK_REVEAL");
     previewSlots(s, REVEAL);
-    const cols = [
-      ["A  ·  USA", "Text only", "Small Surgeon General warning on the side. The front is pure brand. Graphic warnings (FDA, 2020) are still blocked in court."],
-      ["B  ·  Hungary (EU)", "65%", "Picture + text warning on front and back. Plain packaging for all brands since 2022. No menthol."],
-      ["C  ·  Indonesia", "40%", "Picture warning, below the WHO-recommended 50%. Never signed the WHO tobacco treaty. Clove kretek culture."],
-      ["D  ·  Australia", "75% / 90%", "World’s first plain packs (2012) in drab dark brown, nicknamed “the ugliest colour in the world”."],
-    ];
-    cols.forEach(([h, n, b], i) => {
+    [
+      ["A  ·  USA", "Text only", "Small warning on the side. The brand owns the front."],
+      ["B  ·  Hungary", "65%", "Picture warnings and a plain pack since 2022."],
+      ["C  ·  Indonesia", "40%", "Small picture warning. Clove kretek culture."],
+      ["D  ·  Australia", "75%", "The world’s first plain packs (2012)."],
+    ].forEach(([h, n, b], i) => {
       const x = REVEAL[i].x, w = REVEAL[i].w;
-      txt(s, h, { x, y: 3.9, w, h: 0.35, fontSize: 15, bold: true, color: RED });
-      txt(s, n, { x, y: 4.27, w, h: 0.6, fontSize: 30, bold: true, color: NAVY });
-      txt(s, b, { x, y: 4.95, w, h: 1.5, fontSize: 13, color: BODY });
+      txt(s, h, { x, y: 3.95, w, h: 0.35, fontSize: 16, bold: true, color: RED });
+      txt(s, n, { x, y: 4.35, w, h: 0.7, fontSize: 36, bold: true, color: NAVY });
+      txt(s, b, { x, y: 5.15, w, h: 0.9, fontSize: 15, color: BODY });
     });
-    source(s, "Warning size = share of the front and back of the pack. Sources: Canadian Cancer Society (2025); TPackSS (2023); Australian Dept. of Health.");
-    s.addNotes("(~1 min) Here are the answers. A is the USA: the brand still owns the front of the pack. B is Hungary: 65% warnings and, since 2022, plain packaging, which is what you see in every Nemzeti Dohánybolt. C is Indonesia, home of clove kretek cigarettes, with only 40% warnings. D is Australia, the first country with plain packs in 2012, with a colour chosen because smokers found it the least attractive. Same product, same companies, four completely different rulebooks. That is exactly what international marketing is about: the environment shapes the marketing mix.");
+    source(s, "Warning size = share of the pack front. Sources: Canadian Cancer Society (2025); TPackSS (2023).");
+    s.addNotes("(~45 s) A is the USA: the brand still owns the pack. B is Hungary, the pack you see in every Nemzeti Dohánybolt. C is Indonesia, home of clove cigarettes. D is Australia, the first country with plain packs. Same product, often the same company, but four completely different rulebooks. And that is the story I want to tell today: how the industry keeps selling when, one by one, the doors close.");
   }
 
-  // ===== 4. Why tobacco is a unique case =====
+  // ===== 4. The marketer's problem =====
   {
-    const s = addContent("Why this topic", "Why tobacco is a unique international marketing case");
-    const stats = [
-      ["1.2 bn", "tobacco users worldwide in 2024, about 1 adult in 5", "WHO, 2025"],
+    const s = addContent("Prologue", "The marketer’s problem");
+    txt(s, "How do you sell a product to 1.2 billion people when most of the world won’t let you advertise it?", { x: L, y: 1.7, w: W, h: 1.6, fontSize: 32, bold: true, color: NAVY });
+    const cw = (W - 0.6) / 3;
+    [
+      ["1.2 bn", "people use tobacco: about 1 adult in 5", "WHO, 2025"],
       ["80%", "of them live in low- and middle-income countries", "WHO"],
-      ["100 m+", "people vape, including 15 million children aged 13–15", "WHO, 2025"],
-    ];
-    stats.forEach(([n, l, src], i) => {
-      const y = 1.45 + i * 1.5;
-      txt(s, n, { x: L, y, w: 2.6, h: 0.75, fontSize: 36, bold: true, color: RED });
-      txt(s, l, { x: L + 2.75, y: y + 0.12, w: 3.8, h: 0.7, fontSize: 15, color: BODY });
-      txt(s, src, { x: L + 2.75, y: y + 0.85, w: 3.8, h: 0.25, fontSize: 10, color: GREY, italic: true });
+      ["183", "parties to the WHO treaty that bans tobacco ads", "WHO FCTC"],
+    ].forEach(([n, l, src], i) => {
+      const x = L + i * (cw + 0.3);
+      card(s, x, 3.9, cw, 2.3, { fill: TINT, line: TINT });
+      txt(s, n, { x: x + 0.35, y: 4.1, w: cw - 0.7, h: 0.85, fontSize: 44, bold: true, color: RED });
+      txt(s, l, { x: x + 0.35, y: 5.0, w: cw - 0.7, h: 0.75, fontSize: 16, color: BODY });
+      txt(s, src, { x: x + 0.35, y: 5.8, w: cw - 0.7, h: 0.25, fontSize: 10, color: GREY, italic: true });
     });
-    const dx = 7.75, dw = R - dx;
-    txt(s, "Who makes the world’s cigarettes (volume, 2025)", { x: dx, y: 1.45, w: dw, h: 0.35, fontSize: 14, bold: true, color: NAVY, align: "center" });
-    s.addChart(pres.charts.DOUGHNUT, [{ name: "Volume share", labels: ["China National Tobacco", "Big Four (PMI, BAT, JTI, Imperial)", "Others"], values: [47, 34, 19] }], {
-      x: dx + 0.6, y: 1.8, w: dw - 1.2, h: 2.6, holeSize: 64, chartColors: ["C00000", "0E2841", "D1D1D1"], showLegend: false, showValue: false, showPercent: false, showTitle: false, dataBorder: { pt: 1, color: "FFFFFF" },
-    });
-    txt(s, "47%", { x: dx, y: 2.75, w: dw, h: 0.7, fontSize: 28, bold: true, color: RED, align: "center", valign: "middle" });
-    [["China National Tobacco", "47%: sold almost only inside China", RED], ["Big Four (PMI, BAT, JTI, Imperial)", "34%: the real international marketers", NAVY], ["Others", "19%", LIGHT]].forEach(([a, b, col], i) => {
-      const y = 4.55 + i * 0.42;
-      s.addShape(pres.shapes.RECTANGLE, { x: dx + 0.1, y: y + 0.08, w: 0.2, h: 0.2, fill: { color: col }, line: { color: col, width: 0 } });
-      txt(s, [{ text: a + "  ", options: { bold: true, color: NAVY } }, { text: b, options: { color: BODY } }], { x: dx + 0.45, y, w: dw - 0.45, h: 0.36, fontSize: 13 });
-    });
-    source(s, "Chart: TobaccoTactics citing Euromonitor (2025).", dx + 0.1, 5.85, dw - 0.1);
-    s.addText([
-      { text: "The paradox: ", options: { bold: true, color: NAVY } },
-      { text: "tobacco is legal, but most countries have banned the “P” for Promotion. Western sales shrink, so growth moves to Asia, Africa and the Middle East.", options: { color: BODY } },
-    ], { isTextBox: true, x: L, y: 6.1, w: W, h: 0.75, fontSize: 14, margin: 12, valign: "middle", fill: { color: TINT } });
-    s.addNotes("(~1 min) Why is tobacco such an interesting case? 1.2 billion people use it, and 80% of them live in low- and middle-income countries, so this industry is international by necessity. China National Tobacco makes almost half of all cigarettes but sells them at home. So when we say 'international tobacco marketing', we really mean four companies: Philip Morris International, BAT, Japan Tobacco and Imperial. And they face a paradox: the product is legal, but in most countries they are not allowed to promote it.");
+    s.addNotes("(~40 s) Imagine you are the marketing manager. Your product has 1.2 billion customers, most of them in developing countries. But almost every country in the world has signed a treaty that says: you may not advertise. So how do you market it? Let me tell this story in three chapters.");
   }
 
-  // ===== 5. Rules of the game =====
+  // ===== 5. Doors close =====
   {
-    const s = addContent("Political & legal environment", "The rules of the game");
+    const s = addContent("Chapter 1  ·  Closing the doors", "One by one, the doors closed");
     const ms = [
-      ["2003", "WHO tobacco treaty (FCTC)", "Today 183 parties; ad bans are a core duty"],
-      ["2012", "Australia: plain packs", "The world’s first"],
-      ["2016", "Uruguay beats Philip Morris", "Investment court backs big warnings"],
-      ["2020", "WTO backs Australia", "Plain packs are legal under trade law"],
-      ["2020", "EU bans menthol", "All flavours now banned in the EU"],
-      ["2026", "UK generational ban", "No sales ever to anyone born after 2008"],
+      ["2003", "WHO treaty", "Tobacco ads banned"],
+      ["2009", "USA", "Flavoured cigarettes banned (not menthol)"],
+      ["2012", "Australia", "World’s first plain packs"],
+      ["2020", "European Union", "Menthol banned"],
+      ["2026", "United Kingdom", "Nobody born after 2008 can ever buy"],
     ];
-    const x0 = 1.9, x1 = 11.7, ly = 2.6, step = (x1 - x0) / (ms.length - 1);
+    const x0 = 2.0, x1 = 11.6, ly = 2.9, step = (x1 - x0) / (ms.length - 1);
     s.addShape(pres.shapes.LINE, { x: x0, y: ly, w: x1 - x0, h: 0, line: { color: LIGHT, width: 3 } });
     ms.forEach(([d, t, e], i) => {
       const cx = x0 + i * step, last = i === ms.length - 1, col = last ? RED : NAVY;
-      s.addShape(pres.shapes.OVAL, { x: cx - 0.17, y: ly - 0.17, w: 0.34, h: 0.34, fill: { color: col }, line: { color: WHITE, width: 2 } });
-      txt(s, d, { x: cx - 0.95, y: ly - 0.9, w: 1.9, h: 0.45, fontSize: 19, bold: true, color: col, align: "center" });
-      txt(s, t, { x: cx - 0.95, y: ly + 0.38, w: 1.9, h: 0.75, fontSize: 14, bold: true, color: col, align: "center" });
-      txt(s, e, { x: cx - 0.95, y: ly + 1.12, w: 1.9, h: 0.8, fontSize: 12, color: BODY, align: "center" });
+      s.addShape(pres.shapes.OVAL, { x: cx - 0.19, y: ly - 0.19, w: 0.38, h: 0.38, fill: { color: col }, line: { color: WHITE, width: 2 } });
+      txt(s, d, { x: cx - 1.1, y: ly - 1.0, w: 2.2, h: 0.55, fontSize: 26, bold: true, color: col, align: "center" });
+      txt(s, t, { x: cx - 1.1, y: ly + 0.45, w: 2.2, h: 0.4, fontSize: 17, bold: true, color: col, align: "center" });
+      txt(s, e, { x: cx - 1.1, y: ly + 0.9, w: 2.2, h: 0.85, fontSize: 15, color: BODY, align: "center" });
     });
-    const bw = (W - 0.3) / 2;
-    [
-      ["Outside the treaty", "USA (signed, never ratified) and Indonesia (never signed): two of the most important markets for the industry."],
-      ["Lesson for marketers", "The industry tried to fight packaging rules with trade and investment law, and lost every major case."],
-    ].forEach(([h, b], i) => {
-      const x = L + i * (bw + 0.3);
-      card(s, x, 4.75, bw, 1.75, { fill: TINT, line: TINT });
-      txt(s, h, { x: x + 0.3, y: 4.92, w: bw - 0.6, h: 0.38, fontSize: 17, bold: true, color: i ? RED : NAVY });
-      txt(s, b, { x: x + 0.3, y: 5.35, w: bw - 0.6, h: 1.05, fontSize: 14, color: BODY });
-    });
-    s.addNotes("(~1 min) The rules come mainly from one treaty: the WHO Framework Convention on Tobacco Control from 2003, with 183 parties. It requires bans on advertising, promotion and sponsorship. Then came packaging: Australia introduced plain packs in 2012. Philip Morris sued Uruguay and lost in 2016; several countries took Australia to the WTO and lost in 2020. The EU banned menthol in 2020, and this year the UK passed a generational ban. Two big exceptions: the USA and Indonesia never joined the treaty, and we'll see both again when we talk about flavours.");
+    banner(s, "Every closed door pushed marketers to look for another one.", 5.55, 0.85, 20);
+    s.addNotes("(~45 s) Chapter one: the doors close. In 2003 the WHO treaty bans advertising. In 2009 the US bans flavoured cigarettes, except menthol. In 2012 Australia takes the logo off the pack. In 2020 the EU bans menthol. And this year the UK passed a law that nobody born after 2008 can ever legally buy tobacco. Every time a door closed, marketers looked for the next one.");
   }
 
-  // ===== 6. EU vs USA packaging =====
+  // ===== 6. Did it work? =====
   {
-    const s = addContent("Packaging", "The pack is the last billboard: EU vs USA");
-    const hd = (t) => ({ text: t, options: { bold: true, color: "FFFFFF", fill: { color: "0E2841" } } });
-    const rl = (t) => ({ text: t, options: { bold: true, color: "0E2841", fill: { color: "F3F4F6" } } });
+    const s = addContent("Chapter 1  ·  Closing the doors", "Did it work? Teenagers stopped smoking");
+    s.addChart(pres.charts.BAR, [{ name: "Smokers", labels: ["1999", "2011", "2014", "2019"], values: [28.5, 15.8, 9.2, 5.8] }], {
+      ...chartBase(), x: L - 0.1, y: 1.4, w: 6.9, h: 3.85, barDir: "col", barGapWidthPct: 55,
+      chartColors: ["0E2841"], showTitle: true, title: "US high-school students who smoke cigarettes, %",
+      dataLabelPosition: "outEnd", dataLabelFormatCode: "0.0", valAxisLabelFormatCode: "0", valAxisMaxVal: 35, valAxisMinVal: 0,
+    });
+    source(s, "CDC / FDA National Youth Tobacco Survey (past-30-day use).", L, 5.3, 6.8);
+    const sx = 8.3, sw = R - sx;
+    txt(s, "÷5", { x: sx, y: 1.6, w: sw, h: 0.8, fontSize: 44, bold: true, color: RED });
+    txt(s, "five times fewer teenage smokers in 20 years", { x: sx, y: 2.4, w: sw, h: 0.7, fontSize: 16, color: BODY });
+    txt(s, "−17%", { x: sx, y: 3.3, w: sw, h: 0.8, fontSize: 44, bold: true, color: RED });
+    txt(s, "lower chance that a teenager smokes after the 2009 US flavour ban", { x: sx, y: 4.1, w: sw, h: 0.7, fontSize: 16, color: BODY });
+    txt(s, "Courtemanche, Palmer & Pesko (2017)", { x: sx, y: 4.85, w: sw, h: 0.25, fontSize: 10, color: GREY, italic: true });
+    banner(s, [{ text: "Cigarettes lost the teenagers.  " }, { text: "But nicotine didn’t.", options: { color: "F2B8B8" } }], 5.75, 0.8, 20);
+    s.addNotes("(~50 s) Did it work? Look at American high-school students. In 1999, almost 3 in 10 smoked. By 2019 it was under 6 in 100: five times fewer. Researchers found that the 2009 flavour ban alone cut the chance that a teenager smokes by about 17%. So the cigarette lost the teenagers. But, and this is the twist, nicotine didn't. Before we get there, let's look at what happened to the pack.");
+  }
+
+  // ===== 7. The pack =====
+  {
+    const s = addContent("Chapter 1  ·  Closing the doors", "The pack became the last billboard");
+    const cw = (W - 0.4) / 2;
+    [
+      ["European Union", "65%", "of the pack is a picture warning", ["Plain packs in France, Ireland, Hungary…", "No flavours at all, menthol included"], NAVY],
+      ["United States", "Text only", "a small warning on the side", ["Graphic warnings stuck in court since 2020", "Menthol is still allowed"], RED],
+    ].forEach(([h, n, sub, pts, col], i) => {
+      const x = L + i * (cw + 0.4);
+      s.addText(h, { isTextBox: true, shape: pres.shapes.RECTANGLE, x, y: 1.5, w: cw, h: 0.6, fill: { color: col }, color: WHITE, bold: true, fontSize: 20, valign: "middle", margin: 16 });
+      card(s, x, 2.1, cw, 2.95);
+      txt(s, n, { x: x + 0.4, y: 2.35, w: cw - 0.8, h: 0.9, fontSize: 48, bold: true, color: col });
+      txt(s, sub, { x: x + 0.4, y: 3.25, w: cw - 0.8, h: 0.4, fontSize: 17, color: BODY });
+      s.addText(pts.map((p, j) => ({ text: p, options: { bullet: true, breakLine: j < pts.length - 1 } })), { isTextBox: true, x: x + 0.4, y: 3.95, w: cw - 0.8, h: 1.3, fontSize: 16, color: BODY, margin: 0, valign: "top", paraSpaceAfter: 8 });
+    });
+    txt(s, "World record: in Türkiye and Timor-Leste, 92.5% of the pack is warning.", { x: L, y: 5.4, w: W, h: 0.4, fontSize: 16, color: GREY, italic: true });
+    source(s, "Sources: EU Directive 2014/40/EU; US FDA; Canadian Cancer Society (2025).");
+    s.addNotes("(~40 s) When there is no TV, no billboard and no magazine, the pack itself is the last billboard. That's why regulators fight over it. In the EU, two-thirds of the pack is a warning, and in Hungary the logo is gone too. In the US, the brand still owns the pack: just a small text warning on the side, and the picture warnings have been stuck in court since 2020. The record holders are Türkiye and Timor-Leste, where 92.5% of the pack is warning.");
+  }
+
+  // ===== 8. Flavours of the world =====
+  {
+    const s = addContent("Chapter 2  ·  The sweet door", "Every country has its own taste", "CONTENT_PICTURE");
+    previewSlots(s, [SIDE]);
     const rows = [
-      [hd(""), hd("European Union"), hd("United States")],
-      [rl("Health warning"), "Picture + text, 65% of front and back", "Text only, small, on the side panel"],
-      [rl("Graphic warnings"), "Mandatory since 2016 (EU directive)", "FDA rule from 2020 still blocked by courts"],
-      [rl("Plain packaging"), "France, Ireland, Hungary, Belgium and others", "None: the brand owns the pack"],
-      [rl("Flavours"), "All banned, including menthol (2020)", "Banned in 2009, except menthol"],
-      [rl("Advertising"), "Banned in press, radio, online, sponsorship", "TV and radio banned since 1971; print limited"],
+      ["Indonesia", "Clove kretek. PMI bought local Sampoerna instead of pushing Marlboro."],
+      ["Japan", "Menthol and “ice” flavours are mainstream."],
+      ["Latin America", "Capsules: click the filter, change the flavour."],
+      ["USA", "Menthol: used by ~85% of Black smokers after years of targeted ads."],
     ];
-    s.addTable(rows, { x: L, y: 1.45, w: W, colW: [2.3, 4.64, 4.64], rowH: 0.5, fontSize: 14, color: "404040", valign: "middle", border: { type: "solid", pt: 1, color: "D1D1D1" }, margin: 0.1 });
-    txt(s, "World records", { x: L, y: 4.75, w: 4, h: 0.32, fontSize: 14, bold: true, color: GREY });
+    const lw = 8.0, rh = 1.1, gap = 0.17;
+    rows.forEach(([h, b], i) => {
+      const y = 1.55 + i * (rh + gap);
+      card(s, L, y, lw, rh, { fill: i % 2 ? WHITE : TINT, line: i % 2 ? LIGHT : TINT });
+      txt(s, h, { x: L + 0.3, y: y + 0.1, w: 2.1, h: rh - 0.2, fontSize: 18, bold: true, color: RED, valign: "middle" });
+      txt(s, b, { x: L + 2.45, y: y + 0.1, w: lw - 2.7, h: rh - 0.2, fontSize: 16, color: BODY, valign: "middle" });
+    });
+    txt(s, "Flavour is the easiest way to adapt the product to a culture.", { x: L, y: 6.6, w: lw, h: 0.3, fontSize: 14, color: GREY, italic: true });
+    s.addNotes("(~45 s) Chapter two: the sweet door. If you can't change the advertising, you change the product. In Indonesia people smoke clove kretek, so when Philip Morris came in, it bought the local leader Sampoerna instead of pushing Marlboro. In Japan menthol is mainstream. In Latin America, capsule cigarettes let you click a ball in the filter and change the taste. And in the US, menthol was advertised so heavily in Black neighbourhoods that today about 85% of Black smokers use menthol.\n\nPicture suggestion: a capsule ('click') pack or an Indonesian kretek pack.");
+  }
+
+  // ===== 9. Why flavours get banned =====
+  {
+    const s = addContent("Chapter 2  ·  The sweet door", "Why governments ban flavours");
+    const lw = 6.2;
+    [
+      [I.wind, "They hide the harshness", "Menthol numbs the throat. The first cigarette doesn’t hurt."],
+      [I.user, "They attract beginners", "Sweet tastes make perfect starter products."],
+      [I.target, "They target groups", "Flavours were aimed at specific communities."],
+    ].forEach(([img, h, b], i) => {
+      const y = 1.55 + i * 1.6;
+      card(s, L, y, lw, 1.4, { fill: TINT, line: TINT });
+      iconCircle(s, img, L + 0.3, y + 0.39, 0.62);
+      txt(s, h, { x: L + 1.2, y: y + 0.22, w: lw - 1.4, h: 0.4, fontSize: 19, bold: true, color: NAVY });
+      txt(s, b, { x: L + 1.2, y: y + 0.66, w: lw - 1.4, h: 0.6, fontSize: 15, color: BODY });
+    });
+    const sx = 7.6, sw = R - sx;
+    card(s, sx, 1.55, sw, 4.6, { line: RED, lineW: 1.25 });
+    txt(s, "The clove war", { x: sx + 0.35, y: 1.75, w: sw - 0.7, h: 0.45, fontSize: 22, bold: true, color: RED });
+    [["2009", "USA bans clove cigarettes, but keeps menthol"], ["2010", "Indonesia sues the USA at the WTO"], ["2012", "Indonesia wins: it was discrimination"]].forEach(([d, t], i) => {
+      const y = 2.5 + i * 1.15;
+      txt(s, d, { x: sx + 0.35, y, w: 1.0, h: 0.45, fontSize: 20, bold: true, color: NAVY });
+      txt(s, t, { x: sx + 1.4, y: y + 0.03, w: sw - 1.75, h: 0.85, fontSize: 16, color: BODY });
+    });
+    txt(s, "Health policy became trade policy.", { x: sx + 0.35, y: 5.6, w: sw - 0.7, h: 0.35, fontSize: 15, color: GREY, italic: true });
+    s.addNotes("(~50 s) Why do governments ban flavours? Menthol numbs the throat, so the first cigarette doesn't hurt. Sweet flavours make perfect starter products. And they were used to target specific groups. Here's my favourite story. In 2009 the US banned clove cigarettes, but kept menthol. Who makes clove cigarettes? Indonesia. Who makes menthol? American companies. Indonesia sued at the WTO and won in 2012. Health policy became trade policy, which is exactly why international marketers must watch regulation.");
+  }
+
+  // ===== 10. Then came the vape =====
+  {
+    const s = addContent("Chapter 3  ·  The new door", "Then came the vape");
+    s.addChart(pres.charts.BAR, [{ name: "Vapers", labels: ["2011", "2014", "2018", "2019", "2022", "2024"], values: [1.5, 13.4, 20.8, 27.5, 14.1, 7.8] }], {
+      ...chartBase(), x: L - 0.1, y: 1.4, w: 7.4, h: 4.0, barDir: "col", barGapWidthPct: 45,
+      chartColors: ["0E2841", "0E2841", "0E2841", "C00000", "0E2841", "0E2841"], showTitle: true, title: "US high-school students who vape, %",
+      dataLabelPosition: "outEnd", dataLabelFormatCode: "0.0", valAxisLabelFormatCode: "0", valAxisMaxVal: 32, valAxisMinVal: 0,
+    });
+    source(s, "CDC / FDA National Youth Tobacco Survey. The 2019 survey moved to tablets, which may raise estimates.", L, 5.45, 7.3);
+    const sx = 8.8, sw = R - sx;
+    [["2014", "Vapes overtake cigarettes among US teens", NAVY], ["2019", "Peak: more than 1 in 4 high-schoolers vape", RED], ["2020", "FDA restricts flavoured cartridges, and use falls", NAVY]].forEach(([d, t, col], i) => {
+      const y = 1.55 + i * 1.25;
+      txt(s, d, { x: sx, y, w: sw, h: 0.5, fontSize: 24, bold: true, color: col });
+      txt(s, t, { x: sx, y: y + 0.5, w: sw, h: 0.65, fontSize: 15, color: BODY });
+    });
+    banner(s, [{ text: "Today: " }, { text: "~9 in 10 young vapers use flavours.", options: { color: "F2B8B8" } }, { text: "  Worldwide, 15 million kids aged 13–15 vape." }], 5.85, 0.8, 17);
+    s.addNotes("(~50 s) Chapter three: the new door. Just as teenagers stopped smoking, the vape arrived. In 2011 only 1.5% of American high-schoolers vaped. In 2014 vapes overtook cigarettes. By 2019, more than one in four high-schoolers vaped. That is more than ever smoked cigarettes in the last decade. Then regulators reacted: in 2020 the FDA restricted flavoured cartridges, and use fell to under 8% by 2024. But even today about nine in ten young vapers use flavours, and worldwide 15 million children aged 13 to 15 vape.");
+  }
+
+  // ===== 11. Why vapes speak to kids =====
+  {
+    const s = addContent("Chapter 3  ·  The new door", "Why vapes speak to kids");
+    const cw = (W - 0.9) / 4;
+    [
+      [I.candy, "Flavours", "Bubblegum, mango, cotton candy"],
+      [I.usb, "Design", "Colourful, looks like a USB stick, easy to hide"],
+      [I.phone, "Social media", "Influencers and TikTok, not TV"],
+      [I.coin, "Price", "Cheap disposables sold at every kiosk"],
+    ].forEach(([img, h, b], i) => {
+      const x = L + i * (cw + 0.3);
+      card(s, x, 1.55, cw, 3.0);
+      iconCircle(s, img, x + 0.35, 1.85, 0.75, i === 0 ? RED : NAVY);
+      txt(s, h, { x: x + 0.35, y: 2.8, w: cw - 0.7, h: 0.45, fontSize: 20, bold: true, color: i === 0 ? RED : NAVY });
+      txt(s, b, { x: x + 0.35, y: 3.3, w: cw - 0.7, h: 1.1, fontSize: 16, color: BODY });
+    });
+    s.addText([
+      { text: "$462 million", options: { bold: true, fontSize: 30, color: WHITE } },
+      { text: "   paid by JUUL (2023) to US states over marketing to young people", options: { fontSize: 17, color: WHITE } },
+    ], { isTextBox: true, shape: pres.shapes.RECTANGLE, x: L, y: 4.85, w: W, h: 1.0, fill: { color: NAVY }, valign: "middle", margin: 16 });
+    txt(s, "“A candy-flavoured trap.”  — WHO Director-General, 2024", { x: L, y: 6.05, w: W, h: 0.4, fontSize: 16, color: RED, italic: true, bold: true });
+    s.addNotes("(~50 s) Why did vapes reach kids so fast? Four reasons, and they are pure marketing. Flavours: bubblegum, mango, cotton candy. Design: colourful, looks like a USB stick, easy to hide from parents and teachers. Social media: influencers and TikTok, where tobacco ad bans were never written for. And price: cheap disposables at every kiosk. The companies say vapes are for adult smokers who want to quit. But JUUL paid 462 million dollars to six US states over marketing to young people, and the head of the WHO called it a 'candy-flavoured trap'.");
+  }
+
+  // ===== 12. 4Ps =====
+  {
+    const s = addContent("What marketers learned", "Marketing without advertising: the 4Ps");
+    const cw = (W - 0.9) / 4;
+    [
+      [I.box, "Product", "New formats: capsules, vapes, pouches"],
+      [I.tag, "Price", "Single sticks and cheap disposables"],
+      [I.store, "Place", "Kiosks, warungs, duty-free, online"],
+      [I.mega, "Promotion", "Sponsorships, influencers, the pack"],
+    ].forEach(([img, h, b], i) => {
+      const x = L + i * (cw + 0.3);
+      card(s, x, 1.55, cw, 3.0, { fill: TINT, line: TINT });
+      iconCircle(s, img, x + 0.35, 1.85, 0.75);
+      txt(s, h, { x: x + 0.35, y: 2.8, w: cw - 0.7, h: 0.45, fontSize: 20, bold: true, color: NAVY });
+      txt(s, b, { x: x + 0.35, y: 3.3, w: cw - 0.7, h: 1.1, fontSize: 16, color: BODY });
+    });
+    txt(s, "Big Tobacco now owns the new door too", { x: L, y: 4.9, w: W, h: 0.4, fontSize: 18, bold: true, color: NAVY });
+    txt(s, [{ text: "41.5%", options: { bold: true, color: RED, fontSize: 30 } }, { text: "  of Philip Morris revenue now comes from smoke-free products (IQOS, ZYN)", options: { color: BODY, fontSize: 16 } }], { x: L, y: 5.35, w: W, h: 0.9, valign: "middle" });
+    source(s, "PMI 2025 full-year results.");
+    s.addNotes("(~40 s) So what did marketers learn? When mass media is closed, the other three Ps do the work. Product: new formats. Price: single sticks and cheap disposables. Place: kiosks and online. Promotion: sponsorships, influencers and the pack. And the big companies are not losing this game: Philip Morris already earns 41.5% of its revenue from heated tobacco and nicotine pouches.");
+  }
+
+  // ===== 13. Epilogue =====
+  {
+    const s = addContent("Epilogue", "The story in three chapters");
     const cw = (W - 0.6) / 3;
     [
-      ["92.5%", "Türkiye and Timor-Leste: the largest warnings in the world"],
-      ["140", "countries now require picture warnings on packs"],
-      ["Every stick", "Canada and Australia print warnings on each cigarette"],
-    ].forEach(([n, l], i) => {
+      ["1", "The doors closed", "Ad bans and plain packs: teenage smoking fell five times."],
+      ["2", "The sweet door", "Flavours adapted the product to every culture, until they were banned."],
+      ["3", "The new door", "Vapes reached kids through flavour, design and social media."],
+    ].forEach(([n, h, b], i) => {
       const x = L + i * (cw + 0.3);
-      card(s, x, 5.1, cw, 1.4);
-      txt(s, n, { x: x + 0.3, y: 5.2, w: cw - 0.6, h: 0.6, fontSize: 28, bold: true, color: RED });
-      txt(s, l, { x: x + 0.3, y: 5.8, w: cw - 0.6, h: 0.6, fontSize: 13, color: BODY });
+      card(s, x, 1.55, cw, 2.6);
+      txt(s, n, { x: x + 0.35, y: 1.7, w: 1, h: 0.75, fontSize: 40, bold: true, color: RED });
+      txt(s, h, { x: x + 0.35, y: 2.5, w: cw - 0.7, h: 0.45, fontSize: 20, bold: true, color: NAVY });
+      txt(s, b, { x: x + 0.35, y: 3.0, w: cw - 0.7, h: 1.0, fontSize: 15, color: BODY });
     });
-    source(s, "Sources: EU Directive 2014/40/EU; US FDA; Canadian Cancer Society, Cigarette Package Health Warnings (2025).");
-    s.addNotes("(~1 min) When advertising is banned, the pack becomes the last billboard, and that is why regulators fight over it. In the EU, 65% of the front and back is a picture-and-text warning, and many countries, including Hungary, add plain packaging. In the US it is the opposite: only a small text warning on the side, and the FDA's graphic warnings from 2020 are still stuck in court. Flavours too: the EU banned everything including menthol; the US banned flavours in 2009 but kept menthol. Elsewhere it goes even further: in Türkiye 92.5% of the pack is warning, and Canada and Australia now print warnings on every single cigarette.");
-  }
-
-  // ===== 7. A world of flavours =====
-  {
-    const s = addContent("Product adaptation", "A world of flavours", "CONTENT_PICTURE");
-    previewSlots(s, [SIDE]);
-    const items = [
-      ["Indonesia", "Clove kretek cigarettes are national culture, so PMI bought local Sampoerna (2005) instead of pushing Marlboro."],
-      ["Japan & Philippines", "Menthol and “ice” variants are mainstream products, not a niche."],
-      ["Latin America & Asia", "Capsule cigarettes: you click a ball in the filter and the flavour changes."],
-      ["Middle East", "Flavoured shisha (waterpipe) tobacco: apple, mint, grape."],
-      ["USA", "Menthol is used by nearly 85% of Black smokers, after decades of targeted marketing (FDA)."],
-      ["European Union", "No flavours at all since 2020: one taste fits all."],
-    ];
-    const cw = 3.85, ch = 1.6, gap = 0.3;
-    items.forEach(([h, b], i) => {
-      const x = L + (i % 2) * (cw + gap), y = 1.5 + Math.floor(i / 2) * (ch + 0.2);
-      card(s, x, y, cw, ch, { fill: i === 5 ? TINT : WHITE, line: i === 5 ? TINT : LIGHT });
-      txt(s, h, { x: x + 0.25, y: y + 0.15, w: cw - 0.5, h: 0.35, fontSize: 16, bold: true, color: i === 5 ? NAVY : RED });
-      txt(s, b, { x: x + 0.25, y: y + 0.55, w: cw - 0.5, h: 0.95, fontSize: 13.5, color: BODY });
-    });
-    s.addNotes("(~1 min) Taste is local, so the product itself is adapted. In Indonesia clove kretek cigarettes are part of the culture; when Philip Morris entered, it bought the local leader Sampoerna instead of pushing Marlboro. In Japan and the Philippines menthol is mainstream. In Latin America and Asia, capsule cigarettes let you click a flavour ball in the filter: product innovation as entertainment. In the Middle East it's flavoured shisha. In the US, menthol was marketed so heavily to Black communities that today about 85% of Black smokers use menthol. And in the EU: no flavours at all.\n\nPicture suggestion: a capsule ('click') pack or an Indonesian kretek pack.");
-  }
-
-  // ===== 8. Why flavours get banned =====
-  {
-    const s = addContent("Product adaptation", "Why flavours get banned");
-    const lw = 6.1;
-    txt(s, "Flavours change the first experience, and the first experience decides who starts.", { x: L, y: 1.35, w: W, h: 0.4, fontSize: 16, color: BODY });
-    const reasons = [
-      [I.wind, "Hide the harshness", "Menthol cools and numbs the throat, so smoke is easier to inhale."],
-      [I.user, "Attract beginners", "Sweet tastes and capsules appeal to young people: perfect starter products."],
-      [I.target, "Target groups", "Flavours were used to reach specific communities, e.g. menthol in Black US neighbourhoods."],
-    ];
-    reasons.forEach(([img, h, b], i) => {
-      const y = 2.0 + i * 1.5;
-      card(s, L, y, lw, 1.3, { fill: TINT, line: TINT });
-      iconCircle(s, img, L + 0.25, y + 0.33, 0.62);
-      txt(s, h, { x: L + 1.1, y: y + 0.17, w: lw - 1.3, h: 0.36, fontSize: 17, bold: true, color: NAVY });
-      txt(s, b, { x: L + 1.1, y: y + 0.55, w: lw - 1.3, h: 0.65, fontSize: 14, color: BODY });
-    });
-    const tx = 7.6, tw = R - tx;
-    txt(s, "Key bans and fights", { x: tx, y: 2.0, w: tw, h: 0.35, fontSize: 14, bold: true, color: GREY });
-    const ev = [
-      ["2009", "USA bans all flavours, except menthol"],
-      ["2012", "Indonesia wins at the WTO: banning clove but not menthol was discrimination"],
-      ["2020", "EU bans menthol cigarettes"],
-      ["2023", "EU extends the ban to heated tobacco"],
-      ["2025", "USA withdraws its proposed menthol ban"],
-    ];
-    s.addShape(pres.shapes.LINE, { x: tx + 0.12, y: 2.55, w: 0, h: 3.85, line: { color: LIGHT, width: 2 } });
-    ev.forEach(([d, t], i) => {
-      const y = 2.45 + i * 0.83, col = i === 1 ? RED : NAVY;
-      s.addShape(pres.shapes.OVAL, { x: tx, y: y + 0.08, w: 0.24, h: 0.24, fill: { color: col }, line: { color: WHITE, width: 1.5 } });
-      txt(s, d, { x: tx + 0.45, y, w: 0.8, h: 0.4, fontSize: 17, bold: true, color: col });
-      txt(s, t, { x: tx + 1.3, y: y + 0.03, w: tw - 1.3, h: 0.75, fontSize: 13, color: BODY });
-    });
-    s.addNotes("(~1 min) Why do governments ban flavours? Three reasons: menthol numbs the throat so the first cigarette doesn't hurt; sweet flavours attract beginners; and flavours were used to target specific groups. The most interesting fight: in 2009 the US banned clove cigarettes but kept menthol. Indonesia, the home of clove kretek, went to the WTO and won in 2012, because protecting the American flavour while banning the Indonesian one was discrimination. Health policy became trade policy. The EU banned menthol in 2020, while the US withdrew its menthol ban proposal in 2025.");
-  }
-
-  // ===== 9. 4Ps =====
-  {
-    const s = addContent("Marketing mix", "Marketing without advertising: the 4Ps adapted");
-    const ps = [
-      [I.box, "Product", "Capsules, slim packs aimed at women, kretek, heated tobacco (IQOS), nicotine pouches (ZYN)."],
-      [I.tag, "Price", "Single sticks and small packs in poorer markets match daily incomes. Excise taxes shape every price tier."],
-      [I.store, "Place", "Kiosks, Indonesian warungs, South African spaza shops, duty-free. Hungary: state-licensed National Tobacco Shops since 2013."],
-      [I.mega, "Promotion", "Ferrari F1 “Mission Winnow” (2018–21), sports sponsorship in Indonesia, influencers who don’t disclose payment, and the pack itself."],
-    ];
-    const cw = (W - 0.3) / 2, ch = 2.2;
-    ps.forEach(([img, h, b], i) => {
-      const x = L + (i % 2) * (cw + 0.3), y = 1.5 + Math.floor(i / 2) * (ch + 0.3);
-      card(s, x, y, cw, ch);
-      iconCircle(s, img, x + 0.3, y + 0.3, 0.62, i === 3 ? RED : NAVY);
-      txt(s, h, { x: x + 1.15, y: y + 0.38, w: cw - 1.45, h: 0.45, fontSize: 20, bold: true, color: i === 3 ? RED : NAVY });
-      txt(s, b, { x: x + 0.3, y: y + 1.1, w: cw - 0.6, h: 1.1, fontSize: 15, color: BODY });
-    });
-    txt(s, "When mass media is closed, the product, the price and the shop do the selling.", { x: L, y: 6.45, w: W, h: 0.35, fontSize: 14, color: GREY, italic: true });
-    s.addNotes("(~1 min) So how do you market without advertising? You adapt the 4Ps. Product: capsules, slim packs for women, heated tobacco, nicotine pouches. Price: in poorer markets cigarettes are sold one stick at a time, so the price fits a daily income. Place: dense informal retail like warungs and spaza shops; here in Hungary the state took control of retail in 2013 with the National Tobacco Shops, where you can't even see the products from outside. Promotion: sponsorships like Ferrari's 'Mission Winnow' and influencers on social media.");
-  }
-
-  // ===== 10. Smoke-free pivot =====
-  {
-    const s = addContent("The future", "The smoke-free pivot: strategy or rebranding?");
-    s.addChart(pres.charts.BAR, [{ name: "Smoke-free share", labels: ["2024", "2025", "2030 target"], values: [38.7, 41.5, 67] }], {
-      ...chartBase(), x: L - 0.1, y: 1.45, w: 6.4, h: 3.5, barDir: "col", barGapWidthPct: 60,
-      chartColors: ["0E2841", "0E2841", "D1D1D1"], showTitle: true, title: "Philip Morris International: smoke-free share of net revenue, %",
-      dataLabelPosition: "outEnd", dataLabelFormatCode: "0.0", valAxisLabelFormatCode: "0", valAxisMaxVal: 80, valAxisMinVal: 0,
-    });
-    source(s, "PMI 2025 results; 2030 target = “more than two-thirds”.", L, 5.0, 6.3);
-    const sx = 7.75, sw = R - sx;
-    [["106", "markets sell PMI smoke-free products"], ["76%", "IQOS share of the heated-tobacco category"], ["Japan", "IQOS’s breakthrough market: clean, low smell, tech-friendly"]].forEach(([n, l], i) => {
-      const y = 1.5 + i * 1.15;
-      txt(s, n, { x: sx, y, w: sw, h: 0.6, fontSize: 30, bold: true, color: NAVY });
-      txt(s, l, { x: sx, y: y + 0.6, w: sw, h: 0.4, fontSize: 14, color: BODY });
-    });
-    const hw = (W - 0.3) / 2;
-    [["Industry view", "Fewer harmful products; PMI’s CEO says cigarettes “belong in museums”.", NAVY], ["Critics’ view", "Same nicotine, new flavours and devices, and new young users.", RED]].forEach(([h, b, col], i) => {
-      const x = L + i * (hw + 0.3);
-      card(s, x, 5.4, hw, 1.15, { line: col, lineW: 1.25 });
-      txt(s, h, { x: x + 0.25, y: 5.5, w: hw - 0.5, h: 0.35, fontSize: 16, bold: true, color: col });
-      txt(s, b, { x: x + 0.25, y: 5.88, w: hw - 0.5, h: 0.6, fontSize: 14, color: BODY });
-    });
-    s.addNotes("(~1 min) The industry's answer to all these rules is the so-called smoke-free pivot. Philip Morris already earns 41.5% of its revenue from heated tobacco and nicotine pouches, and wants more than two-thirds by 2030. IQOS has three quarters of the heated-tobacco category, and Japan was its breakthrough market. Is this a real strategy or just rebranding? The industry says it is moving away from cigarettes. Critics say it is the same nicotine with new flavours, new devices and new young users.");
-  }
-
-  // ===== 11. Conclusion =====
-  {
-    const s = addContent("Conclusion", "Conclusion & discussion");
-    bullets(s, [
-      ["Regulation shapes strategy", "— the macro-environment decides the marketing mix, country by country."],
-      ["Global identity, local execution", "— one brand, many boxes, many flavours."],
-      ["Packaging is media", "— when ads are banned, the pack, the price and the shop do the selling."],
-    ], { x: L, y: 1.45, w: W, h: 1.9, fontSize: 17, paraSpaceAfter: 10 });
-    txt(s, "My answer", { x: L, y: 3.45, w: 4, h: 0.32, fontSize: 14, bold: true, color: GREY });
-    txt(s, "“Tobacco marketing didn’t disappear. It moved into the pack, the shop and the product.”", { x: L, y: 3.8, w: W, h: 0.95, fontSize: 24, bold: true, color: RED, italic: true });
+    txt(s, "“Tobacco marketing didn’t disappear. It moved: into the pack, the flavour and the phone.”", { x: L, y: 4.4, w: W, h: 0.9, fontSize: 22, bold: true, color: RED, italic: true });
     s.addText([
-      { text: "Question for discussion", options: { bold: true, fontSize: 14, color: LIGHT, breakLine: true } },
-      { text: "Should a global company follow its strictest home-market rules in every country it sells in?", options: { fontSize: 20, bold: true, color: WHITE } },
-    ], { isTextBox: true, shape: pres.shapes.RECTANGLE, x: L, y: 5.0, w: W, h: 1.5, fill: { color: NAVY }, valign: "middle", margin: 18, paraSpaceAfter: 6 });
-    s.addNotes("(~1 min) To conclude: regulation shapes strategy country by country; the brands are global but the execution is local; and when advertising is banned, the pack, the price and the shop do the selling. My answer: tobacco marketing didn't disappear, it moved. And a question for you: should a global company follow its strictest home-market rules in every country it sells in, or is it fair to use weaker rules where they exist? Thank you.");
+      { text: "Question for you", options: { bold: true, fontSize: 14, color: LIGHT, breakLine: true } },
+      { text: "Should vapes be sold only in plain packs and only in tobacco flavour?", options: { fontSize: 20, bold: true, color: WHITE } },
+    ], { isTextBox: true, shape: pres.shapes.RECTANGLE, x: L, y: 5.45, w: W, h: 1.2, fill: { color: NAVY }, valign: "middle", margin: 18, paraSpaceAfter: 4 });
+    s.addNotes("(~40 s) So, three chapters. First, the doors closed, and teenagers stopped smoking. Second, flavours became the sweet door, until governments closed that too. Third, vapes opened a new door straight into teenagers' phones. My conclusion: tobacco marketing didn't disappear, it moved. And my question for you: should vapes be treated like cigarettes, with plain packs and no flavours? Thank you.");
   }
 
-  // ===== 12. Bibliography =====
+  // ===== 14. Bibliography =====
   {
     const s = addContent("Sources", "Bibliography");
     const refs = [
-      "Australian Government, Department of Health (2012). Tobacco plain packaging.",
       "Canadian Cancer Society (2025). Cigarette Package Health Warnings: International Status Report, 9th ed.",
-      "Directive 2014/40/EU on tobacco and related products (Tobacco Products Directive). Official Journal of the EU.",
+      "CDC (2015). Tobacco use among middle and high school students, 2011–2014. MMWR 64(14).",
+      "CDC (2019). Tobacco product use among middle and high school students, 2019. MMWR 68(SS-12).",
+      "CDC / FDA (2024). Tobacco product use among middle and high school students, 2024. MMWR 73(41).",
+      "Courtemanche, C., Palmer, M., Pesko, M. (2017). Influence of the flavored cigarette ban on adolescent tobacco use. American Journal of Preventive Medicine.",
+      "Directive 2014/40/EU (Tobacco Products Directive). Official Journal of the EU.",
+      "FDA (2026). 2025 National Youth Tobacco Survey findings.",
       "GOV.UK (2026). Tobacco and Vapes Bill becomes law, 29 April 2026.",
-      "ICSID (2016). Philip Morris Brands Sàrl v. Oriental Republic of Uruguay, Case No. ARB/10/7.",
       "Keegan, W. J., & Green, M. C. (2020). Global Marketing, 10th ed. Pearson.",
-      "Philip Morris International (2026). 2025 Fourth-Quarter & Full-Year Results, 5 February 2026.",
-      "TobaccoTactics, University of Bath (2025). Tobacco Companies.",
+      "Philip Morris International (2026). 2025 Fourth-Quarter & Full-Year Results.",
       "TPackSS, Johns Hopkins (2023). Indonesia: health warning label compliance.",
-      "U.S. Food and Drug Administration. Menthol and other flavors in tobacco products; Cigarette health warnings.",
-      "World Health Organization (2025). WHO global report on trends in prevalence of tobacco use 2000–2024 and projections 2025–2030.",
-      "WHO Framework Convention on Tobacco Control (2003) and 2025 Global Progress Report.",
-      "WTO (2012). United States — Measures Affecting the Production and Sale of Clove Cigarettes (DS406).",
-      "WTO (2020). Australia — Tobacco Plain Packaging (DS435, DS441), Appellate Body reports.",
+      "WHO (2024). Hooking the next generation: how the tobacco industry captures young customers.",
+      "WHO (2025). Global report on trends in prevalence of tobacco use 2000–2024.",
+      "WTO (2012). US — Clove Cigarettes (DS406); New York AG (2023). JUUL settlement.",
     ];
     const half = Math.ceil(refs.length / 2);
     const colW = (W - 0.4) / 2;
