@@ -3,3 +3,6 @@ assets/
 node_modules/
 renders/
 *.mp4
+# Проект серии: исходники медиа и служебные артефакты HyperFrames
+*/media/
+*/.hyperframes/
