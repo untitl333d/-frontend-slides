@@ -278,6 +278,33 @@ const chartBase = () => ({
     s.addNotes("(~55 s) So how did vapes reach kids so fast? Look at the marketing mix. Product: bubblegum, mango, cotton candy. Not flavours for a 50-year-old smoker. Package: colourful, looks like a USB stick, easy to hide from parents and teachers. Promotion: not TV, which is banned, but influencers and TikTok, where the old rules were never written. Price and place: cheap disposables at every kiosk, affordable with pocket money. The companies say vapes are for adults who want to quit. But lesson six: when every P points at the same customer, that customer is your real target. The head of the WHO called it 'a candy-flavoured trap'. And JUUL, the biggest US vape brand, paid hundreds of millions of dollars over marketing to young people.");
   }
 
+  // ===== 10b. Anatomy of a vape pack =====
+  {
+    const s = addContent("Look closer", "A vape pack that looks like a toy");
+    const IMG = 5.0, ix = L, iy = 1.45, k = IMG / 432; // source image is 432 x 431 px
+    s.addImage({ path: __dirname + "/images/geek-bar-pulse.png", x: ix, y: iy, w: IMG, h: IMG * 431 / 432, altText: "Geek Bar Pulse vape, flavour Peach Lemonade, with its retail box" });
+    // numbered markers placed on the photo (pixel positions in the source image)
+    [[1, 208, 244], [2, 24, 32], [3, 378, 262], [4, 24, 189], [5, 24, 275]].forEach(([n, px, py]) => {
+      s.addText(String(n), { isTextBox: true, shape: pres.shapes.OVAL, x: ix + px * k - 0.22, y: iy + py * k - 0.22, w: 0.44, h: 0.44, fill: { color: RED }, line: { color: WHITE, width: 1.5 }, color: WHITE, bold: true, fontSize: 15, align: "center", valign: "middle", margin: 0 });
+    });
+    source(s, "Geek Bar Pulse, the vape brand most used by US teens in 2025 (FDA, NYTS 2025).", L, 6.62, IMG + 0.5);
+    const cx = 6.55, cw = R - cx;
+    [
+      ["Candy name and colours", "“Peach Lemonade” in pastel pink: it looks like a soft drink."],
+      ["A playful name", "“Geek Bar” sounds like a snack or a gaming brand."],
+      ["A screen like a game", "Battery and liquid levels shown like a health bar."],
+      ["A big number to beat", "“15000 puffs”: a score, and value for pocket money."],
+      ["A small, text-only warning", "No picture at all. Compare it with the cigarette packs."],
+    ].forEach(([h, b], i) => {
+      const y = 1.45 + i * 0.8;
+      s.addText(String(i + 1), { isTextBox: true, shape: pres.shapes.OVAL, x: cx, y: y + 0.04, w: 0.4, h: 0.4, fill: { color: RED }, color: WHITE, bold: true, fontSize: 14, align: "center", valign: "middle", margin: 0 });
+      txt(s, h, { x: cx + 0.58, y, w: cw - 0.58, h: 0.36, fontSize: 17, bold: true, color: NAVY });
+      txt(s, b, { x: cx + 0.58, y: y + 0.36, w: cw - 0.58, h: 0.4, fontSize: 14, color: BODY });
+    });
+    lesson(s, 7, "For a vape, the product is the package: designed like a toy, not like tobacco.", cx, 5.6, cw, 0.95, true);
+    s.addNotes("(~55 s) Let's look closer at one real product: Geek Bar Pulse, the vape brand most used by American teenagers in 2025. One: the flavour is called 'Peach Lemonade', in pastel pink and green. It looks like a soft drink, not like tobacco. Two: the name, 'Geek Bar', sounds like a snack bar or a gaming brand. Three: it has a screen that shows the battery and the liquid like a health bar in a video game. Four: a big number, 15,000 puffs: it feels like a score, and like great value for pocket money. And five: the warning. Just a few words of text, no picture. Remember the cigarette packs from Hungary or Australia? None of those rules are here. Lesson seven: for a vape, the product itself is the package, and it is designed like a toy, not like tobacco.");
+  }
+
   // ===== 11. Then and now =====
   {
     const s = addContent("Look familiar?", "Same playbook, new channel", "THEN_NOW");
@@ -296,7 +323,7 @@ const chartBase = () => ({
     const rows = [
       ["You can’t standardise a regulated product.", "Each country’s law decides how much of the 4Ps you may use, from the USA to Kyrgyzstan.", "Lessons 1, 3"],
       ["Close one P, and the others take over.", "Promotion was banned, so the pack, the flavour, the price and the shop did the selling.", "Lessons 3, 4"],
-      ["Targeting shows in the mix, not in the mission.", "Cartoons, candy flavours and TikTok reveal the real customer, whatever the company says.", "Lessons 2, 4, 6"],
+      ["Targeting shows in the mix, not in the mission.", "Cartoons, candy flavours, toy-like packs and TikTok reveal the real customer.", "Lessons 2, 4, 6, 7"],
     ];
     rows.forEach(([h, b, ref], i) => {
       const y = 1.5 + i * 1.72;
@@ -306,7 +333,7 @@ const chartBase = () => ({
       txt(s, b, { x: L + 1.35, y: y + 0.75, w: W - 3.6, h: 0.6, fontSize: 17, color: BODY });
       txt(s, ref, { x: R - 2.1, y: y + 0.2, w: 1.8, h: 1.1, fontSize: 14, color: GREY, italic: true, align: "right", valign: "middle" });
     });
-    s.addNotes("(~60 s) So what do these lessons mean for us as international marketers? Three conclusions. First: you cannot standardise the marketing of a regulated product. The Marlboro Man could be the same in every country; the pack cannot. The law decides, country by country, how much of the marketing mix you are allowed to use. Second: when you close one P, the other three take over. Promotion was banned, and the pack, the flavour, the price and the shop started doing the selling. Third, and for me the most important: targeting shows in the marketing mix, not in the mission statement. A company can say 'we only market to adults', but cartoons, candy flavours and TikTok tell you who the real customer is.");
+    s.addNotes("(~60 s) So what do these lessons mean for us as international marketers? Three conclusions. First: you cannot standardise the marketing of a regulated product. The Marlboro Man could be the same in every country; the pack cannot. The law decides, country by country, how much of the marketing mix you are allowed to use. Second: when you close one P, the other three take over. Promotion was banned, and the pack, the flavour, the price and the shop started doing the selling. Third, and for me the most important: targeting shows in the marketing mix, not in the mission statement. A company can say 'we only market to adults', but cartoons, candy flavours, a vape that looks like a toy, and TikTok tell you who the real customer is.");
   }
 
   // ===== 13. My view =====

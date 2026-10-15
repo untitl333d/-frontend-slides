@@ -58,22 +58,26 @@ Picture suggestion: a capsule ('click') cigarette pack.
 
 (~55 s) So how did vapes reach kids so fast? Look at the marketing mix. Product: bubblegum, mango, cotton candy. Not flavours for a 50-year-old smoker. Package: colourful, looks like a USB stick, easy to hide from parents and teachers. Promotion: not TV, which is banned, but influencers and TikTok, where the old rules were never written. Price and place: cheap disposables at every kiosk, affordable with pocket money. The companies say vapes are for adults who want to quit. But lesson six: when every P points at the same customer, that customer is your real target. The head of the WHO called it 'a candy-flavoured trap'. And JUUL, the biggest US vape brand, paid hundreds of millions of dollars over marketing to young people.
 
-## 11. Same playbook, new channel
+## 11. A vape pack that looks like a toy
+
+(~55 s) Let's look closer at one real product: Geek Bar Pulse, the vape brand most used by American teenagers in 2025. One: the flavour is called 'Peach Lemonade', in pastel pink and green. It looks like a soft drink, not like tobacco. Two: the name, 'Geek Bar', sounds like a snack bar or a gaming brand. Three: it has a screen that shows the battery and the liquid like a health bar in a video game. Four: a big number, 15,000 puffs: it feels like a score, and like great value for pocket money. And five: the warning. Just a few words of text, no picture. Remember the cigarette packs from Hungary or Australia? None of those rules are here. Lesson seven: for a vape, the product itself is the package, and it is designed like a toy, not like tobacco.
+
+## 12. Same playbook, new channel
 
 (~35 s) Remember Joe Camel? Here he is on the left: a cartoon in a magazine. On the right: a sweet-flavoured vape on TikTok. Different decade, different product, different channel. But it's the same playbook: make it fun, make it sweet, and put it where young people look. Lesson two from the beginning still holds: the creative shows you the real target.
 
 Picture suggestions: left = Joe Camel ad; right = screenshot of a vape post on social media (or colourful disposable vapes).
 
-## 12. What this means for an international marketer
+## 13. What this means for an international marketer
 
-(~60 s) So what do these lessons mean for us as international marketers? Three conclusions. First: you cannot standardise the marketing of a regulated product. The Marlboro Man could be the same in every country; the pack cannot. The law decides, country by country, how much of the marketing mix you are allowed to use. Second: when you close one P, the other three take over. Promotion was banned, and the pack, the flavour, the price and the shop started doing the selling. Third, and for me the most important: targeting shows in the marketing mix, not in the mission statement. A company can say 'we only market to adults', but cartoons, candy flavours and TikTok tell you who the real customer is.
+(~60 s) So what do these lessons mean for us as international marketers? Three conclusions. First: you cannot standardise the marketing of a regulated product. The Marlboro Man could be the same in every country; the pack cannot. The law decides, country by country, how much of the marketing mix you are allowed to use. Second: when you close one P, the other three take over. Promotion was banned, and the pack, the flavour, the price and the shop started doing the selling. Third, and for me the most important: targeting shows in the marketing mix, not in the mission statement. A company can say 'we only market to adults', but cartoons, candy flavours, a vape that looks like a toy, and TikTok tell you who the real customer is.
 
-## 13. The tools are neutral. The target is not.
+## 14. The tools are neutral. The target is not.
 
 (~45 s) So is marketing the villain here? I don't think so. The same tools work the other way too. In the US, the 'truth' campaign used exactly the tobacco playbook: edgy ads, youth culture, rebellion. But it told teenagers that the tobacco industry was manipulating them. Studies credit it with part of the drop in teen smoking. So my view: the tools are neutral. Storytelling, packaging, flavour, influencers: they're just tools. Marketing isn't the problem. Who you aim it at is.
 
 Picture suggestion: a 'truth' campaign ad (truthinitiative.org).
 
-## 14. Tobacco marketing didn’t die. It moved.
+## 15. Tobacco marketing didn’t die. It moved.
 
 (~35 s) To sum up: tobacco marketing didn't die. It moved: from the ad, to the pack, to the flavour, and now to the phone. Every time one door closed, marketers found the next one, and the next door will probably be a product we haven't seen yet. So I'll leave you with a question I find hard to answer: where is the line between marketing a legal product and marketing to children? Thank you!
