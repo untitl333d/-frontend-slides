@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="ru" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>SMK — серия 1</title>
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; font-weight: 700; font-style: normal; src: url("fonts/inter-cyrillic-700-normal.woff2") format("woff2"); unicode-range: U+0400-04FF; }
+      @font-face { font-family: "Inter"; font-weight: 700; font-style: normal; src: url("fonts/inter-latin-700-normal.woff2") format("woff2"); unicode-range: U+0000-03FF, U+2000-206F, U+2190-21FF; }
+      @font-face { font-family: "Inter"; font-weight: 700; font-style: italic; src: url("fonts/inter-cyrillic-700-italic.woff2") format("woff2"); unicode-range: U+0400-04FF; }
+      @font-face { font-family: "Inter"; font-weight: 700; font-style: italic; src: url("fonts/inter-latin-700-italic.woff2") format("woff2"); unicode-range: U+0000-03FF, U+2000-206F, U+2190-21FF; }
+      @font-face { font-family: "Inter"; font-weight: 900; font-style: normal; src: url("fonts/inter-cyrillic-900-normal.woff2") format("woff2"); unicode-range: U+0400-04FF; }
+      @font-face { font-family: "Inter"; font-weight: 900; font-style: normal; src: url("fonts/inter-latin-900-normal.woff2") format("woff2"); unicode-range: U+0000-03FF, U+2000-206F, U+2190-21FF; }
+      @font-face { font-family: "Inter"; font-weight: 900; font-style: italic; src: url("fonts/inter-cyrillic-900-italic.woff2") format("woff2"); unicode-range: U+0400-04FF; }
+      @font-face { font-family: "Inter"; font-weight: 900; font-style: italic; src: url("fonts/inter-latin-900-italic.woff2") format("woff2"); unicode-range: U+0000-03FF, U+2000-206F, U+2190-21FF; }
+      @font-face { font-family: "Oswald"; font-weight: 700; src: url("fonts/oswald-cyrillic-700-normal.woff2") format("woff2"); unicode-range: U+0400-04FF; }
+      @font-face { font-family: "Oswald"; font-weight: 700; src: url("fonts/oswald-latin-700-normal.woff2") format("woff2"); unicode-range: U+0000-03FF, U+2000-206F, U+2190-21FF; }
+      @font-face { font-family: "Caveat"; font-weight: 700; src: url("fonts/caveat-cyrillic-700-normal.woff2") format("woff2"); unicode-range: U+0400-04FF; }
+      @font-face { font-family: "Caveat"; font-weight: 700; src: url("fonts/caveat-latin-700-normal.woff2") format("woff2"); unicode-range: U+0000-03FF, U+2000-206F; }
+
+      :root {
+        --ink: #070707;
+        --paper: #f2f0ea;
+        --red: #e0202e;
+        --yellow: #f5c518;
+        --cut: #ece4d3;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ink); }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--ink);
+        color: var(--paper);
+        font-family: "Inter", sans-serif;
+      }
+      .layer { position: absolute; inset: 0; }
+      .scene { position: absolute; inset: 0; overflow: hidden; }
+      .fill { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+      /* ---------- type system (reference: dense grotesk + italic connectors + condensed caps) ---------- */
+      .band {
+        position: absolute;
+        left: 60px;
+        right: 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .t-big { font-weight: 900; font-size: 132px; line-height: 0.9; letter-spacing: -0.05em; }
+      .t-mid { font-weight: 900; font-size: 92px; line-height: 0.92; letter-spacing: -0.045em; }
+      .t-small { font-weight: 700; font-size: 54px; line-height: 1.05; letter-spacing: -0.02em; }
+      .t-cond { font-family: "Oswald", sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.95; }
+      .t-hand { font-family: "Caveat", cursive; font-weight: 700; }
+      .it { font-style: italic; font-weight: 700; }
+      .red { color: var(--red); }
+      .shadow { text-shadow: 0 6px 30px rgba(0, 0, 0, 0.55); }
+      .word { display: inline-block; }
+      .line { display: block; white-space: nowrap; }
+
+      /* ---------- persistent chrome ---------- */
+      #brandmark {
+        position: absolute;
+        top: 236px;
+        left: 50%;
+        width: 92px;
+        height: 50px;
+        margin-left: -46px;
+        background: url("media/smk-logo-white.png") center / contain no-repeat;
+        opacity: 0.9;
+      }
+      #disclaimer {
+        position: absolute;
+        top: 1468px;
+        left: 120px;
+        right: 120px;
+        text-align: center;
+        font-weight: 700;
+        font-size: 21px;
+        line-height: 1.3;
+        letter-spacing: 0.01em;
+        color: rgba(242, 240, 234, 0.62);
+      }
+      #grain { position: absolute; inset: 0; overflow: hidden; pointer-events: none; mix-blend-mode: screen; opacity: 0.16; }
+      #grain .tex {
+        position: absolute;
+        top: -10%;
+        left: -10%;
+        width: 120%;
+        height: 120%;
+        background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch' seed='7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-size: 256px 256px;
+      }
+      #vignette {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(ellipse at 50% 45%, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.55) 100%);
+      }
+
+      /* ---------- glitch overlay (seeded slices) ---------- */
+      #glitch { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; }
+      #glitch .slice { position: absolute; left: 0; width: 100%; opacity: 0; }
+      #flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+
+      /* ---------- S0 intro: VHS logo ---------- */
+      #s0 { background: #050505; }
+      #vhs-noise { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; opacity: 0.32; }
+      .logo-stack { position: absolute; left: 50%; top: 760px; width: 640px; height: 348px; margin-left: -320px; }
+      .logo-ch { position: absolute; inset: 0; -webkit-mask: url("media/smk-logo-white.png") center / contain no-repeat; mask: url("media/smk-logo-white.png") center / contain no-repeat; }
+      .logo-ch.r { background: #ff2236; mix-blend-mode: screen; }
+      .logo-ch.c { background: #19e3ff; mix-blend-mode: screen; }
+      .logo-ch.w { background: #f4f4f4; }
+      .scanlines { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.28) 0 2px, rgba(0, 0, 0, 0) 2px 5px); }
+      .tracking { position: absolute; left: 0; width: 100%; height: 90px; top: 0; background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0)); filter: blur(4px); }
+
+      /* ---------- head shots ---------- */
+      .vwrap { position: absolute; inset: 0; overflow: hidden; }
+      .vwrap .inner { position: absolute; inset: 0; }
+      .vwrap video, .vwrap img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .sidelight { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.15) 45%, rgba(0, 0, 0, 0.72) 100%); }
+      .lowfade { position: absolute; left: 0; right: 0; bottom: 0; height: 900px; background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.55)); }
+      #dark1 { position: absolute; inset: 0; background: #000; opacity: 0; }
+
+      /* ---------- S2 proof ---------- */
+      #s2 { background: #0b0b0b; }
+      .card { position: absolute; width: 600px; height: 923px; left: 240px; top: 400px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7); }
+      .card img { width: 100%; height: 100%; display: block; }
+      .card .ul { position: absolute; left: 38px; top: 590px; width: 330px; height: 12px; background: var(--yellow); transform-origin: left center; }
+      #s2-label { top: 300px; }
+
+      /* ---------- S3 who we are ---------- */
+      #s3 { background: #0a0a0a; }
+      .scrap { position: absolute; overflow: hidden; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6); filter: grayscale(1) contrast(1.25) brightness(0.8); }
+      .scrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .redwash { position: absolute; inset: 0; background: var(--red); mix-blend-mode: multiply; opacity: 0.55; }
+      #s3-logo { position: absolute; left: 50%; top: 640px; width: 600px; height: 326px; margin-left: -300px; background: url("media/smk-logo-white.png") center / contain no-repeat; }
+      #s3-tg { position: absolute; left: 270px; top: 1150px; width: 540px; height: 293px; transform-origin: center; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7); }
+      #s3-tg img { width: 100%; height: 100%; display: block; }
+      .strike { position: absolute; left: -2%; top: 52%; width: 104%; height: 10px; background: var(--red); transform-origin: left center; }
+      .arrow { width: 14px; height: 120px; background: var(--red); position: relative; display: block; margin: 0 auto; transform-origin: top center; }
+      .arrow::after { content: ""; position: absolute; left: -23px; bottom: -26px; border-left: 30px solid transparent; border-right: 30px solid transparent; border-top: 36px solid var(--red); }
+
+      /* ---------- S4 how we work: three strips ---------- */
+      #s4 { background: #0a0a0a; }
+      .strip { position: absolute; left: 0; width: 1080px; height: 372px; overflow: hidden; background: #0e1621; }
+      .strip .media { position: absolute; inset: 0; }
+      .strip .tag {
+        position: absolute;
+        left: 40px;
+        bottom: 26px;
+        padding: 10px 22px 12px;
+        background: var(--red);
+        color: #fff;
+        font-family: "Oswald", sans-serif;
+        font-weight: 700;
+        font-size: 50px;
+        line-height: 1;
+        letter-spacing: 0.02em;
+      }
+      #strip1 { top: 290px; }
+      #strip2 { top: 678px; }
+      #strip3 { top: 1066px; }
+      #strip1 img { position: absolute; left: 0; top: -150px; width: 1080px; height: auto; filter: contrast(1.1); }
+      #strip2 img { position: absolute; left: 50%; top: 26px; width: 590px; margin-left: -295px; height: auto; }
+      #journal { position: absolute; left: 50%; top: 0; width: 640px; margin-left: -320px; }
+      #journal img { width: 640px; height: auto; display: block; }
+      #journal .ul { position: absolute; left: 28px; top: 918px; width: 400px; height: 10px; background: var(--yellow); transform-origin: left center; }
+      #s4-dim { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.72); opacity: 0; }
+
+      /* ---------- S5 values: pyramid ---------- */
+      .pyr { position: absolute; left: 50%; height: 104px; display: flex; align-items: center; justify-content: center; background: var(--cut); color: #111; font-family: "Oswald", sans-serif; font-weight: 700; font-size: 58px; letter-spacing: 0.03em; box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55); }
+      #pyr1 { top: 520px; width: 700px; margin-left: -350px; clip-path: polygon(2% 6%, 30% 0, 61% 4%, 98% 1%, 100% 93%, 70% 100%, 37% 95%, 0 100%); }
+      #pyr2 { top: 404px; width: 540px; margin-left: -270px; clip-path: polygon(0 3%, 44% 0, 100% 5%, 98% 100%, 52% 94%, 3% 99%); }
+      #pyr3 { top: 288px; width: 380px; margin-left: -190px; clip-path: polygon(3% 0, 97% 4%, 100% 96%, 47% 100%, 0 95%); }
+      #pyr-glow { position: absolute; left: 50%; top: 270px; width: 760px; height: 380px; margin-left: -380px; background: radial-gradient(ellipse at 50% 60%, rgba(224, 32, 46, 0.55), rgba(224, 32, 46, 0) 65%); opacity: 0; }
+
+      /* ---------- S6 outro ---------- */
+      #s6 { background: #050505; }
+      #s6-logo { width: 220px; height: 120px; background: url("media/smk-logo-white.png") center / contain no-repeat; margin: 0 auto; }
+      .pill { display: inline-block; margin-top: 26px; padding: 14px 34px 16px; border: 3px solid var(--paper); border-radius: 999px; font-weight: 700; font-size: 48px; letter-spacing: -0.01em; }
+      .cursor { display: inline-block; width: 8px; height: 0.9em; background: var(--paper); margin-left: 6px; vertical-align: -0.08em; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="32.46" data-width="1080" data-height="1920">
+      <!-- soundtrack: music + pitched voice + SFX, premixed by tools/mix.py -->
+      <audio id="mix" src="media/mix.wav" data-start="0" data-duration="32.46" data-track-index="9" data-volume="1"></audio>
+
+      <!-- ===== S0 · 0.00–2.00 · intro: SMK through VHS noise ===== -->
+      <section id="s0" class="scene clip" data-start="0" data-duration="2.0" data-track-index="0">
+        <svg id="vhs-noise" viewBox="0 0 270 480" preserveAspectRatio="none">
+          <filter id="vhsf"><feTurbulence id="vhs-turb" type="fractalNoise" baseFrequency="0.9 0.35" numOctaves="2" seed="1" /><feColorMatrix type="saturate" values="0" /></filter>
+          <rect width="270" height="480" filter="url(#vhsf)" />
+        </svg>
+        <div class="logo-stack" id="s0-logo">
+          <div class="logo-ch r" id="s0-r"></div>
+          <div class="logo-ch c" id="s0-c"></div>
+          <div class="logo-ch w" id="s0-w"></div>
+        </div>
+        <div class="tracking" id="s0-track"></div>
+        <div class="scanlines"></div>
+      </section>
+
+      <!-- ===== S1 · 2.00–4.97 · hook (head) ===== -->
+      <div class="vwrap" id="s1-wrap">
+        <div class="inner" id="s1-inner">
+          <video id="head1" class="clip" src="media/head_9875.mp4" muted playsinline data-start="2.0" data-media-start="0.25" data-duration="2.97" data-track-index="1"></video>
+        </div>
+      </div>
+      <section id="s1" class="scene clip" data-start="2.0" data-duration="2.97" data-track-index="2">
+        <div class="sidelight"></div>
+        <div class="lowfade"></div>
+        <div id="dark1"></div>
+        <div class="band shadow" style="top: 1010px">
+          <span class="line t-cond" id="s1-zero" style="font-size: 190px"><span class="word" id="s1-0">0</span> <span class="word red" id="s1-lic">ЛИЦ</span></span>
+          <span class="line t-mid" id="s1-all" style="margin-top: 10px"><span class="word it" id="s1-vse" style="font-weight: 700">все</span> <span class="word red" id="s1-deals">СДЕЛКИ</span></span>
+        </div>
+      </section>
+
+      <!-- ===== S2 · 4.97–7.20 · proof: real closed trades ===== -->
+      <section id="s2" class="scene clip" data-start="4.97" data-duration="2.23" data-track-index="2">
+        <div class="card" id="card1" style="left: 200px; top: 420px"><img src="media/okx1.png" alt="" /><div class="ul" id="card1-ul"></div></div>
+        <div class="card" id="card2" style="left: 290px; top: 470px"><img src="media/okx2.png" alt="" /><div class="ul" id="card2-ul"></div></div>
+        <div class="band" id="s2-label"><span class="line t-cond red shadow" style="font-size: 120px"><span class="word it" style="font-family: Inter; text-transform: none; font-size: 64px; color: var(--paper); letter-spacing: -0.02em; margin-right: 18px">показываем</span>СДЕЛКИ</span></div>
+      </section>
+
+      <!-- ===== S3 · 7.20–15.37 · who we are (VO 9876) ===== -->
+      <section id="s3" class="scene clip" data-start="7.2" data-duration="8.17" data-track-index="2">
+        <div class="scrap" id="sc1" style="left: -60px; top: 330px; width: 700px; height: 360px"><img src="media/chart-trade1.png" alt="" /><div class="redwash"></div></div>
+        <div class="scrap" id="sc2" style="left: 470px; top: 560px; width: 680px; height: 520px"><img src="media/chart-trade2.png" alt="" /></div>
+        <div class="scrap" id="sc3" style="left: 40px; top: 900px; width: 420px; height: 694px"><img src="media/signal-reports.png" alt="" /></div>
+        <div class="scrap" id="sc4" style="left: 560px; top: 1130px; width: 460px; height: 250px"><img src="media/tg-signal-1.png" alt="" /><div class="redwash"></div></div>
+        <div id="s3-shade" class="layer" style="background: rgba(0, 0, 0, 0.55); opacity: 0"></div>
+        <div id="s3-logo"></div>
+        <div id="s3-tg"><img src="media/tg-signal-1.png" alt="" /></div>
+
+        <div class="band shadow" id="s3-a" style="top: 1030px">
+          <span class="line t-mid"><span class="word it" id="s3-a1">сами</span> <span class="word" id="s3-a2">торгуем</span></span>
+          <span class="line t-cond red" id="s3-a3" style="font-size: 100px; margin-top: 8px">криптофьючерсами</span>
+        </div>
+        <div class="band shadow" id="s3-b" style="top: 960px">
+          <span class="line t-mid"><span class="word it" id="s3-b1">делимся</span></span>
+          <span class="line t-cond red" id="s3-b2" style="font-size: 130px; margin-top: 4px">сигналами</span>
+        </div>
+        <div class="band shadow" id="s3-c" style="top: 980px">
+          <span class="line t-small it" id="s3-c1">для тех, кто хочет торговать</span>
+          <span class="line t-cond red" id="s3-c2" style="font-size: 150px; margin-top: 10px">по правилам</span>
+          <span class="line t-small" id="s3-c3" style="margin-top: 18px"><span class="it">а не </span><span class="word" style="position: relative">по ощущениям<span class="strike" id="s3-strike"></span></span></span>
+        </div>
+        <div class="band shadow" id="s3-d" style="top: 1000px">
+          <span class="arrow" id="s3-arrow"></span>
+          <span class="line t-cond red" style="font-size: 150px; margin-top: 48px">по правилам</span>
+        </div>
+      </section>
+
+      <!-- ===== S4 · 15.37–22.06 · how we work (VO 9877) ===== -->
+      <section id="s4" class="scene clip" data-start="15.37" data-duration="6.69" data-track-index="2">
+        <div class="strip" id="strip1"><div class="media"><img src="media/chart-trade2.png" alt="" /></div><div class="tag">АНАЛИЗ</div></div>
+        <div class="strip" id="strip2"><div class="media"><img src="media/tg-signal-1.png" alt="" /></div><div class="tag">СИГНАЛ</div></div>
+        <div class="strip" id="strip3"><div class="media"><div id="journal"><img src="media/signal-reports.png" alt="" /><div class="ul" id="journal-ul"></div></div></div><div class="tag">ЖУРНАЛ</div></div>
+        <div id="s4-dim"></div>
+        <div class="band shadow" id="s4-end" style="top: 700px">
+          <span class="line t-cond" id="s4-w1" style="font-size: 150px">анализ</span>
+          <span class="line t-cond red" id="s4-w2" style="font-size: 150px">сигнал</span>
+          <span class="line t-cond" id="s4-w3" style="font-size: 150px">журнал</span>
+        </div>
+      </section>
+
+      <!-- ===== S5 · 22.06–29.49 · values (head 9879 + freeze) ===== -->
+      <div class="vwrap" id="s5-wrap">
+        <div class="inner" id="s5-inner">
+          <video id="head2" class="clip" src="media/head_9879.mp4" muted playsinline data-start="22.06" data-media-start="0.3" data-duration="3.79" data-track-index="1"></video>
+          <img id="head2-freeze" class="clip" src="media/head_9879_freeze.jpg" alt="" data-start="25.85" data-duration="3.64" data-track-index="1" />
+        </div>
+      </div>
+      <section id="s5" class="scene clip" data-start="22.06" data-duration="7.43" data-track-index="2">
+        <div class="lowfade"></div>
+        <div id="pyr-glow"></div>
+        <div class="pyr" id="pyr1">ДИСЦИПЛИНА</div>
+        <div class="pyr" id="pyr2">НАДЁЖНОСТЬ</div>
+        <div class="pyr" id="pyr3">РЕЗУЛЬТАТ</div>
+        <div class="band shadow" id="s5-a" style="top: 1090px">
+          <span class="line t-small it" id="s5-a0">не обещаем</span>
+          <span class="line t-mid" id="s5-a1" style="position: relative; margin-top: 6px">лёгкие деньги<span class="strike" id="s5-strike"></span></span>
+        </div>
+        <div class="band shadow" id="s5-b" style="top: 1080px">
+          <span class="line t-small it" id="s5-b0">обещаем</span>
+          <span class="line t-cond red" id="s5-b1" style="font-size: 190px; margin-top: 4px">систему</span>
+        </div>
+      </section>
+
+      <!-- ===== S6 · 29.49–32.46 · end of episode ===== -->
+      <section id="s6" class="scene clip" data-start="29.49" data-duration="2.97" data-track-index="2">
+        <div class="band" style="top: 760px">
+          <span class="line t-big it" id="s6-next">дальше →</span>
+          <span class="line t-cond red" id="s6-type" style="font-size: 96px; margin-top: 26px"><span id="s6-chars">с чем мы помогаем</span><span class="cursor" id="s6-cursor"></span></span>
+          <div id="s6-cta" style="margin-top: 120px">
+            <div id="s6-logo"></div>
+            <span class="pill">t.me/SMKFRE</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== persistent chrome ===== -->
+      <div id="brandmark" class="clip" data-start="2.0" data-duration="20.06" data-track-index="5"></div>
+      <div id="disclaimer" class="clip" data-start="2.0" data-duration="30.46" data-track-index="5">Не является инвестиционной рекомендацией. Торговля с плечом связана с высоким риском потери средств.</div>
+      <div id="vignette"></div>
+      <div id="grain"><div class="tex" id="grain-tex"></div></div>
+      <div id="glitch"></div>
+      <div id="flash"></div>
+    </div>
+
+    <script>
+      (function () {
+        // Seeded PRNG: every "random" glitch slice is reproducible from the seed.
+        let seed = 0x5a3c91;
+        const rnd = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
+
+        const BEAT = 0.743; // Titanium instrumental, 80.7 BPM; drop sits on 2.0s
+        const tl = gsap.timeline({ paused: true });
+        const $ = (s) => document.querySelector(s);
+
+        // ---------- helpers ----------
+        const slam = (el, t, from = 1.35) =>
+          tl.fromTo(el, { opacity: 0, scale: from }, { opacity: 1, scale: 1, duration: 0.16, ease: "power4.out" }, t);
+        const pop = (el, t) => tl.fromTo(el, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.22, ease: "power3.out" }, t);
+        const hide = (el, t) => tl.set(el, { opacity: 0 }, t);
+        const show = (el, t) => tl.set(el, { opacity: 1 }, t);
+        const draw = (el, t, d = 0.22) => tl.fromTo(el, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.out" }, t);
+
+        // Glitch slices: 14 seeded bands, re-dealt on every hit.
+        const glitchRoot = $("#glitch");
+        const slices = [];
+        for (let i = 0; i < 14; i++) {
+          const s = document.createElement("div");
+          s.className = "slice";
+          glitchRoot.appendChild(s);
+          slices.push(s);
+        }
+        function glitch(t, dur = 0.18, strength = 1) {
+          const steps = 4;
+          for (let k = 0; k < steps; k++) {
+            const tt = t + (dur / steps) * k;
+            slices.forEach((s, i) => {
+              const on = rnd() < 0.55 * strength;
+              tl.set(s, {
+                opacity: on ? 0.55 + rnd() * 0.45 : 0,
+                top: Math.floor(rnd() * 1920),
+                height: 6 + Math.floor(rnd() * 70),
+                x: (rnd() - 0.5) * 160 * strength,
+                backgroundColor: i % 3 === 0 ? "#ff2236" : i % 3 === 1 ? "#19e3ff" : "#ffffff",
+              }, tt);
+            });
+            tl.set("#root", { x: (rnd() - 0.5) * 24 * strength }, tt);
+          }
+          slices.forEach((s) => tl.set(s, { opacity: 0 }, t + dur));
+          tl.set("#root", { x: 0 }, t + dur);
+        }
+        const flash = (t, peak = 0.85, d = 0.12) =>
+          tl.fromTo("#flash", { opacity: peak }, { opacity: 0, duration: d, ease: "power2.out", immediateRender: false }, t);
+
+        // ---------- global texture ----------
+        tl.fromTo("#grain-tex", { x: 0, y: 0 }, { x: -48, y: 31, duration: 0.25, ease: "steps(3)", repeat: 129, yoyo: true }, 0);
+
+        // ---------- S0 · intro ----------
+        const turb = $("#vhs-turb");
+        const vhs = { f: 0 };
+        tl.to(vhs, { f: 1, duration: 2.0, ease: "none", onUpdate: () => turb.setAttribute("seed", String(1 + Math.floor(tl.time() * 24))) }, 0);
+        tl.fromTo("#s0-track", { y: -120 }, { y: 1980, duration: 1.1, ease: "none" }, 0.1);
+        tl.fromTo("#s0-track", { y: -120 }, { y: 1980, duration: 0.7, ease: "none", immediateRender: false }, 1.22);
+        tl.fromTo("#s0-logo", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "steps(6)" }, 0.05);
+        tl.fromTo("#s0-r", { x: -38 }, { x: -6, duration: 0.95, ease: "steps(8)" }, 0.05);
+        tl.fromTo("#s0-c", { x: 34 }, { x: 5, duration: 0.95, ease: "steps(8)" }, 0.05);
+        tl.to("#s0-r", { x: -26, duration: 0.08, ease: "steps(1)", yoyo: true, repeat: 3 }, 1.05);
+        tl.to("#s0-c", { x: 22, duration: 0.08, ease: "steps(1)", yoyo: true, repeat: 3 }, 1.05);
+        tl.fromTo("#s0-logo", { scale: 1 }, { scale: 1.08, duration: 1.9, ease: "power1.in" }, 0.1);
+        tl.fromTo("#vhs-noise", { opacity: 0.45 }, { opacity: 0.2, duration: 1.6 }, 0);
+        glitch(0.05, 0.16, 0.7);
+        glitch(1.05, 0.14, 0.6);
+        glitch(1.84, 0.16, 1);
+
+        // ---------- S1 · hook: lights snap on with the drop ----------
+        tl.set("#dark1", { opacity: 1 }, 2.0);
+        tl.set("#dark1", { opacity: 0 }, 2.02);
+        tl.set("#dark1", { opacity: 0.85 }, 2.08);
+        tl.set("#dark1", { opacity: 0 }, 2.15);
+        flash(2.02, 0.7, 0.14);
+        tl.fromTo("#s1-inner", { scale: 1.0 }, { scale: 1.09, duration: 2.97, ease: "none" }, 2.0);
+        tl.set(["#s1-0", "#s1-lic", "#s1-vse", "#s1-deals"], { opacity: 0 }, 2.0);
+        slam("#s1-0", 2.75, 1.6);
+        slam("#s1-lic", 3.0);
+        pop("#s1-vse", 3.7);
+        slam("#s1-deals", 3.9);
+
+        // ---------- S2 · proof ----------
+        tl.set(["#card1", "#card2", "#s2-label"], { opacity: 0 }, 4.97);
+        tl.fromTo("#card1", { opacity: 0, scale: 1.25, rotation: -9 }, { opacity: 1, scale: 1, rotation: -4, duration: 0.2, ease: "power4.out" }, 4.97);
+        draw("#card1-ul", 5.2);
+        tl.fromTo("#card2", { opacity: 0, scale: 1.25, rotation: 10 }, { opacity: 1, scale: 1, rotation: 4, duration: 0.2, ease: "power4.out" }, 5.71);
+        draw("#card2-ul", 5.94);
+        slam("#s2-label", 4.97, 1.15);
+        tl.to("#card1", { x: -40, duration: 0.6, ease: "power2.out" }, 5.71);
+        tl.to(["#card1", "#card2"], { scale: 1.06, duration: 0.74, ease: "none" }, 6.46);
+        glitch(7.04, 0.16, 1);
+
+        // ---------- S3 · who we are ----------
+        // collage scraps drift, then collapse into the SMK mark on "СМК"
+        const scraps = ["#sc1", "#sc2", "#sc3", "#sc4"];
+        const rot = [-6, 5, -3, 7];
+        scraps.forEach((s, i) => {
+          tl.fromTo(s, { opacity: 0, rotation: rot[i] * 1.6, scale: 1.12 }, { opacity: 1, rotation: rot[i], scale: 1, duration: 0.18, ease: "power3.out" }, 7.2 + i * 0.09);
+          tl.to(s, { x: (i % 2 ? -1 : 1) * 160, y: (i < 2 ? 1 : -1) * 120, scale: 0.55, rotation: 0, opacity: 0.0, duration: 0.55, ease: "power3.in" }, 7.62 + i * 0.03);
+        });
+        tl.fromTo("#s3-logo", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.26, ease: "power4.out" }, 8.12);
+        flash(8.2, 0.5, 0.12);
+        tl.to("#s3-logo", { y: -330, scale: 0.5, duration: 0.42, ease: "power3.inOut" }, 8.62);
+
+        // copy, word-synced to the voice (video time = 7.6 + (word − 0.96))
+        tl.set(["#s3-a1", "#s3-a2", "#s3-a3", "#s3-b1", "#s3-b2", "#s3-c1", "#s3-c2", "#s3-c3", "#s3-arrow", "#s3-tg"], { opacity: 0 }, 7.2);
+        pop("#s3-a1", 8.96);
+        slam("#s3-a2", 9.1);
+        slam("#s3-a3", 9.66, 1.2);
+        hide("#s3-a", 10.42);
+        show("#s3-a", 7.2);
+        pop("#s3-b1", 10.42);
+        slam("#s3-b2", 10.75, 1.25);
+        tl.fromTo("#s3-tg", { opacity: 0, y: 80, rotation: -6 }, { opacity: 1, y: 0, rotation: -2, duration: 0.24, ease: "back.out(1.6)" }, 10.75);
+        hide("#s3-b", 11.32);
+        hide("#s3-tg", 11.32);
+        show("#s3-b", 7.2);
+        pop("#s3-c1", 11.32);
+        slam("#s3-c2", 12.52, 1.5);
+        tl.fromTo("#s3-c2", { y: 0 }, { y: 6, duration: 0.05, yoyo: true, repeat: 3, ease: "steps(1)" }, 12.52);
+        pop("#s3-c3", 13.1);
+        draw("#s3-strike", 13.6, 0.18);
+        hide("#s3-c", 14.0);
+        show("#s3-c", 7.2);
+        tl.set("#s3-d", { opacity: 0 }, 7.2);
+        show("#s3-d", 14.0);
+        tl.fromTo("#s3-arrow", { opacity: 1, scaleY: 0 }, { opacity: 1, scaleY: 1, duration: 0.3, ease: "power2.out" }, 14.0);
+        tl.to("#s3-logo", { y: -250, scale: 0.62, duration: 0.4, ease: "power2.out" }, 14.0);
+
+        // ---------- S4 · analysis → signal → journal ----------
+        tl.fromTo("#strip1", { x: -1080 }, { x: 0, duration: 0.3, ease: "power4.out" }, 15.4);
+        tl.fromTo("#strip1 img", { x: 0 }, { x: -60, duration: 6.3, ease: "none" }, 15.75);
+        tl.fromTo("#strip2", { x: 1080 }, { x: 0, duration: 0.3, ease: "power4.out" }, 17.03);
+        tl.fromTo("#strip2 img", { scale: 1.12 }, { scale: 1, duration: 0.5, ease: "power3.out" }, 17.03);
+        tl.fromTo("#strip3", { x: -1080 }, { x: 0, duration: 0.3, ease: "power4.out" }, 18.13);
+        tl.fromTo("#journal", { y: 0 }, { y: -600, duration: 1.9, ease: "power1.inOut" }, 18.2);
+        draw("#journal-ul", 20.05, 0.3);
+        tl.set("#s4-dim", { opacity: 0 }, 15.37);
+        tl.to("#s4-dim", { opacity: 1, duration: 0.2 }, 20.42);
+        tl.set(["#s4-w1", "#s4-w2", "#s4-w3"], { opacity: 0 }, 15.37);
+        slam("#s4-w1", 20.42);
+        slam("#s4-w2", 20.79);
+        slam("#s4-w3", 21.16);
+        glitch(21.9, 0.16, 1);
+
+        // ---------- S5 · values ----------
+        tl.fromTo("#s5-inner", { scale: 1.0 }, { scale: 1.06, duration: 3.79, ease: "none" }, 22.06);
+        tl.fromTo("#s5-inner", { scale: 1.06 }, { scale: 1.16, duration: 3.64, ease: "power1.in", immediateRender: false }, 25.85);
+        tl.fromTo("#s5-inner", { filter: "saturate(1) brightness(1)" }, { filter: "saturate(0.35) brightness(0.8)", duration: 0.6, immediateRender: false }, 25.85);
+        tl.set(["#s5-a0", "#s5-a1", "#s5-b0", "#s5-b1", "#pyr1", "#pyr2", "#pyr3"], { opacity: 0 }, 22.06);
+        pop("#s5-a0", 22.58);
+        slam("#s5-a1", 22.9, 1.2);
+        draw("#s5-strike", 23.6, 0.2);
+        tl.to("#s5-a", { opacity: 0.0, duration: 0.12 }, 24.2);
+        tl.set("#s5-a", { opacity: 1 }, 22.06);
+        pop("#s5-b0", 24.2);
+        slam("#s5-b1", 24.29, 1.5);
+        [["#pyr1", 25.03], ["#pyr2", 25.78], ["#pyr3", 26.52]].forEach(([el, t], i) => {
+          tl.fromTo(el, { opacity: 0, y: 70, rotation: i % 2 ? 2.5 : -2.5 }, { opacity: 1, y: 0, rotation: i % 2 ? 0.8 : -0.8, duration: 0.22, ease: "back.out(2)" }, t);
+        });
+        tl.fromTo("#pyr-glow", { opacity: 0 }, { opacity: 1, duration: 0.25, yoyo: true, repeat: 1 }, 27.26);
+        tl.fromTo("#s5-b1", { scale: 1 }, { scale: 1.08, duration: 0.12, yoyo: true, repeat: 1, ease: "power2.out" }, 27.26);
+        glitch(29.32, 0.17, 1);
+
+        // ---------- S6 · end of episode ----------
+        flash(29.49, 0.9, 0.16);
+        tl.set(["#s6-next", "#s6-cta"], { opacity: 0 }, 29.49);
+        slam("#s6-next", 29.52, 1.3);
+        const typed = $("#s6-chars");
+        const text = typed.textContent;
+        typed.textContent = "";
+        const chars = [...text].map((ch) => {
+          const s = document.createElement("span");
+          s.textContent = ch;
+          typed.appendChild(s);
+          return s;
+        });
+        tl.set(chars, { opacity: 0 }, 29.49);
+        chars.forEach((c, i) => tl.set(c, { opacity: 1 }, 29.85 + i * 0.062));
+        tl.fromTo("#s6-cursor", { opacity: 1 }, { opacity: 0, duration: 0.25, ease: "steps(1)", repeat: 9, yoyo: true }, 29.49);
+        pop("#s6-cta", 31.0);
+
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>
