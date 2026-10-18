@@ -119,12 +119,11 @@
       /* ---------- S4 own money: red side light ---------- */
       #redlight { position: absolute; inset: 0; background: linear-gradient(270deg, rgba(224, 32, 46, 0.62) 0%, rgba(224, 32, 46, 0.18) 38%, rgba(224, 32, 46, 0) 62%); mix-blend-mode: screen; }
 
-      /* ---------- S5 CTA: door of light behind the subject ---------- */
-      #door { position: absolute; left: 372px; top: 140px; width: 300px; height: 1180px; }
-      #door .glow { position: absolute; inset: -80px; background: radial-gradient(ellipse at 50% 45%, rgba(255, 214, 140, 0.55), rgba(255, 214, 140, 0) 70%); }
-      #door .slit { position: absolute; inset: 0; background: linear-gradient(180deg, #fffaf0, #ffe2a6 60%, #ffcf7a); box-shadow: 0 0 60px rgba(255, 220, 150, 0.9), 0 0 160px rgba(255, 200, 120, 0.5); }
-      #door .frame { position: absolute; inset: -10px; border: 10px solid #1a1a1a; }
-      #spill { position: absolute; left: 240px; top: 1300px; width: 600px; height: 320px; background: radial-gradient(ellipse at 50% 0%, rgba(255, 214, 140, 0.45), rgba(255, 214, 140, 0) 70%); }
+      /* ---------- S5 CTA: giant keyword behind the matted subject (reference: type behind the helmet) ---------- */
+      #bigword { position: absolute; left: 0; right: 0; top: 610px; text-align: center; font-family: "Oswald", sans-serif; font-weight: 700; font-size: 250px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; }
+      #bigword .ghost { position: absolute; left: 0; right: 0; top: 0; color: transparent; -webkit-text-stroke: 3px rgba(242, 240, 234, 0.22); }
+      #bigword .fill { position: relative; color: var(--red); text-shadow: 0 0 60px rgba(224, 32, 46, 0.55); }
+      #bigword .fill span { display: inline-block; }
       .tag { display: inline-block; padding: 10px 28px 14px; background: var(--yellow); color: #0a0a0a; font-family: "Oswald", sans-serif; font-weight: 700; font-size: 64px; letter-spacing: 0.02em; transform: rotate(-2deg); }
 
       /* ---------- S6 final ---------- */
@@ -234,8 +233,7 @@
           <video id="cta-bg-a" class="clip" src="media/head_9905.mp4" muted playsinline data-start="27.262" data-media-start="0.7" data-duration="5.4" data-track-index="1"></video>
           <video id="cta-bg-b" class="clip" src="media/head_9905.mp4" muted playsinline data-start="32.662" data-media-start="7.4" data-duration="1.6" data-track-index="1"></video>
           <img id="cta-bg-f" class="clip" src="media/head_9905_freeze.jpg" alt="" data-start="34.262" data-duration="1.175" data-track-index="1" />
-          <div id="door" class="clip" data-start="27.262" data-duration="8.175" data-track-index="3"><div class="glow" id="door-glow"></div><div class="frame"></div><div class="slit" id="door-slit"></div></div>
-          <div id="spill" class="clip" data-start="27.262" data-duration="8.175" data-track-index="3"></div>
+          <div id="bigword" class="clip" data-start="27.262" data-duration="8.175" data-track-index="3"><div class="ghost">СИГНАЛ</div><div class="fill" id="bw-fill">СИГНАЛ</div></div>
           <video id="cta-fg-a" class="clip" src="media/head_9905_fg.webm" muted playsinline data-start="27.262" data-media-start="0.7" data-duration="5.4" data-track-index="4"></video>
           <video id="cta-fg-b" class="clip" src="media/head_9905_fg.webm" muted playsinline data-start="32.662" data-media-start="7.4" data-duration="1.6" data-track-index="4"></video>
           <img id="cta-fg-f" class="clip" src="media/head_9905_fg_freeze.png" alt="" data-start="34.262" data-duration="1.175" data-track-index="4" />
@@ -245,7 +243,7 @@
         <div class="lowfade"></div>
         <div class="band shadow" id="s5-a" style="top: 1060px">
           <span class="line t-small it" id="s5-a0">не верь на слово —</span>
-          <span class="line t-cond" id="s5-a1" style="font-size: 150px; margin-top: 4px"><span class="it" style="font-family: Inter; text-transform: none; font-size: 64px; margin-right: 16px">пиши</span><span class="red">«сигнал»</span></span>
+          <span class="line t-mid" id="s5-a1" style="margin-top: 6px">пиши слово <span class="red">«СИГНАЛ»</span></span>
           <span id="s5-a2" style="margin-top: 18px"><span class="pill">в директ @smk.trade</span></span>
         </div>
         <div class="band shadow" id="s5-b" style="top: 1000px">
@@ -454,17 +452,26 @@
         slam("#s4-a2", 24.22, 1.4);
         glitch(27.12, 0.15, 1);
 
-        // ---------- S5 · CTA: door of light opens behind the subject ----------
+        // ---------- S5 · CTA: the keyword types itself in, huge, behind the subject ----------
         // segment A word times: video = 26.562 + t; segment B: video = 32.662 + (t − 7.4)
-        tl.fromTo("#door-slit", { scaleX: 0.02 }, { scaleX: 1, duration: 1.6, ease: "power2.inOut" }, 27.4);
-        tl.fromTo("#door-glow", { opacity: 0.2 }, { opacity: 1, duration: 1.6, ease: "power2.inOut" }, 27.4);
-        tl.fromTo("#spill", { opacity: 0 }, { opacity: 1, duration: 1.6, ease: "power2.inOut" }, 27.4);
+        const bw = $("#bw-fill");
+        const letters = [...bw.textContent].map((ch) => {
+          const sp = document.createElement("span");
+          sp.textContent = ch;
+          return sp;
+        });
+        bw.textContent = "";
+        letters.forEach((sp) => bw.appendChild(sp));
+        tl.fromTo("#bigword", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 27.3);
+        tl.set(letters, { opacity: 0 }, 27.262);
+        letters.forEach((sp, i) => tl.fromTo(sp, { opacity: 0, scale: 1.5, y: -30 }, { opacity: 1, scale: 1, y: 0, duration: 0.1, ease: "power4.out", immediateRender: false }, 28.76 + i * 0.1));
+        tl.fromTo("#bigword", { x: 0 }, { x: 14, duration: 0.05, ease: "steps(1)", yoyo: true, repeat: 5, immediateRender: false }, 29.32);
         tl.fromTo("#s5-inner", { scale: 1.0 }, { scale: 1.05, duration: 5.4, ease: "none" }, 27.262);
         tl.fromTo("#s5-inner", { scale: 1.16 }, { scale: 1.2, duration: 2.775, ease: "none", immediateRender: false }, 32.662);
         flash(32.662, 0.5, 0.1);
         tl.set(["#s5-a0", "#s5-a1", "#s5-a2", "#s5-b0", "#s5-b1", "#s5-b2", "#s5-b3"], { opacity: 0 }, 27.262);
         pop("#s5-a0", 27.54);
-        slam("#s5-a1", 29.32, 1.4);
+        slam("#s5-a1", 28.76, 1.2);
         slam("#s5-a2", 29.78, 1.2);
         hide("#s5-a", 32.04);
         tl.set("#s5-a", { opacity: 1 }, 27.262);
