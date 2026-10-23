@@ -6,3 +6,4 @@ renders/
 # Проект серии: исходники медиа и служебные артефакты HyperFrames
 */media/
 */.hyperframes/
+__pycache__/

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <!-- rubber-stamp ink: mostly solid, with speckled gaps where the noise is bright -->
+  <filter id="s"><feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="11" /><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -3.2 0 0 0 2.45" /></filter>
+  <rect width="300" height="300" filter="url(#s)" />
+</svg>
