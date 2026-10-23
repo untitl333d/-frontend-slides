@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="ru" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>SMK — серия 3</title>
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; font-weight: 700; font-style: normal; src: url("fonts/inter-cyrillic-700-normal.woff2") format("woff2"); unicode-range: U+0400-04FF; }
+      @font-face { font-family: "Inter"; font-weight: 700; font-style: normal; src: url("fonts/inter-latin-700-normal.woff2") format("woff2"); unicode-range: U+0000-03FF, U+2000-206F, U+2190-21FF; }
+      @font-face { font-family: "Inter"; font-weight: 700; font-style: italic; src: url("fonts/inter-cyrillic-700-italic.woff2") format("woff2"); unicode-range: U+0400-04FF; }
+      @font-face { font-family: "Inter"; font-weight: 700; font-style: italic; src: url("fonts/inter-latin-700-italic.woff2") format("woff2"); unicode-range: U+0000-03FF, U+2000-206F, U+2190-21FF; }
+      @font-face { font-family: "Inter"; font-weight: 900; font-style: normal; src: url("fonts/inter-cyrillic-900-normal.woff2") format("woff2"); unicode-range: U+0400-04FF; }
+      @font-face { font-family: "Inter"; font-weight: 900; font-style: normal; src: url("fonts/inter-latin-900-normal.woff2") format("woff2"); unicode-range: U+0000-03FF, U+2000-206F, U+2190-21FF; }
+      @font-face { font-family: "Inter"; font-weight: 900; font-style: italic; src: url("fonts/inter-cyrillic-900-italic.woff2") format("woff2"); unicode-range: U+0400-04FF; }
+      @font-face { font-family: "Inter"; font-weight: 900; font-style: italic; src: url("fonts/inter-latin-900-italic.woff2") format("woff2"); unicode-range: U+0000-03FF, U+2000-206F, U+2190-21FF; }
+      @font-face { font-family: "Oswald"; font-weight: 700; src: url("fonts/oswald-cyrillic-700-normal.woff2") format("woff2"); unicode-range: U+0400-04FF; }
+      @font-face { font-family: "Oswald"; font-weight: 700; src: url("fonts/oswald-latin-700-normal.woff2") format("woff2"); unicode-range: U+0000-03FF, U+2000-206F, U+2190-21FF; }
+
+      :root {
+        --ink: #070707;
+        --paper: #f2f0ea;
+        --red: #e0202e;
+        --yellow: #f5c518;
+        --green: #3ddc6b;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ink); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--ink); color: var(--paper); font-family: "Inter", sans-serif; }
+      .layer { position: absolute; inset: 0; }
+      .scene { position: absolute; inset: 0; overflow: hidden; }
+
+      /* ---------- type system (same as episodes 1–2) ---------- */
+      .band { position: absolute; left: 60px; right: 60px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+      .t-big { font-weight: 900; font-size: 132px; line-height: 0.9; letter-spacing: -0.05em; }
+      .t-mid { font-weight: 900; font-size: 92px; line-height: 0.92; letter-spacing: -0.045em; }
+      .t-small { font-weight: 700; font-size: 54px; line-height: 1.05; letter-spacing: -0.02em; }
+      .t-cond { font-family: "Oswald", sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.95; }
+      .it { font-style: italic; font-weight: 700; }
+      .red { color: var(--red); }
+      .green { color: var(--green); }
+      .shadow { text-shadow: 0 6px 30px rgba(0, 0, 0, 0.65); }
+      .word { display: inline-block; }
+      .line { display: block; white-space: nowrap; }
+      .pill { display: inline-block; padding: 12px 30px 14px; border: 3px solid var(--paper); border-radius: 999px; font-weight: 700; font-size: 46px; letter-spacing: -0.01em; background: rgba(0, 0, 0, 0.45); }
+      .strike { position: absolute; left: -2%; top: 50%; width: 104%; height: 10px; background: var(--red); transform-origin: left center; }
+
+      /* ---------- persistent chrome ---------- */
+      #brandmark { position: absolute; top: 236px; left: 50%; width: 92px; height: 50px; margin-left: -46px; background: url("media/smk-logo-white.png") center / contain no-repeat; opacity: 0.9; }
+      #grain { position: absolute; inset: 0; overflow: hidden; pointer-events: none; mix-blend-mode: screen; opacity: 0.16; }
+      #grain .tex {
+        position: absolute; top: -10%; left: -10%; width: 120%; height: 120%;
+        background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch' seed='7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-size: 256px 256px;
+      }
+      #vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 45%, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.55) 100%); }
+      #glitch { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; }
+      #glitch .slice { position: absolute; left: 0; width: 100%; opacity: 0; }
+      #flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+
+      /* ---------- S0 intro: VHS logo (series sting) ---------- */
+      #s0 { background: #050505; }
+      #vhs-noise { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; opacity: 0.32; }
+      .logo-stack { position: absolute; left: 50%; top: 760px; width: 640px; height: 348px; margin-left: -320px; }
+      .logo-ch { position: absolute; inset: 0; -webkit-mask: url("media/smk-logo-white.png") center / contain no-repeat; mask: url("media/smk-logo-white.png") center / contain no-repeat; }
+      .logo-ch.r { background: #ff2236; mix-blend-mode: screen; }
+      .logo-ch.c { background: #19e3ff; mix-blend-mode: screen; }
+      .logo-ch.w { background: #f4f4f4; }
+      .scanlines { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.28) 0 2px, rgba(0, 0, 0, 0) 2px 5px); }
+      .tracking { position: absolute; left: 0; width: 100%; height: 90px; top: 0; background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0)); filter: blur(4px); }
+
+      /* ---------- head shots ---------- */
+      .vwrap { position: absolute; inset: 0; overflow: hidden; }
+      .vwrap .inner { position: absolute; inset: 0; }
+      .vwrap video, .vwrap img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .lowfade { position: absolute; left: 0; right: 0; bottom: 0; height: 900px; background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.55)); }
+
+      /* ---------- S1 hook: generated "+%" screenshot collage ---------- */
+      #s1 { background: #0b0b0b; }
+      .fake { position: absolute; width: 430px; padding: 20px 26px 22px; background: #1c1f24; border-radius: 22px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7); filter: grayscale(0.25) contrast(1.1); }
+      .fake .tk { font-weight: 700; font-size: 26px; color: rgba(242, 240, 234, 0.55); letter-spacing: 0.02em; }
+      .fake .pct { font-weight: 900; font-size: 92px; line-height: 1; letter-spacing: -0.04em; color: var(--green); margin-top: 6px; }
+      .fake .sub { font-weight: 700; font-size: 26px; color: rgba(242, 240, 234, 0.7); margin-top: 6px; }
+      .fake .x1, .fake .x2 { position: absolute; left: 50%; top: 50%; width: 120%; height: 16px; margin-left: -60%; margin-top: -8px; background: var(--red); box-shadow: 0 0 20px rgba(224, 32, 46, 0.6); transform-origin: center; }
+      #s1-dim { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.72); opacity: 0; }
+      #bigx { position: absolute; left: 50%; top: 1000px; width: 300px; height: 300px; margin-left: -150px; }
+      #bigx i { position: absolute; left: -10%; top: 50%; width: 120%; height: 46px; margin-top: -23px; background: var(--red); box-shadow: 0 0 50px rgba(224, 32, 46, 0.7); }
+
+      /* ---------- S2 scales ---------- */
+      #scales { position: absolute; left: 540px; top: 310px; width: 480px; height: 470px; perspective: 900px; }
+      #scales .post { position: absolute; left: 233px; top: 40px; width: 14px; height: 370px; background: linear-gradient(90deg, #8a8f99, #e8e8e8 45%, #6b7078); border-radius: 6px; }
+      #scales .base { position: absolute; left: 150px; top: 400px; width: 180px; height: 26px; background: linear-gradient(180deg, #d9d9d9, #6b7078); border-radius: 12px 12px 4px 4px; }
+      #scales .pivot { position: absolute; left: 226px; top: 30px; width: 28px; height: 28px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff, #8a8f99); }
+      #beam { position: absolute; left: 30px; top: 38px; width: 420px; height: 12px; border-radius: 6px; background: linear-gradient(180deg, #f2f2f2, #7d828b); transform-origin: 210px 6px; }
+      .pan { position: absolute; top: 44px; width: 200px; height: 250px; }
+      #panL { left: -60px; }
+      #panR { left: 340px; }
+      .pan .str { position: absolute; top: 0; width: 3px; height: 170px; background: rgba(230, 230, 230, 0.7); }
+      .pan .str.a { left: 40px; transform: rotate(14deg); transform-origin: top; }
+      .pan .str.b { left: 157px; transform: rotate(-14deg); transform-origin: top; }
+      .pan .dish { position: absolute; left: 0; top: 166px; width: 200px; height: 34px; border-radius: 0 0 100px 100px; background: linear-gradient(180deg, #e8e8e8, #6b7078); box-shadow: 0 16px 30px rgba(0, 0, 0, 0.6); }
+      .pan .load { position: absolute; left: 20px; bottom: 82px; width: 160px; }
+      .mini { position: absolute; left: 10px; width: 140px; height: 54px; padding: 8px 10px; background: #1c1f24; border-radius: 10px; font-weight: 900; font-size: 28px; color: var(--green); box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5); }
+      #jbook { position: absolute; left: 4px; bottom: 0; width: 152px; height: 190px; border-radius: 10px; overflow: hidden; border: 3px solid #f2f0ea; box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6); background: #0e1621; }
+      #jbook img { width: 152px; height: 228px; object-fit: cover; object-position: 50% 62%; display: block; }
+      #jbook .lbl { position: absolute; left: 0; right: 0; bottom: 0; padding: 4px 0 6px; text-align: center; background: var(--red); font-family: "Oswald", sans-serif; font-weight: 700; font-size: 24px; letter-spacing: 0.06em; }
+      .chip { position: absolute; white-space: nowrap; padding: 8px 18px 10px; border-radius: 999px; font-weight: 900; font-size: 34px; color: #071; background: var(--green); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); }
+      .chip.neg { background: var(--red); color: #fff; }
+
+      /* ---------- S3 stop grid ---------- */
+      #s3 { background: #0a0a0a; }
+      #grid { position: absolute; left: 110px; top: 320px; width: 860px; display: grid; grid-template-columns: repeat(4, 200px); gap: 20px; }
+      .cell { position: relative; height: 150px; padding: 14px 16px; background: #15171c; border: 2px solid #252830; border-radius: 16px; }
+      .cell .tk { font-family: "Oswald", sans-serif; font-weight: 700; font-size: 30px; line-height: 1; }
+      .cell .spark { position: absolute; left: 16px; right: 16px; bottom: 42px; height: 40px; }
+      .cell .sl { position: absolute; left: 16px; bottom: 12px; font-weight: 700; font-size: 20px; color: rgba(242, 240, 234, 0.5); }
+      .cell .stop { position: absolute; right: 10px; top: 10px; padding: 4px 10px 6px; border-radius: 8px; background: var(--red); font-family: "Oswald", sans-serif; font-weight: 700; font-size: 24px; letter-spacing: 0.05em; box-shadow: 0 0 22px rgba(224, 32, 46, 0.85); }
+
+      /* ---------- S4 own money: red side light ---------- */
+      #redlight { position: absolute; inset: 0; background: linear-gradient(270deg, rgba(224, 32, 46, 0.62) 0%, rgba(224, 32, 46, 0.18) 38%, rgba(224, 32, 46, 0) 62%); mix-blend-mode: screen; }
+
+      /* ---------- S5 CTA: giant keyword behind the matted subject (reference: type behind the helmet) ---------- */
+      #bigword { position: absolute; left: 0; right: 0; top: 610px; text-align: center; font-family: "Oswald", sans-serif; font-weight: 700; font-size: 250px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; }
+      #bigword .ghost { position: absolute; left: 0; right: 0; top: 0; color: transparent; -webkit-text-stroke: 3px rgba(242, 240, 234, 0.22); }
+      #bigword .fill { position: relative; color: var(--red); text-shadow: 0 0 60px rgba(224, 32, 46, 0.55); }
+      #bigword .fill span { display: inline-block; }
+      .tag { display: inline-block; padding: 10px 28px 14px; background: var(--yellow); color: #0a0a0a; font-family: "Oswald", sans-serif; font-weight: 700; font-size: 64px; letter-spacing: 0.02em; transform: rotate(-2deg); }
+
+      /* ---------- S6 final ---------- */
+      #s6 { background: #000; }
+      .badge { display: inline-flex; align-items: center; justify-content: center; width: 120px; height: 120px; border-radius: 50%; border: 6px solid var(--red); color: var(--red); font-weight: 900; font-size: 50px; letter-spacing: -0.03em; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="40" data-width="1080" data-height="1920">
+      <!-- soundtrack: music + pitched voice + SFX, premixed by tools/mix.py (music cut at 35.437) -->
+      <audio id="mix" src="media/mix.wav" data-start="0" data-duration="40" data-track-index="9" data-volume="1"></audio>
+
+      <!-- ===== S0 · 0.00–2.00 · SMK sting ===== -->
+      <section id="s0" class="scene clip" data-start="0" data-duration="2.0" data-track-index="0">
+        <svg id="vhs-noise" viewBox="0 0 270 480" preserveAspectRatio="none">
+          <filter id="vhsf"><feTurbulence id="vhs-turb" type="fractalNoise" baseFrequency="0.9 0.35" numOctaves="2" seed="1" /><feColorMatrix type="saturate" values="0" /></filter>
+          <rect width="270" height="480" filter="url(#vhsf)" />
+        </svg>
+        <div class="logo-stack" id="s0-logo"><div class="logo-ch r" id="s0-r"></div><div class="logo-ch c" id="s0-c"></div><div class="logo-ch w"></div></div>
+        <div class="tracking" id="s0-track"></div>
+        <div class="scanlines"></div>
+      </section>
+
+      <!-- ===== S1 · 2.00–7.201 · hook: everyone posts only wins (VO 9893) ===== -->
+      <section id="s1" class="scene clip" data-start="2.0" data-duration="5.201" data-track-index="2" data-layout-allow-overlap>
+        <div id="fakes" data-layout-allow-overlap></div>
+        <div id="s1-dim"></div>
+        <div class="band shadow" id="s1-a" style="top: 860px">
+          <span class="line t-cond" id="s1-a1" style="font-size: 200px">сотни</span>
+          <span class="line t-small it" id="s1-a2">каналов с сигналами</span>
+        </div>
+        <div class="band shadow" id="s1-b" style="top: 860px">
+          <span class="line t-small it" id="s1-b1">и почти у всех одни</span>
+          <span class="line t-cond green" id="s1-b2" style="font-size: 200px">плюсы</span>
+        </div>
+        <div class="band shadow" id="s1-c" style="top: 640px">
+          <span class="line t-cond green" style="font-size: 150px; position: relative">+300% +500%<span class="strike" id="s1-cs" style="height: 16px"></span></span>
+        </div>
+        <div id="bigx"><i id="bx1"></i><i id="bx2"></i></div>
+      </section>
+
+      <!-- ===== S2 · 7.201–14.631 · difference 1: a journal, not screenshots (head 9897) ===== -->
+      <div class="vwrap" id="s2-wrap" data-layout-allow-overflow>
+        <div class="inner" id="s2-inner">
+          <video id="head1" class="clip" src="media/head_9897.mp4" muted playsinline data-start="7.201" data-media-start="0.6" data-duration="5.8" data-track-index="1"></video>
+          <img id="head1-freeze" class="clip" src="media/head_9897_freeze.jpg" alt="" data-start="13.001" data-duration="1.63" data-track-index="1" />
+        </div>
+      </div>
+      <section id="s2" class="scene clip" data-start="7.201" data-duration="7.43" data-track-index="2" data-layout-allow-overlap>
+        <div class="lowfade"></div>
+        <div id="scales">
+          <div class="post"></div>
+          <div class="base"></div>
+          <div id="beam"></div>
+          <div class="pivot"></div>
+          <div class="pan" id="panL">
+            <div class="str a"></div><div class="str b"></div><div class="dish"></div>
+            <div class="load" id="loadL">
+              <div class="mini" id="m1" style="bottom: 0; transform: rotate(-4deg)">+300%</div>
+              <div class="mini" id="m2" style="bottom: 40px; transform: rotate(5deg)">+500%</div>
+              <div class="mini" id="m3" style="bottom: 80px; transform: rotate(-2deg)">+780%</div>
+            </div>
+          </div>
+          <div class="pan" id="panR">
+            <div class="str a"></div><div class="str b"></div><div class="dish"></div>
+            <div class="load"><div id="jbook"><img src="media/journal.jpg" alt="" /><div class="lbl">ЖУРНАЛ</div></div></div>
+          </div>
+          <div class="chip" id="chip-plus" style="left: 200px; top: 330px">+ плюсовые</div>
+          <div class="chip neg" id="chip-minus" style="left: 200px; top: 400px">− минусовые</div>
+        </div>
+        <div class="band shadow" id="s2-a" style="top: 1060px">
+          <span class="line t-mid" style="position: relative"><span class="it" style="font-weight: 700">не </span>скрины<span class="strike" id="s2-strike"></span></span>
+          <span class="line t-cond red" id="s2-a2" style="font-size: 170px; margin-top: 6px"><span style="color: var(--paper)">→</span> журнал</span>
+        </div>
+      </section>
+
+      <!-- ===== S3 · 14.631–21.318 · difference 2: a stop in every signal (VO 9898) ===== -->
+      <section id="s3" class="scene clip" data-start="14.631" data-duration="6.687" data-track-index="2">
+        <div id="grid"></div>
+        <div class="band shadow" id="s3-a" style="top: 1190px">
+          <span class="line t-cond" id="s3-a1" style="font-size: 130px">стоп <span class="red">— всегда</span></span>
+          <span class="line t-small it" id="s3-a2" style="margin-top: 14px">защищаем депозит,</span>
+          <span class="line t-small" id="s3-a3" style="margin-top: 6px"><span class="it">а не играем </span><span class="word" style="position: relative">в угадайку<span class="strike" id="s3-strike"></span></span></span>
+        </div>
+      </section>
+
+      <!-- ===== S4 · 21.318–27.262 · difference 3: our own money (head 9900) ===== -->
+      <div class="vwrap" id="s4-wrap" data-layout-allow-overflow>
+        <div class="inner" id="s4-inner">
+          <video id="head2" class="clip" src="media/head_9900.mp4" muted playsinline data-start="21.318" data-media-start="0.9" data-duration="4.8" data-track-index="1"></video>
+          <img id="head2-freeze" class="clip" src="media/head_9900_freeze.jpg" alt="" data-start="26.118" data-duration="1.144" data-track-index="1" />
+        </div>
+      </div>
+      <section id="s4" class="scene clip" data-start="21.318" data-duration="5.944" data-track-index="2">
+        <div id="redlight"></div>
+        <div class="lowfade"></div>
+        <div class="band shadow" id="s4-a" style="top: 1060px">
+          <span class="line t-small it" id="s4-a0">торгуем по</span>
+          <span class="line t-cond" id="s4-a1" style="font-size: 116px">тем же сигналам</span>
+          <span class="line t-cond red" id="s4-a2" style="font-size: 116px; margin-top: 6px">своими деньгами</span>
+        </div>
+      </section>
+
+      <!-- ===== S5 · 27.262–35.437 · CTA (head 9905, "до 10 октября" cut out) ===== -->
+      <div class="vwrap" id="s5-wrap" data-layout-allow-overflow>
+        <div class="inner" id="s5-inner">
+          <video id="cta-bg-a" class="clip" src="media/head_9905.mp4" muted playsinline data-start="27.262" data-media-start="0.7" data-duration="5.4" data-track-index="1"></video>
+          <video id="cta-bg-b" class="clip" src="media/head_9905.mp4" muted playsinline data-start="32.662" data-media-start="7.4" data-duration="1.6" data-track-index="1"></video>
+          <img id="cta-bg-f" class="clip" src="media/head_9905_freeze.jpg" alt="" data-start="34.262" data-duration="1.175" data-track-index="1" />
+          <div id="bigword" class="clip" data-start="27.262" data-duration="8.175" data-track-index="3"><div class="ghost">СИГНАЛ</div><div class="fill" id="bw-fill">СИГНАЛ</div></div>
+          <video id="cta-fg-a" class="clip" src="media/head_9905_fg.webm" muted playsinline data-start="27.262" data-media-start="0.7" data-duration="5.4" data-track-index="4"></video>
+          <video id="cta-fg-b" class="clip" src="media/head_9905_fg.webm" muted playsinline data-start="32.662" data-media-start="7.4" data-duration="1.6" data-track-index="4"></video>
+          <img id="cta-fg-f" class="clip" src="media/head_9905_fg_freeze.png" alt="" data-start="34.262" data-duration="1.175" data-track-index="4" />
+        </div>
+      </div>
+      <section id="s5" class="scene clip" data-start="27.262" data-duration="8.175" data-track-index="2">
+        <div class="lowfade"></div>
+        <div class="band shadow" id="s5-a" style="top: 1060px">
+          <span class="line t-small it" id="s5-a0">не верь на слово —</span>
+          <span class="line t-mid" id="s5-a1" style="margin-top: 6px">пиши слово <span class="red">«СИГНАЛ»</span></span>
+          <span id="s5-a2" style="margin-top: 18px"><span class="pill">в директ @smk.trade</span></span>
+        </div>
+        <div class="band shadow" id="s5-b" style="top: 1000px">
+          <span class="line" id="s5-b0" style="font-weight: 700; font-size: 38px">пиши «СИГНАЛ» → @smk.trade</span>
+          <span class="line t-cond red" id="s5-b1" style="font-size: 200px; margin-top: 4px">3 дня</span>
+          <span class="line t-cond" id="s5-b2" style="font-size: 110px">бесплатно</span>
+          <span id="s5-b3" style="margin-top: 18px"><span class="tag">ДО 1 НОЯБРЯ</span></span>
+        </div>
+      </section>
+
+      <!-- ===== S6 · 35.437–40.00 · final: music cut, disclaimer ===== -->
+      <section id="s6" class="scene clip" data-start="35.437" data-duration="4.563" data-track-index="2">
+        <div class="band" style="top: 620px">
+          <span class="line t-big" id="s6-a" style="font-size: 120px">@smk.trade</span>
+          <div id="s6-b" style="margin-top: 70px; display: flex; align-items: center; gap: 28px">
+            <span class="badge">18+</span><span class="t-cond" style="font-size: 96px">не финсовет</span>
+          </div>
+          <span id="s6-c" style="margin-top: 56px; max-width: 860px; font-weight: 700; font-size: 46px; line-height: 1.2; color: rgba(242, 240, 234, 0.85)">ТОРГОВЛЯ С ПЛЕЧОМ МОЖЕТ ОБНУЛИТЬ ДЕПОЗИТ</span>
+        </div>
+      </section>
+
+      <!-- ===== persistent chrome ===== -->
+      <div id="brandmark" class="clip" data-start="2.0" data-duration="25.262" data-track-index="6"></div>
+      <div id="vignette"></div>
+      <div id="grain"><div class="tex" id="grain-tex"></div></div>
+      <div id="glitch"></div>
+      <div id="flash"></div>
+    </div>
+
+    <script>
+      (function () {
+        // Seeded PRNG: collage placement and glitch slices are reproducible from the seed.
+        let seed = 0x6c1e33;
+        const rnd = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
+
+        const tl = gsap.timeline({ paused: true });
+        const $ = (s) => document.querySelector(s);
+
+        const slam = (el, t, from = 1.35) =>
+          tl.fromTo(el, { opacity: 0, scale: from }, { opacity: 1, scale: 1, duration: 0.16, ease: "power4.out" }, t);
+        const pop = (el, t) => tl.fromTo(el, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.22, ease: "power3.out" }, t);
+        const hide = (el, t) => tl.set(el, { opacity: 0 }, t);
+        const draw = (el, t, d = 0.22) => tl.fromTo(el, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.out" }, t);
+
+        const glitchRoot = $("#glitch");
+        const slices = [];
+        for (let i = 0; i < 14; i++) {
+          const s = document.createElement("div");
+          s.className = "slice";
+          glitchRoot.appendChild(s);
+          slices.push(s);
+        }
+        function glitch(t, dur = 0.18, strength = 1) {
+          const steps = 4;
+          for (let k = 0; k < steps; k++) {
+            const tt = t + (dur / steps) * k;
+            slices.forEach((s, i) => {
+              const on = rnd() < 0.55 * strength;
+              tl.set(s, {
+                opacity: on ? 0.55 + rnd() * 0.45 : 0,
+                top: Math.floor(rnd() * 1920),
+                height: 6 + Math.floor(rnd() * 70),
+                x: (rnd() - 0.5) * 160 * strength,
+                backgroundColor: i % 3 === 0 ? "#ff2236" : i % 3 === 1 ? "#19e3ff" : "#ffffff",
+              }, tt);
+            });
+            tl.set("#root", { x: (rnd() - 0.5) * 24 * strength }, tt);
+          }
+          slices.forEach((s) => tl.set(s, { opacity: 0 }, t + dur));
+          tl.set("#root", { x: 0 }, t + dur);
+        }
+        const flash = (t, peak = 0.85, d = 0.12) =>
+          tl.fromTo("#flash", { opacity: peak }, { opacity: 0, duration: d, ease: "power2.out", immediateRender: false }, t);
+
+        tl.fromTo("#grain-tex", { x: 0, y: 0 }, { x: -48, y: 31, duration: 0.25, ease: "steps(3)", repeat: 159, yoyo: true }, 0);
+
+        // ---------- S0 · sting (identical to episodes 1–2) ----------
+        const turb = $("#vhs-turb");
+        const vhs = { f: 0 };
+        tl.to(vhs, { f: 1, duration: 2.0, ease: "none", onUpdate: () => turb.setAttribute("seed", String(1 + Math.floor(tl.time() * 24))) }, 0);
+        tl.fromTo("#s0-track", { y: -120 }, { y: 1980, duration: 1.1, ease: "none" }, 0.1);
+        tl.fromTo("#s0-track", { y: -120 }, { y: 1980, duration: 0.7, ease: "none", immediateRender: false }, 1.22);
+        tl.fromTo("#s0-logo", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "steps(6)" }, 0.05);
+        tl.fromTo("#s0-r", { x: -38 }, { x: -6, duration: 0.95, ease: "steps(8)" }, 0.05);
+        tl.fromTo("#s0-c", { x: 34 }, { x: 5, duration: 0.95, ease: "steps(8)" }, 0.05);
+        tl.to("#s0-r", { x: -26, duration: 0.08, ease: "steps(1)", yoyo: true, repeat: 3 }, 1.05);
+        tl.to("#s0-c", { x: 22, duration: 0.08, ease: "steps(1)", yoyo: true, repeat: 3 }, 1.05);
+        tl.fromTo("#s0-logo", { scale: 1 }, { scale: 1.08, duration: 1.9, ease: "power1.in" }, 0.1);
+        tl.fromTo("#vhs-noise", { opacity: 0.45 }, { opacity: 0.2, duration: 1.6 }, 0);
+        glitch(0.05, 0.16, 0.7);
+        glitch(1.05, 0.14, 0.6);
+        glitch(1.84, 0.16, 1);
+
+        // ---------- S1 · hook ----------
+        // VO word times: video = 1.85 + word time in IMG_9893
+        // Generated, generic "win" screenshots: no real channel names, tickers only.
+        const fakes = [
+          ["#PEPEUSDT · LONG", "+300%", "Тейк взят"], ["#SOLUSDT · LONG", "+500%", "За 2 часа"],
+          ["#DOGEUSDT · LONG", "+420%", "Профит"], ["#XRPUSDT · SHORT", "+1000%", "x50"],
+          ["#BTCUSDT · LONG", "+250%", "Тейк взят"], ["#WIFUSDT · LONG", "+780%", "Профит"],
+          ["#BNBUSDT · SHORT", "+350%", "Тейк взят"], ["#ARBUSDT · LONG", "+600%", "За день"],
+        ];
+        const spots = [[40, 300], [600, 340], [330, 560], [40, 800], [610, 860], [300, 1080], [40, 1300], [610, 1330]];
+        const fakeRoot = $("#fakes");
+        const cards = fakes.map(([tk, pct, sub], i) => {
+          const c = document.createElement("div");
+          c.className = "fake";
+          c.style.left = spots[i][0] + "px";
+          c.style.top = spots[i][1] + "px";
+          c.innerHTML = `<div class="tk">${tk}</div><div class="pct">${pct}</div><div class="sub">${sub}</div><i class="x1"></i><i class="x2"></i>`;
+          fakeRoot.appendChild(c);
+          return c;
+        });
+        const cardT = [2.45, 2.75, 3.01, 3.43, 3.52, 3.61, 3.7, 3.79];
+        tl.set(cards, { opacity: 0 }, 2.0);
+        cards.forEach((c, i) => {
+          const r = (rnd() - 0.5) * 14;
+          tl.fromTo(c, { opacity: 0, scale: 1.3, rotation: r * 2 }, { opacity: 1, scale: 1, rotation: r, duration: 0.16, ease: "power4.out", immediateRender: false }, cardT[i]);
+        });
+        tl.set(".fake .x1, .fake .x2", { scaleX: 0 }, 2.0);
+        tl.to(".fake .pct", { scale: 1.12, duration: 0.12, yoyo: true, repeat: 1, ease: "power2.out", transformOrigin: "0% 50%" }, 5.21);
+        cards.forEach((c, i) => {
+          const t = 5.55 + i * 0.08;
+          tl.fromTo(c.querySelector(".x1"), { scaleX: 0, rotation: 24 }, { scaleX: 1, rotation: 24, duration: 0.1, ease: "power2.out", immediateRender: false }, t);
+          tl.fromTo(c.querySelector(".x2"), { scaleX: 0, rotation: -24 }, { scaleX: 1, rotation: -24, duration: 0.1, ease: "power2.out", immediateRender: false }, t + 0.05);
+        });
+        tl.set(["#s1-a1", "#s1-a2", "#s1-b1", "#s1-b2", "#s1-c", "#bigx"], { opacity: 0 }, 2.0);
+        slam("#s1-a1", 3.43, 1.4);
+        pop("#s1-a2", 3.6);
+        hide("#s1-a", 4.33);
+        tl.set("#s1-a", { opacity: 1 }, 2.0);
+        pop("#s1-b1", 4.33);
+        slam("#s1-b2", 5.21, 1.4);
+        hide("#s1-b", 6.46);
+        tl.set("#s1-b", { opacity: 1 }, 2.0);
+        tl.fromTo("#s1-dim", { opacity: 0 }, { opacity: 0.55, duration: 0.12 }, 3.43);
+        tl.to("#s1-dim", { opacity: 1, duration: 0.12 }, 6.46);
+        slam("#s1-c", 6.46, 1.2);
+        draw("#s1-cs", 6.56, 0.16);
+        tl.fromTo("#bigx", { opacity: 0, scale: 2.2, rotation: 0 }, { opacity: 1, scale: 1, rotation: 45, duration: 0.2, ease: "power4.out", immediateRender: false }, 6.6);
+        tl.set("#bx2", { rotation: 90 }, 2.0);
+        glitch(7.05, 0.16, 1);
+
+        // ---------- S2 · scales: a journal outweighs screenshots ----------
+        // word times: video = 6.601 + word time in IMG_9897
+        tl.fromTo("#s2-inner", { scale: 1.0 }, { scale: 1.06, duration: 5.8, ease: "none" }, 7.201);
+        tl.fromTo("#s2-inner", { scale: 1.06 }, { scale: 1.1, duration: 1.63, ease: "power1.in", immediateRender: false }, 13.001);
+        tl.set(["#scales", "#m1", "#m2", "#m3", "#jbook", "#chip-plus", "#chip-minus", "#s2-a", "#s2-a2"], { opacity: 0 }, 7.201);
+        tl.fromTo("#scales", { opacity: 0, y: -60, rotationX: 18 }, { opacity: 1, y: 0, rotationX: 8, duration: 0.35, ease: "power3.out", immediateRender: false }, 7.4);
+        const L = 210;
+        const tilt = (deg, t, d, ease) => {
+          const dy = Math.sin((deg * Math.PI) / 180) * L;
+          tl.to("#beam", { rotation: deg, duration: d, ease }, t);
+          tl.to("#panL", { y: -dy, duration: d, ease }, t);
+          tl.to("#panR", { y: dy, duration: d, ease }, t);
+        };
+        [["#m1", 7.95], ["#m2", 8.05], ["#m3", 8.15]].forEach(([m, t]) => tl.fromTo(m, { opacity: 0, y: -140 }, { opacity: 1, y: 0, duration: 0.18, ease: "bounce.out", immediateRender: false }, t));
+        tilt(-7, 8.12, 0.35, "power2.out");
+        slam("#s2-a", 8.12, 1.2);
+        draw("#s2-strike", 8.62, 0.2);
+        tl.fromTo("#jbook", { opacity: 0, y: -220 }, { opacity: 1, y: 0, duration: 0.22, ease: "power3.in", immediateRender: false }, 8.78);
+        tilt(13, 8.98, 0.7, "elastic.out(1, 0.45)");
+        slam("#s2-a2", 8.98, 1.3);
+        pop("#chip-plus", 11.22);
+        pop("#chip-minus", 12.1);
+        glitch(14.45, 0.16, 1);
+
+        // ---------- S3 · stop grid ----------
+        // VO word times: video = 14.2 + word time in IMG_9898
+        const tks = ["BTC", "ETH", "SOL", "LINEA", "JUP", "WLD", "ADA", "ZETA", "DOGE", "APE", "DOT", "ROSE", "CHZ", "DYDX", "EDEN", "LDO", "ARB", "OP", "SUI", "TIA"];
+        const grid = $("#grid");
+        const cells = tks.map((tk) => {
+          const c = document.createElement("div");
+          c.className = "cell";
+          let pts = "", y = 20;
+          for (let k = 0; k < 8; k++) { y = Math.max(4, Math.min(36, y + (rnd() - 0.5) * 22)); pts += `${k * 24},${y.toFixed(1)} `; }
+          const up = rnd() > 0.5;
+          c.innerHTML = `<div class="tk">${tk}</div><svg class="spark" viewBox="0 0 168 40" preserveAspectRatio="none"><polyline points="${pts}" fill="none" stroke="${up ? "#3ddc6b" : "#e0202e"}" stroke-width="3"/></svg><div class="sl">SL ✓</div><div class="stop">STOP</div>`;
+          grid.appendChild(c);
+          return c;
+        });
+        const stops = cells.map((c) => c.querySelector(".stop"));
+        tl.set(cells, { opacity: 0 }, 14.631);
+        tl.set(stops, { opacity: 0 }, 14.631);
+        tl.fromTo(cells[5], { opacity: 0, scale: 1.8 }, { opacity: 1, scale: 1, duration: 0.25, ease: "power4.out", immediateRender: false }, 14.75);
+        cells.forEach((c, i) => {
+          if (i === 5) return;
+          tl.fromTo(c, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.16, ease: "back.out(1.8)", immediateRender: false }, 15.1 + (Math.abs((i % 4) - 1.5) + Math.floor(i / 4)) * 0.06);
+        });
+        stops.forEach((s, i) => tl.fromTo(s, { opacity: 0, scale: 2 }, { opacity: 1, scale: 1, duration: 0.1, ease: "power3.out", immediateRender: false }, 15.92 + i * 0.035));
+        tl.to(stops, { scale: 1.15, duration: 0.1, yoyo: true, repeat: 1, ease: "power2.out" }, 16.72);
+        tl.set(["#s3-a1", "#s3-a2", "#s3-a3"], { opacity: 0 }, 14.631);
+        slam("#s3-a1", 16.72, 1.4);
+        pop("#s3-a2", 17.66);
+        pop("#s3-a3", 18.62);
+        draw("#s3-strike", 19.22, 0.2);
+        glitch(21.16, 0.16, 1);
+
+        // ---------- S4 · own money: slow push-in, red side light ----------
+        // word times: video = 20.418 + word time in IMG_9900
+        tl.fromTo("#s4-inner", { scale: 1.0 }, { scale: 1.12, duration: 5.944, ease: "none" }, 21.318);
+        tl.fromTo("#redlight", { opacity: 0.55 }, { opacity: 1, duration: 0.6, ease: "sine.inOut", yoyo: true, repeat: 8 }, 21.318);
+        tl.set(["#s4-a0", "#s4-a1", "#s4-a2"], { opacity: 0 }, 21.318);
+        pop("#s4-a0", 21.88);
+        slam("#s4-a1", 22.3, 1.25);
+        slam("#s4-a2", 24.22, 1.4);
+        glitch(27.12, 0.15, 1);
+
+        // ---------- S5 · CTA: the keyword types itself in, huge, behind the subject ----------
+        // segment A word times: video = 26.562 + t; segment B: video = 32.662 + (t − 7.4)
+        const bw = $("#bw-fill");
+        const letters = [...bw.textContent].map((ch) => {
+          const sp = document.createElement("span");
+          sp.textContent = ch;
+          return sp;
+        });
+        bw.textContent = "";
+        letters.forEach((sp) => bw.appendChild(sp));
+        tl.fromTo("#bigword", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 27.3);
+        tl.set(letters, { opacity: 0 }, 27.262);
+        letters.forEach((sp, i) => tl.fromTo(sp, { opacity: 0, scale: 1.5, y: -30 }, { opacity: 1, scale: 1, y: 0, duration: 0.1, ease: "power4.out", immediateRender: false }, 28.76 + i * 0.1));
+        tl.fromTo("#bigword", { x: 0 }, { x: 14, duration: 0.05, ease: "steps(1)", yoyo: true, repeat: 5, immediateRender: false }, 29.32);
+        tl.fromTo("#s5-inner", { scale: 1.0 }, { scale: 1.05, duration: 5.4, ease: "none" }, 27.262);
+        tl.fromTo("#s5-inner", { scale: 1.16 }, { scale: 1.2, duration: 2.775, ease: "none", immediateRender: false }, 32.662);
+        flash(32.662, 0.5, 0.1);
+        tl.set(["#s5-a0", "#s5-a1", "#s5-a2", "#s5-b0", "#s5-b1", "#s5-b2", "#s5-b3"], { opacity: 0 }, 27.262);
+        pop("#s5-a0", 27.54);
+        slam("#s5-a1", 28.76, 1.2);
+        slam("#s5-a2", 29.78, 1.2);
+        hide("#s5-a", 32.04);
+        tl.set("#s5-a", { opacity: 1 }, 27.262);
+        pop("#s5-b0", 32.04);
+        slam("#s5-b1", 32.06, 1.5);
+        slam("#s5-b2", 32.3, 1.3);
+        tl.fromTo("#s5-b3", { opacity: 0, scale: 1.8, rotation: -8 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.18, ease: "back.out(2)", immediateRender: false }, 32.662);
+
+        // ---------- S6 · final: black, music already cut ----------
+        tl.set(["#s6-a", "#s6-b", "#s6-c"], { opacity: 0 }, 35.437);
+        slam("#s6-a", 35.55, 1.2);
+        pop("#s6-b", 35.95);
+        pop("#s6-c", 36.35);
+
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

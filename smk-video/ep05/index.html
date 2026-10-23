@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="ru" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>SMK — Дело $362 900</title>
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; font-weight: 700; font-style: normal; src: url("fonts/inter-cyrillic-700-normal.woff2") format("woff2"); unicode-range: U+0400-04FF; }
+      @font-face { font-family: "Inter"; font-weight: 700; font-style: normal; src: url("fonts/inter-latin-700-normal.woff2") format("woff2"); unicode-range: U+0000-03FF, U+2000-206F, U+2190-21FF; }
+      @font-face { font-family: "Inter"; font-weight: 700; font-style: italic; src: url("fonts/inter-cyrillic-700-italic.woff2") format("woff2"); unicode-range: U+0400-04FF; }
+      @font-face { font-family: "Inter"; font-weight: 700; font-style: italic; src: url("fonts/inter-latin-700-italic.woff2") format("woff2"); unicode-range: U+0000-03FF, U+2000-206F, U+2190-21FF; }
+      @font-face { font-family: "Inter"; font-weight: 900; font-style: normal; src: url("fonts/inter-cyrillic-900-normal.woff2") format("woff2"); unicode-range: U+0400-04FF; }
+      @font-face { font-family: "Inter"; font-weight: 900; font-style: normal; src: url("fonts/inter-latin-900-normal.woff2") format("woff2"); unicode-range: U+0000-03FF, U+2000-206F, U+2190-21FF; }
+      @font-face { font-family: "Oswald"; font-weight: 700; src: url("fonts/oswald-cyrillic-700-normal.woff2") format("woff2"); unicode-range: U+0400-04FF; }
+      @font-face { font-family: "Oswald"; font-weight: 700; src: url("fonts/oswald-latin-700-normal.woff2") format("woff2"); unicode-range: U+0000-03FF, U+2000-206F, U+2190-21FF; }
+      @font-face { font-family: "Caveat"; font-weight: 700; src: url("fonts/caveat-cyrillic-700-normal.woff2") format("woff2"); unicode-range: U+0400-04FF; }
+      @font-face { font-family: "Caveat"; font-weight: 700; src: url("fonts/caveat-latin-700-normal.woff2") format("woff2"); unicode-range: U+0000-03FF, U+2000-206F; }
+      @font-face { font-family: "LibMono"; font-weight: 700; src: url("fonts/liberation-mono-700.ttf") format("truetype"); }
+
+      :root {
+        --ink: #070707;
+        --paper: #f2f0ea;
+        --red: #e0202e;
+        --yellow: #f5c518;
+        --green: #3ddc6b;
+        --dark-ink: #1a1a1c;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ink); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--ink); color: var(--paper); font-family: "Inter", sans-serif; }
+      #stage { position: absolute; inset: 0; }
+      .scene { position: absolute; inset: 0; overflow: hidden; }
+      .hid { opacity: 0; }
+
+      /* ---------- type system (same as episodes 1–3) ---------- */
+      .band { position: absolute; left: 60px; right: 60px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+      .t-small { font-weight: 700; font-size: 54px; line-height: 1.05; letter-spacing: -0.02em; }
+      .t-cond { font-family: "Oswald", sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.95; }
+      .it { font-style: italic; font-weight: 700; }
+      .red { color: var(--red); }
+      .green { color: var(--green); }
+      .yellow { color: var(--yellow); }
+      .mono { font-family: "LibMono", monospace; font-weight: 700; letter-spacing: 0.02em; }
+      .shadow { text-shadow: 0 6px 30px rgba(0, 0, 0, 0.75), 0 2px 6px rgba(0, 0, 0, 0.6); }
+      .line { display: block; white-space: nowrap; }
+      .rel { position: relative; display: inline-block; }
+      .pill { display: inline-block; padding: 12px 30px 14px; border: 3px solid var(--paper); border-radius: 999px; font-weight: 700; font-size: 46px; letter-spacing: -0.01em; background: rgba(0, 0, 0, 0.45); }
+      .strike { position: absolute; left: -3%; top: 52%; width: 106%; height: 12px; margin-top: -6px; background: var(--red); transform-origin: left center; box-shadow: 0 0 18px rgba(224, 32, 46, 0.6); }
+      .lowfade { position: absolute; left: 0; right: 0; bottom: 0; height: 1000px; background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)); }
+      .topfade { position: absolute; left: 0; right: 0; top: 0; height: 1000px; background: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)); }
+      .dim { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.38); }
+
+      /* ---------- persistent chrome: briefing HUD ---------- */
+      #brandmark { position: absolute; top: 236px; left: 50%; width: 92px; height: 50px; margin-left: -46px; background: url("media/smk-logo-white.png") center / contain no-repeat; opacity: 0.9; }
+      #hud { position: absolute; left: 0; top: 0; width: 1080px; height: 320px; pointer-events: none; }
+      #hud .l, #hud .r { position: absolute; top: 248px; font-size: 26px; color: rgba(242, 240, 234, 0.85); text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8); white-space: nowrap; }
+      #hud .l { left: 64px; }
+      #hud .r { right: 64px; }
+      #recdot { display: inline-block; width: 18px; height: 18px; margin-right: 10px; border-radius: 50%; background: var(--red); box-shadow: 0 0 12px rgba(224, 32, 46, 0.9); vertical-align: -1px; }
+      #grain { position: absolute; inset: 0; overflow: hidden; pointer-events: none; mix-blend-mode: screen; opacity: 0.17; }
+      #grain .tex {
+        position: absolute; top: -10%; left: -10%; width: 120%; height: 120%;
+        background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch' seed='7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-size: 256px 256px;
+      }
+      #vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 45%, rgba(0, 0, 0, 0) 52%, rgba(0, 0, 0, 0.6) 100%); }
+      #glitch { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; }
+      #glitch .slice { position: absolute; left: 0; width: 100%; opacity: 0; }
+      #flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+
+      /* ---------- S0 intro: VHS logo (series sting) ---------- */
+      #s0 { background: #050505; }
+      .vhs-noise { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; opacity: 0.32; }
+      .logo-stack { position: absolute; left: 50%; top: 760px; width: 640px; height: 348px; margin-left: -320px; }
+      .logo-ch { position: absolute; inset: 0; -webkit-mask: url("media/smk-logo-white.png") center / contain no-repeat; mask: url("media/smk-logo-white.png") center / contain no-repeat; }
+      .logo-ch.r { background: #ff2236; mix-blend-mode: screen; }
+      .logo-ch.c { background: #19e3ff; mix-blend-mode: screen; }
+      .logo-ch.w { background: #f4f4f4; }
+      .scanlines { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.28) 0 2px, rgba(0, 0, 0, 0) 2px 5px); }
+      .tracking { position: absolute; left: 0; width: 100%; height: 90px; top: 0; background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0)); filter: blur(4px); }
+
+      /* ---------- footage ---------- */
+      .vwrap { position: absolute; inset: 0; overflow: hidden; }
+      .vwrap video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .full { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+      /* ---------- briefing desk, evidence prints, stamps ---------- */
+      .desk {
+        position: absolute; inset: 0;
+        background:
+          radial-gradient(ellipse at 28% 18%, rgba(255, 210, 150, 0.12), rgba(0, 0, 0, 0) 55%),
+          radial-gradient(ellipse at 50% 55%, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6) 100%),
+          repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 2px, rgba(0, 0, 0, 0) 2px 72px),
+          repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0 2px, rgba(0, 0, 0, 0) 2px 72px),
+          #0e0f11;
+      }
+      .desk .coords { position: absolute; font-size: 22px; color: rgba(242, 240, 234, 0.28); }
+      .print, .pwrap { position: absolute; padding: 18px 18px 76px; background: #eeebe3; box-shadow: 0 34px 80px rgba(0, 0, 0, 0.85); }
+      .pwrap { padding: 0; opacity: 0; }
+      .pwrap video { position: absolute; left: 18px; top: 18px; object-fit: cover; background: #111; }
+      .print .ph { position: relative; overflow: hidden; background: #111; }
+      .print .ph img { display: block; width: 100%; height: 100%; object-fit: cover; }
+      .cap { position: absolute; left: 24px; right: 24px; bottom: 12px; font-family: "Caveat", cursive; font-weight: 700; font-size: 48px; line-height: 1; color: #1d1d1f; white-space: nowrap; }
+      .tape { position: absolute; top: -26px; left: 50%; width: 240px; height: 52px; margin-left: -120px; background: url("media/tape.png") center / 100% 100% no-repeat; opacity: 0.92; }
+      .stamp {
+        position: absolute; white-space: nowrap; padding: 4px 28px 10px; border: 10px solid currentColor; border-radius: 14px;
+        color: var(--red); font-family: "Oswald", sans-serif; font-weight: 700; font-size: 104px; line-height: 1; letter-spacing: 0.05em; opacity: 0;
+        -webkit-mask-image: url("textures/stamp-mask.svg");
+        mask-image: url("textures/stamp-mask.svg");
+        -webkit-mask-size: 300px 300px; mask-size: 300px 300px;
+      }
+      .marker { position: absolute; background: rgba(255, 214, 0, 0.78); mix-blend-mode: multiply; transform-origin: left center; border-radius: 4px; }
+
+      /* ---------- dossier ---------- */
+      #dos { position: absolute; left: 110px; top: 340px; width: 860px; height: 1060px; padding: 40px 46px; color: var(--dark-ink); background: url("media/paper.jpg") center / cover; box-shadow: 0 40px 90px rgba(0, 0, 0, 0.85); overflow: hidden; }
+      #dos::before { content: ""; position: absolute; inset: 0; background: rgba(250, 244, 230, 0.35); }
+      #dos > * { position: absolute; }
+      #dos .k { font-size: 28px; color: rgba(26, 26, 28, 0.6); }
+      #dos .v { font-size: 40px; color: var(--dark-ink); }
+      .want { position: absolute; width: 330px; height: 440px; padding: 16px 16px 0; background: #e9e5da; box-shadow: 0 28px 60px rgba(0, 0, 0, 0.8); color: var(--dark-ink); }
+      .want .ph { position: relative; width: 298px; height: 330px; overflow: hidden; background: #b9b4a8; }
+      .want .ph img { position: absolute; left: 0; bottom: 0; width: 100%; height: 100%; object-fit: contain; object-position: 50% 100%; }
+      .want .q { position: absolute; left: 0; right: 0; top: 70px; text-align: center; font-family: "Oswald", sans-serif; font-weight: 700; font-size: 150px; color: rgba(242, 240, 234, 0.85); }
+      .want .lbl { margin-top: 18px; text-align: center; font-size: 26px; }
+
+      /* ---------- end card ---------- */
+      #sc-end { background: #030303; }
+      #end-logo { top: 560px; width: 520px; height: 283px; margin-left: -260px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="50" data-width="1080" data-height="1920">
+      <!-- soundtrack: Socket Calibration (spliced into the breakdown at 29.258) + pitched voice + SFX, premixed by tools/mix.py -->
+      <audio id="mix" src="media/mix.wav" data-start="0" data-duration="50" data-track-index="9" data-volume="1"></audio>
+
+      <div id="stage">
+        <!-- ===== S0 · 0.00–2.00 · SMK sting ===== -->
+        <section id="s0" class="scene clip" data-start="0" data-duration="2.0" data-track-index="0">
+          <svg class="vhs-noise" id="vhs-noise" viewBox="0 0 270 480" preserveAspectRatio="none">
+            <filter id="vhsf"><feTurbulence id="vhs-turb" type="fractalNoise" baseFrequency="0.9 0.35" numOctaves="2" seed="1" /><feColorMatrix type="saturate" values="0" /></filter>
+            <rect width="270" height="480" filter="url(#vhsf)" />
+          </svg>
+          <div class="logo-stack" id="s0-logo"><div class="logo-ch r" id="s0-r"></div><div class="logo-ch c" id="s0-c"></div><div class="logo-ch w"></div></div>
+          <div class="tracking" id="s0-track"></div>
+          <div class="scanlines"></div>
+        </section>
+
+        <!-- ===== footage: one untimed wrapper per shot (push-ins), timed video inside ===== -->
+        <div class="vwrap" id="w-c01"><video id="v-c01" class="clip" src="media/c01_walk.mp4" muted playsinline data-start="2.0" data-duration="1.88" data-track-index="1"></video></div>
+        <div class="vwrap" id="w-c02"><video id="v-c02" class="clip" src="media/c02_bag.mp4" muted playsinline data-start="3.88" data-duration="2.02" data-track-index="1"></video></div>
+        <div class="vwrap" id="w-c03"><video id="v-c03" class="clip" src="media/c03_cash_car.mp4" muted playsinline data-start="5.9" data-duration="1.04" data-track-index="1"></video></div>
+        <div class="vwrap" id="w-c04"><video id="v-c04" class="clip" src="media/c04_monitors.mp4" muted playsinline data-start="9.9" data-duration="1.0" data-track-index="1"></video></div>
+        <div class="vwrap" id="w-c05"><video id="v-c05" class="clip" src="media/c05_phone.mp4" muted playsinline data-start="10.9" data-duration="2.54" data-track-index="1"></video></div>
+        <div class="vwrap" id="w-c06"><video id="v-c06" class="clip" src="media/c06_uv_tease.mp4" muted playsinline data-start="14.8" data-duration="0.75" data-track-index="1"></video></div>
+        <div class="vwrap" id="w-c07"><video id="v-c07" class="clip" src="media/c07_drone.mp4" muted playsinline data-start="16.0" data-duration="1.26" data-track-index="1"></video></div>
+        <div class="vwrap" id="w-c08"><video id="v-c08" class="clip" src="media/c08_mouse.mp4" muted playsinline data-start="19.14" data-duration="1.46" data-track-index="1"></video></div>
+        <div class="vwrap" id="w-c09"><video id="v-c09" class="clip" src="media/c09_cuffs.mp4" muted playsinline data-start="20.6" data-duration="1.6" data-track-index="1"></video></div>
+        <div class="vwrap" id="w-c18"><video id="v-c18" class="clip" src="media/c18_police.mp4" muted playsinline data-start="22.2" data-duration="3.8" data-track-index="1"></video></div>
+        <div class="vwrap" id="w-c10"><video id="v-c10" class="clip" src="media/c10_latch.mp4" muted playsinline data-start="26.0" data-duration="0.9" data-track-index="1"></video></div>
+        <div class="vwrap" id="w-c11"><video id="v-c11" class="clip" src="media/c11_silhouettes.mp4" muted playsinline data-start="26.9" data-duration="1.15" data-track-index="1"></video></div>
+        <div class="vwrap" id="w-c12"><video id="v-c12" class="clip" src="media/c12_flashlight.mp4" muted playsinline data-start="28.05" data-duration="1.208" data-track-index="1"></video></div>
+        <div class="vwrap" id="w-c13"><video id="v-c13" class="clip" src="media/c13_uv.mp4" muted playsinline data-start="32.75" data-duration="0.65" data-track-index="1"></video></div>
+        <div class="vwrap" id="w-c14"><video id="v-c14" class="clip" src="media/c14_detector.mp4" muted playsinline data-start="33.4" data-duration="0.8" data-track-index="1"></video></div>
+        <div class="vwrap" id="w-c15"><video id="v-c15" class="clip" src="media/c15_burn.mp4" muted playsinline data-start="35.0" data-duration="3.57" data-track-index="1"></video></div>
+        <div class="vwrap" id="w-c16"><video id="v-c16" class="clip" src="media/c16_hands_phone.mp4" muted playsinline data-start="39.85" data-duration="1.14" data-track-index="1"></video></div>
+        <div class="vwrap" id="w-c17"><video id="v-c17" class="clip" src="media/c17_teller.mp4" muted playsinline data-start="40.99" data-duration="2.38" data-track-index="1"></video></div>
+        <div class="vwrap" id="w-c19"><video id="v-c19" class="clip" src="media/c19_bills.mp4" muted playsinline data-start="44.41" data-duration="0.89" data-track-index="1"></video></div>
+
+        <!-- ===== 6.94–8.90 · Franklin's eye: only $900 are real ===== -->
+        <section id="sc-eye" class="scene clip" data-start="6.94" data-duration="1.96" data-track-index="2">
+          <img id="eye-img" class="full" src="media/franklin_eye.jpg" alt="" style="filter: brightness(0.42) contrast(1.15)" />
+        </section>
+
+        <!-- ===== 8.90–9.90 · evidence print: MVD ===== -->
+        <section id="sc-mvd" class="scene clip" data-start="8.9" data-duration="1.0" data-track-index="2" data-layout-allow-overlap>
+          <div class="desk"><span class="coords mono" style="left: 64px; top: 1480px">42.8746° N · 74.5698° E</span></div>
+          <div class="print" id="pr-mvd" style="left: 307px; top: 350px">
+            <div class="ph" style="width: 430px; height: 733px"><img src="media/mvd_building.jpg" alt="" /></div>
+            <div class="cap">МВД КР</div>
+            <div class="tape" style="transform: rotate(-4deg)"></div>
+          </div>
+        </section>
+
+        <!-- ===== 13.44–14.80 · vb.kg clipping with marker ===== -->
+        <section id="sc-vb" class="scene clip" data-start="13.44" data-duration="1.36" data-track-index="2" data-layout-allow-overlap>
+          <div class="desk"></div>
+          <div id="vb-grp" style="position: absolute; inset: 0" data-layout-allow-overlap>
+            <div id="vb-head" style="position: absolute; left: 70px; top: 560px; width: 940px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8); transform: rotate(-1.6deg)">
+              <img src="media/vbkg_head.png" alt="" style="display: block; width: 940px" />
+              <div class="tape" style="left: 8%; transform: rotate(-9deg); width: 180px; margin-left: 0"></div>
+            </div>
+            <div id="vb-para" style="position: absolute; left: 70px; top: 770px; width: 940px; height: 210px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8); transform: rotate(0.8deg)">
+              <img src="media/vbkg_para.png" alt="" style="display: block; width: 940px" />
+              <div class="marker" id="mk1" style="left: 670px; top: 126px; width: 121px; height: 38px"></div>
+              <div class="marker" id="mk2" style="left: 11px; top: 164px; width: 523px; height: 40px"></div>
+              <div class="tape" style="left: 86%; top: -30px; transform: rotate(7deg); width: 170px; margin-left: 0"></div>
+            </div>
+            <div class="mono" style="position: absolute; left: 76px; top: 1030px; font-size: 26px; color: rgba(242, 240, 234, 0.6)">ИСТОЧНИК: VB.KG · 10.03.2025</div>
+          </div>
+        </section>
+
+        <!-- ===== 15.55–16.00 · black: loading the case ===== -->
+        <section id="sc-load" class="scene clip" data-start="15.55" data-duration="0.45" data-track-index="2">
+          <div class="band" style="top: 900px"><span class="line mono" id="load-t" style="font-size: 40px; color: rgba(242, 240, 234, 0.85)">ЗАГРУЗКА ДЕЛА ████</span></div>
+        </section>
+
+        <!-- ===== 17.26–19.14 · evidence print: operative footage ===== -->
+        <section id="sc-p1" class="scene clip" data-start="17.26" data-duration="1.88" data-track-index="2">
+          <div class="desk"><span class="coords mono" style="left: 64px; top: 1480px">ОПЕРАТИВНАЯ СЪЁМКА · МВД КР</span></div>
+        </section>
+        <div class="pwrap" id="pw-op1" style="left: 242px; top: 350px; width: 596px; height: 735px" data-layout-allow-overlap>
+          <video id="v-op1" class="clip" src="media/op1_guur_entry.mp4" muted playsinline data-start="17.26" data-duration="1.88" data-track-index="1" style="width: 560px; height: 641px"></video>
+          <div class="cap">ГУУР МВД</div>
+          <div class="tape" style="transform: rotate(3deg)"></div>
+        </div>
+
+        <!-- ===== 22.20–26.00 · dossier over police lights ===== -->
+        <section id="sc-dos" class="scene clip" data-start="22.2" data-duration="3.8" data-track-index="2" data-layout-allow-overlap>
+          <div class="dim"></div>
+          <div id="dos" data-layout-allow-overlap>
+            <div class="t-cond" style="left: 46px; top: 30px; font-size: 92px">ДОСЬЕ</div>
+            <div class="mono" style="right: 46px; top: 66px; font-size: 26px">БИШКЕК · МАРТ 2025</div>
+            <div style="left: 46px; right: 46px; top: 138px; height: 5px; background: var(--dark-ink)"></div>
+            <div class="print" id="dos-photo" style="left: 40px; top: 190px; padding: 14px 14px 64px; transform: rotate(-3deg)">
+              <div class="ph" style="width: 340px; height: 319px"><img src="media/suspect_still.jpg" alt="" /></div>
+              <div class="cap" style="font-size: 42px">задержанный</div>
+              <div class="tape" style="width: 180px; margin-left: -90px; transform: rotate(4deg)"></div>
+            </div>
+            <div class="mono" style="left: 460px; top: 200px; width: 360px">
+              <div class="k">ЛИЦО:</div><div class="v">ИНОСТРАНЕЦ</div>
+              <div class="k" style="margin-top: 26px">ВОЗРАСТ:</div><div class="v" id="f-age">23 ГОДА</div>
+              <div class="k" style="margin-top: 26px">ПРИ СЕБЕ:</div><div class="v">$362 900</div>
+            </div>
+            <div class="mono k" id="f-src" style="left: 46px; top: 640px">ПО ДАННЫМ МВД:</div>
+            <div class="t-cond" id="f-prior" style="left: 46px; top: 690px; width: 768px; font-size: 76px; line-height: 1.02">РАНЕЕ НЕОДНОКРАТНО СУДИМ НА РОДИНЕ</div>
+            <div class="stamp" id="st-sudim" style="left: 450px; top: 852px; font-size: 110px">СУДИМ</div>
+            <div class="mono" style="left: 46px; top: 1012px; font-size: 22px; color: rgba(26, 26, 28, 0.62)">* по данным МВД КР · вина устанавливается только судом</div>
+          </div>
+        </section>
+
+        <!-- ===== 28.05–29.258 · the rest of the group: wanted cards ===== -->
+        <section id="sc-want" class="scene clip" data-start="28.05" data-duration="1.208" data-track-index="2" data-layout-allow-overlap>
+          <div class="want" id="want1" style="left: 100px; top: 380px">
+            <div class="ph"><img src="media/silhouette_1.png" alt="" /><div class="q">?</div></div>
+            <div class="lbl mono">УЧАСТНИК ГРУППЫ</div>
+            <div class="stamp" id="st-want1" style="left: 30px; top: 150px; font-size: 84px">ИЩУТ</div>
+          </div>
+          <div class="want" id="want2" style="left: 650px; top: 420px">
+            <div class="ph"><img src="media/silhouette_2.png" alt="" /><div class="q">?</div></div>
+            <div class="lbl mono">УЧАСТНИК ГРУППЫ</div>
+            <div class="stamp" id="st-want2" style="left: 40px; top: 160px; font-size: 84px">ИЩУТ</div>
+          </div>
+        </section>
+
+        <!-- ===== 29.258–29.55 · splice into the breakdown: black ===== -->
+        <section id="sc-dosm" class="scene clip" data-start="29.258" data-duration="0.292" data-track-index="2">
+          <div class="band" style="top: 900px"><span class="line mono" style="font-size: 40px; color: rgba(242, 240, 234, 0.85)">ДОСМОТР ▮</span></div>
+        </section>
+
+        <!-- ===== 29.55–32.75 · evidence pile: search footage, the bag, the stacks ===== -->
+        <section id="sc-pile" class="scene clip" data-start="29.55" data-duration="3.2" data-track-index="2">
+          <div class="desk"></div>
+        </section>
+        <div id="pile" style="position: absolute; inset: 0" data-layout-allow-overlap>
+          <div class="pwrap" id="pw-op2" style="left: 70px; top: 340px; width: 596px; height: 735px" data-layout-allow-overlap>
+            <video id="v-op2" class="clip" src="media/op2_counter_bag.mp4" muted playsinline data-start="29.55" data-media-start="3.6" data-duration="3.2" data-track-index="1" style="width: 560px; height: 641px"></video>
+            <div class="cap">досмотр</div>
+          </div>
+          <div class="print hid" id="pr-bag" style="left: 470px; top: 370px; padding: 16px 16px 70px">
+            <div class="ph" style="width: 470px; height: 591px"><img src="media/seized_bag.jpg" alt="" /></div>
+            <div class="cap">сумка · $362 900</div>
+            <div class="tape" style="transform: rotate(-5deg)"></div>
+          </div>
+          <div class="pwrap" id="pw-op4" style="left: 200px; top: 590px; width: 676px; height: 598px" data-layout-allow-overlap>
+            <video id="v-op4" class="clip" src="media/op4_stacks.mp4" muted playsinline data-start="31.6" data-duration="1.15" data-track-index="1" style="width: 640px; height: 504px"></video>
+            <div class="cap">пачки</div>
+            <div class="tape" style="transform: rotate(4deg)"></div>
+          </div>
+        </div>
+
+        <!-- ===== 34.20–35.00 · callback: Franklin's eye ===== -->
+        <section id="sc-eye2" class="scene clip" data-start="34.2" data-duration="0.8" data-track-index="2">
+          <img id="eye2-img" class="full" src="media/franklin_eye.jpg" alt="" style="filter: brightness(0.3) contrast(1.15)" />
+        </section>
+
+        <!-- ===== 38.57–39.85 · evidence print: exchange offices ===== -->
+        <section id="sc-ex" class="scene clip" data-start="38.57" data-duration="1.28" data-track-index="2">
+          <div class="desk"></div>
+          <div class="print" id="pr-ex" style="left: 102px; top: 640px">
+            <div class="ph" style="width: 840px; height: 559px"><img src="media/exchange_street.jpg" alt="" /></div>
+            <div class="cap">обменники · Бишкек</div>
+            <div class="tape" style="transform: rotate(-3deg)"></div>
+          </div>
+        </section>
+
+        <!-- ===== 43.37–44.41 · dark: "иначе тебе заплатят…" ===== -->
+        <section id="sc-dark" class="scene clip" data-start="43.37" data-duration="1.04" data-track-index="2">
+          <div id="redglow" style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 46%, rgba(224, 32, 46, 0.32), rgba(0, 0, 0, 0) 62%)"></div>
+        </section>
+
+        <!-- ===== 45.30–50.00 · end card ===== -->
+        <section id="sc-end" class="scene clip" data-start="45.3" data-duration="4.7" data-track-index="2">
+          <div class="logo-stack" id="end-logo"><div class="logo-ch r" id="end-r"></div><div class="logo-ch c" id="end-c"></div><div class="logo-ch w"></div></div>
+          <div class="band" style="top: 960px">
+            <span id="end-link" class="hid"><span class="pill">t.me/SMKFRE</span></span>
+            <span class="line mono hid" id="end-src" style="margin-top: 110px; font-size: 26px; color: rgba(242, 240, 234, 0.7)">Источник: МВД КР · 24.kg · vb.kg</span>
+            <span class="line mono hid" id="end-disc" style="margin-top: 14px; font-size: 24px; color: rgba(242, 240, 234, 0.55)">Вина устанавливается только судом · 18+ · Не финсовет</span>
+          </div>
+          <div class="tracking" id="end-track"></div>
+          <div class="scanlines"></div>
+        </section>
+
+        <!-- ================= kinetic type, one group per voice phrase ================= -->
+        <section id="g1" class="scene clip" data-start="2.0" data-duration="1.88" data-track-index="3">
+          <div class="band shadow" style="top: 1180px">
+            <span class="line t-small it hid" id="g1a">он пришёл</span>
+            <span class="line t-cond hid" id="g1b" style="font-size: 150px; margin-top: 8px">купить</span>
+            <span class="line t-cond yellow hid" id="g1c" style="font-size: 150px">крипту</span>
+          </div>
+        </section>
+
+        <section id="g2" class="scene clip" data-start="3.88" data-duration="2.02" data-track-index="3">
+          <div class="band shadow" style="top: 1180px">
+            <span class="line t-small it hid" id="g2a">с собой</span>
+            <span class="line t-cond yellow hid" id="g2b" style="font-size: 190px; margin-top: 8px">$0</span>
+            <span class="line t-small it hid" id="g2c" style="margin-top: 6px">долларов</span>
+          </div>
+        </section>
+
+        <section id="g3" class="scene clip" data-start="5.9" data-duration="1.04" data-track-index="3">
+          <div class="lowfade"></div>
+          <div class="band shadow" style="top: 1260px"><span class="line t-cond red hid" id="g3a" style="font-size: 170px">наличными</span></div>
+        </section>
+
+        <section id="g4" class="scene clip" data-start="6.94" data-duration="1.96" data-track-index="3" data-layout-allow-overlap>
+          <div class="band shadow" style="top: 560px">
+            <span class="line t-small it hid" id="g4a">настоящие из них —</span>
+            <span class="line t-cond hid" id="g4b" style="font-size: 170px; margin-top: 30px"><span class="rel">$362 000<span class="strike" id="g4s"></span></span></span>
+            <span class="line t-cond green hid" id="g4c" style="font-size: 330px; margin-top: 120px; text-shadow: 0 0 60px rgba(61, 220, 107, 0.45)">$900</span>
+          </div>
+          <div class="stamp" id="st-fake1" style="left: 330px; top: 800px; font-size: 80px">ФАЛЬШИВКА</div>
+        </section>
+
+        <section id="g5" class="scene clip" data-start="8.9" data-duration="2.0" data-track-index="3">
+          <div class="band shadow" style="top: 1210px">
+            <span class="line t-small it hid" id="g5a">в МВД</span>
+            <span class="line t-cond hid" id="g5b" style="font-size: 120px; margin-top: 8px">получили</span>
+            <span class="line t-cond yellow hid" id="g5c" style="font-size: 120px">информацию</span>
+          </div>
+        </section>
+
+        <section id="g6" class="scene clip" data-start="10.9" data-duration="2.54" data-track-index="3">
+          <div class="lowfade"></div>
+          <div class="band shadow" style="top: 1240px">
+            <span class="line t-small it hid" id="g6a">кто-то собирается</span>
+            <span class="line t-cond hid" id="g6b" style="font-size: 116px; margin-top: 8px">купить USDT</span>
+            <span class="line t-cond yellow hid" id="g6c" style="font-size: 116px">за наличные $</span>
+          </div>
+        </section>
+
+        <section id="g8" class="scene clip" data-start="14.8" data-duration="0.75" data-track-index="3" data-layout-allow-overlap>
+          <div class="dim"></div>
+          <div class="band" style="top: 820px">
+            <span class="rel t-cond" id="g8w" style="font-size: 148px">
+              <span id="g8r" style="position: absolute; left: 0; top: 0; color: #ff2236; mix-blend-mode: screen">фальшивками</span>
+              <span id="g8c" style="position: absolute; left: 0; top: 0; color: #19e3ff; mix-blend-mode: screen">фальшивками</span>
+              <span style="position: relative; color: var(--paper)">фальшивками</span>
+            </span>
+          </div>
+        </section>
+
+        <section id="g9" class="scene clip" data-start="16.0" data-duration="1.26" data-track-index="3" data-layout-allow-overlap>
+          <div class="dim"></div>
+          <div class="band shadow" style="top: 690px">
+            <span class="line mono hid" id="g9a" style="font-size: 44px; letter-spacing: 0.4em; margin-right: -0.4em">ДЕЛО</span>
+            <span class="line t-cond hid" id="g9b" style="font-size: 200px; margin-top: 6px">приманка</span>
+            <span class="line mono hid" id="g9c" style="font-size: 32px; margin-top: 22px; color: rgba(242, 240, 234, 0.85)">БИШКЕК · МАРТ 2025</span>
+          </div>
+          <div class="stamp" id="st-secret" style="left: 520px; top: 560px; font-size: 76px">СЕКРЕТНО</div>
+        </section>
+
+        <section id="g10" class="scene clip" data-start="17.26" data-duration="1.88" data-track-index="3">
+          <div class="band shadow" style="top: 1150px">
+            <span class="line t-cond hid" id="g10a" style="font-size: 112px">уголовный розыск</span>
+            <span class="line t-small it hid" id="g10b" style="margin-top: 14px">сделал так, чтобы покупатель</span>
+            <span class="line t-cond yellow hid" id="g10c" style="font-size: 112px; margin-top: 8px">сам вышел</span>
+          </div>
+        </section>
+
+        <section id="g11" class="scene clip" data-start="19.14" data-duration="1.46" data-track-index="3">
+          <div class="band shadow" style="top: 1250px"><span class="line t-cond red hid" id="g11a" style="font-size: 160px">на приманку</span></div>
+        </section>
+
+        <section id="g12" class="scene clip" data-start="20.6" data-duration="1.6" data-track-index="3">
+          <div class="topfade"></div>
+          <div class="band shadow" style="top: 420px"><span class="line t-cond hid" id="g12a" style="font-size: 190px">задержан</span></div>
+        </section>
+
+        <section id="g15" class="scene clip" data-start="26.9" data-duration="2.358" data-track-index="3" data-layout-allow-overlap>
+          <div class="band shadow" style="top: 1250px">
+            <span class="line t-small it hid" id="g15a">остальных</span>
+            <span class="line t-cond hid" id="g15b" style="font-size: 98px; margin-top: 8px">участников группы</span>
+          </div>
+          <div class="stamp" id="st-wanted" style="left: 200px; top: 640px; font-size: 120px">В РОЗЫСКЕ</div>
+        </section>
+
+        <section id="g17" class="scene clip" data-start="29.55" data-duration="3.2" data-track-index="3">
+          <div class="band shadow" style="top: 1210px">
+            <span class="line t-small it hid" id="g17a">при досмотре</span>
+            <span class="line t-cond yellow hid" id="g17b" style="font-size: 180px; margin-top: 8px">$362<span id="g17b2" class="hid"> 900</span></span>
+            <span class="line t-small it hid" id="g17c" style="margin-top: 6px">долларов</span>
+          </div>
+        </section>
+
+        <section id="g20" class="scene clip" data-start="32.75" data-duration="0.65" data-track-index="3">
+          <div class="lowfade"></div>
+          <div class="band shadow" style="top: 1260px"><span class="line t-cond hid" id="g20a" style="font-size: 170px">подлинные?</span></div>
+        </section>
+
+        <section id="g21" class="scene clip" data-start="33.4" data-duration="0.8" data-track-index="3">
+          <div class="band shadow" style="top: 1180px">
+            <span class="line t-small it hid" id="g21a">только</span>
+            <span class="line t-cond green hid" id="g21b" style="font-size: 230px; margin-top: 4px; text-shadow: 0 0 50px rgba(61, 220, 107, 0.45)">$900</span>
+          </div>
+        </section>
+
+        <section id="g22" class="scene clip" data-start="34.2" data-duration="0.8" data-track-index="3" data-layout-allow-overlap>
+          <div class="band shadow" style="top: 600px">
+            <span class="line t-cond green hid" id="g22a" style="font-size: 330px; text-shadow: 0 0 60px rgba(61, 220, 107, 0.45)">$900</span>
+            <span class="line t-small it hid" id="g22b" style="margin-top: 50px">из</span>
+            <span class="line t-cond hid" id="g22c" style="font-size: 150px; margin-top: 10px"><span class="rel">$362 900<span class="strike" style="transform: scaleX(1)"></span></span></span>
+          </div>
+        </section>
+
+        <section id="g23" class="scene clip" data-start="35.0" data-duration="3.57" data-track-index="3">
+          <div class="topfade"></div>
+          <div class="band shadow" style="top: 360px">
+            <span class="line t-small it hid" id="g23a">фальшивым в этой сделке</span>
+            <span class="line t-small it hid" id="g23b" style="margin-top: 6px">оказался</span>
+            <span class="line t-cond hid" id="g23c" style="font-size: 160px; margin-top: 18px"><span class="rel">не курс<span class="strike" id="g23s" style="height: 16px; margin-top: -8px"></span></span></span>
+            <span class="line t-cond hid" id="g23d" style="font-size: 130px; margin-top: 10px">а сами</span>
+            <span class="line t-cond red hid" id="g23e" style="font-size: 220px">доллары</span>
+          </div>
+        </section>
+
+        <section id="g24" class="scene clip" data-start="38.57" data-duration="2.42" data-track-index="3">
+          <div class="topfade" style="height: 760px"></div>
+          <div class="band shadow" style="top: 330px">
+            <span class="line t-cond hid" id="g24a" style="font-size: 160px">продаёшь</span>
+            <span class="line t-cond yellow hid" id="g24b" style="font-size: 92px; margin-top: 10px">крипту за наличные?</span>
+          </div>
+        </section>
+
+        <section id="g25" class="scene clip" data-start="40.99" data-duration="2.38" data-track-index="3">
+          <div class="band shadow" style="top: 1180px">
+            <span class="line t-small it hid" id="g25a">только через</span>
+            <span class="line t-cond hid" id="g25b" style="font-size: 112px; margin-top: 8px">лицензированные</span>
+            <span class="line t-cond green hid" id="g25c" style="font-size: 112px">площадки</span>
+          </div>
+        </section>
+
+        <section id="g26" class="scene clip" data-start="43.37" data-duration="1.04" data-track-index="3">
+          <div class="band shadow" style="top: 800px">
+            <span class="line t-small it hid" id="g26a">иначе</span>
+            <span class="line t-cond hid" id="g26b" style="font-size: 126px; margin-top: 12px">тебе заплатят…</span>
+          </div>
+        </section>
+
+        <section id="g27" class="scene clip" data-start="44.41" data-duration="0.89" data-track-index="3" data-layout-allow-overlap>
+          <div class="dim" style="background: rgba(0, 0, 0, 0.3)"></div>
+          <div class="band shadow" style="top: 690px"><span class="line t-cond hid" id="g27a" style="font-size: 250px">вот этим</span></div>
+          <div class="stamp" id="st-fake2" style="left: 140px; top: 1010px; font-size: 140px">ФАЛЬШИВКА</div>
+        </section>
+      </div>
+
+      <!-- ===== persistent chrome ===== -->
+      <div id="hud" class="clip" data-start="2.0" data-duration="43.3" data-track-index="6">
+        <div class="l mono">ДЕЛО $362 900</div>
+        <div class="r mono"><span id="recdot"></span>REC <span id="tc">00:00:00</span></div>
+      </div>
+      <div id="brandmark" class="clip" data-start="2.0" data-duration="43.3" data-track-index="6"></div>
+      <div id="vignette"></div>
+      <div id="grain"><div class="tex" id="grain-tex"></div></div>
+      <div id="glitch"></div>
+      <div id="flash"></div>
+    </div>
+
+    <script>
+      (function () {
+        // Seeded PRNG: glitch slices and shakes are reproducible from the seed.
+        let seed = 0x5e0362;
+        const rnd = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
+
+        const tl = gsap.timeline({ paused: true });
+        const $ = (s) => document.querySelector(s);
+
+        const slam = (el, t, from = 1.35) =>
+          tl.fromTo(el, { opacity: 0, scale: from }, { opacity: 1, scale: 1, duration: 0.16, ease: "power4.out" }, t);
+        const pop = (el, t) => tl.fromTo(el, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.22, ease: "power3.out" }, t);
+        const draw = (el, t, d = 0.22) => tl.fromTo(el, { scaleX: 0 }, { scaleX: 1, duration: d, ease: "power2.out" }, t);
+        const push = (el, t, d, to = 1.07, from = 1) => tl.fromTo(el, { scale: from }, { scale: to, duration: d, ease: "none" }, t);
+
+        const glitchRoot = $("#glitch");
+        const slices = [];
+        for (let i = 0; i < 14; i++) {
+          const s = document.createElement("div");
+          s.className = "slice";
+          glitchRoot.appendChild(s);
+          slices.push(s);
+        }
+        function glitch(t, dur = 0.18, strength = 1) {
+          const steps = 4;
+          for (let k = 0; k < steps; k++) {
+            const tt = t + (dur / steps) * k;
+            slices.forEach((s, i) => {
+              const on = rnd() < 0.55 * strength;
+              tl.set(s, {
+                opacity: on ? 0.55 + rnd() * 0.45 : 0,
+                top: Math.floor(rnd() * 1920),
+                height: 6 + Math.floor(rnd() * 70),
+                x: (rnd() - 0.5) * 160 * strength,
+                backgroundColor: i % 3 === 0 ? "#ff2236" : i % 3 === 1 ? "#19e3ff" : "#ffffff",
+              }, tt);
+            });
+            tl.set("#root", { x: (rnd() - 0.5) * 24 * strength }, tt);
+          }
+          slices.forEach((s) => tl.set(s, { opacity: 0 }, t + dur));
+          tl.set("#root", { x: 0 }, t + dur);
+        }
+        const flash = (t, peak = 0.85, d = 0.12) =>
+          tl.fromTo("#flash", { opacity: peak }, { opacity: 0, duration: d, ease: "power2.out", immediateRender: false }, t);
+        // camera hit: a few seeded jolts of the whole stage, settling back to rest
+        function shake(t, amp = 18, dur = 0.24) {
+          const n = 6;
+          for (let k = 0; k < n; k++) {
+            const a = amp * (1 - k / n);
+            tl.set("#stage", { x: (rnd() - 0.5) * 2 * a, y: (rnd() - 0.5) * 2 * a }, t + (dur / n) * k);
+          }
+          tl.set("#stage", { x: 0, y: 0 }, t + dur);
+        }
+        // rubber stamp: lands exactly on t (the SFX hit), then the frame jolts
+        function stamp(el, t, rot = -8, amp = 14) {
+          tl.fromTo(el, { opacity: 0, scale: 2.3, rotation: rot + 9 }, { opacity: 1, scale: 1, rotation: rot, duration: 0.11, ease: "power4.in", immediateRender: false }, t - 0.11);
+          tl.set(el, { opacity: 0 }, 0);
+          shake(t, amp);
+        }
+        // photo print dropped on the desk with a shutter flash
+        function printIn(el, t, rot) {
+          tl.fromTo(el, { opacity: 0, scale: 1.22, rotation: rot - 5, y: -40 }, { opacity: 1, scale: 1, rotation: rot, y: 0, duration: 0.2, ease: "power3.out", immediateRender: false }, t);
+          tl.set(el, { opacity: 0 }, 0);
+          flash(t, 0.55, 0.14);
+        }
+        // typewriter: characters appear one by one from t
+        function typeIn(el, t, cps = 30) {
+          const chars = [...el.textContent];
+          el.textContent = "";
+          chars.forEach((ch, i) => {
+            const sp = document.createElement("span");
+            sp.textContent = ch;
+            sp.style.opacity = "0";
+            el.appendChild(sp);
+            tl.set(sp, { opacity: 1 }, t + i / cps);
+          });
+        }
+
+        tl.fromTo("#grain-tex", { x: 0, y: 0 }, { x: -48, y: 31, duration: 0.25, ease: "steps(3)", repeat: 199, yoyo: true }, 0);
+
+        // ---------- HUD: REC dot + running timecode ----------
+        const tc = $("#tc");
+        const pad = (n) => String(n).padStart(2, "0");
+        const tcObj = { v: 0 };
+        tl.fromTo(tcObj, { v: 0 }, {
+          v: 43.3, duration: 43.3, ease: "none",
+          onUpdate: () => { const f = Math.floor(tcObj.v * 30); tc.textContent = `${pad(Math.floor(f / 1800))}:${pad(Math.floor(f / 30) % 60)}:${pad(f % 30)}`; },
+        }, 2.0);
+        tl.fromTo("#recdot", { opacity: 1 }, { opacity: 0.15, duration: 0.5, ease: "steps(1)", repeat: 85, yoyo: true }, 2.0);
+
+        // ---------- S0 · sting (identical to episodes 1–3) ----------
+        const turb = $("#vhs-turb");
+        const vhs = { f: 0 };
+        tl.to(vhs, { f: 1, duration: 2.0, ease: "none", onUpdate: () => turb.setAttribute("seed", String(1 + Math.floor(vhs.f * 48))) }, 0);
+        tl.fromTo("#s0-track", { y: -120 }, { y: 1980, duration: 1.1, ease: "none" }, 0.1);
+        tl.fromTo("#s0-track", { y: -120 }, { y: 1980, duration: 0.7, ease: "none", immediateRender: false }, 1.22);
+        tl.fromTo("#s0-logo", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "steps(6)" }, 0.05);
+        tl.fromTo("#s0-r", { x: -38 }, { x: -6, duration: 0.95, ease: "steps(8)" }, 0.05);
+        tl.fromTo("#s0-c", { x: 34 }, { x: 5, duration: 0.95, ease: "steps(8)" }, 0.05);
+        tl.to("#s0-r", { x: -26, duration: 0.08, ease: "steps(1)", yoyo: true, repeat: 3 }, 1.05);
+        tl.to("#s0-c", { x: 22, duration: 0.08, ease: "steps(1)", yoyo: true, repeat: 3 }, 1.05);
+        tl.fromTo("#s0-logo", { scale: 1 }, { scale: 1.08, duration: 1.9, ease: "power1.in" }, 0.1);
+        tl.fromTo("#vhs-noise", { opacity: 0.45 }, { opacity: 0.2, duration: 1.6 }, 0);
+        glitch(0.05, 0.16, 0.7);
+        glitch(1.05, 0.14, 0.6);
+        glitch(1.84, 0.16, 1);
+
+        // ---------- footage push-ins ----------
+        push("#w-c01", 2.0, 1.88, 1.05);
+        push("#w-c02", 3.88, 2.02, 1.06);
+        push("#w-c03", 5.9, 1.04, 1.12, 1.02);
+        push("#w-c04", 9.9, 1.0, 1.05);
+        push("#w-c05", 10.9, 2.54, 1.08);
+        push("#w-c06", 14.8, 0.75, 1.12);
+        push("#w-c07", 16.0, 1.26, 1.1, 1.0);
+        push("#w-c08", 19.14, 1.46, 1.05);
+        push("#w-c09", 20.6, 1.6, 1.08);
+        push("#w-c18", 22.2, 3.8, 1.1);
+        push("#w-c10", 26.0, 0.9, 1.06);
+        push("#w-c11", 26.9, 1.15, 1.08);
+        push("#w-c12", 28.05, 1.208, 1.05);
+        push("#w-c13", 32.75, 0.65, 1.1);
+        push("#w-c14", 33.4, 0.8, 1.06);
+        push("#w-c15", 35.0, 3.57, 1.12);
+        push("#w-c16", 39.85, 1.14, 1.08);
+        push("#w-c17", 40.99, 2.38, 1.06);
+        push("#w-c19", 44.41, 0.89, 1.0, 1.14);
+
+        // ---------- 2.00 · he came to buy crypto (VO 1631 from 2.00) ----------
+        pop("#g1a", 2.0);
+        slam("#g1b", 2.94, 1.3);
+        slam("#g1c", 3.22, 1.5);
+
+        // ---------- 3.88 · count-up to $362 900 (lands on "тысячи") ----------
+        pop("#g2a", 3.88);
+        tl.fromTo("#g2b", { opacity: 0 }, { opacity: 1, duration: 0.08 }, 3.95);
+        const cnt = { v: 0 };
+        const cntEl = $("#g2b");
+        const fmt = (n) => "$" + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        tl.fromTo(cnt, { v: 0 }, { v: 362900, duration: 1.35, ease: "expo.out", onUpdate: () => { cntEl.textContent = fmt(Math.round(cnt.v / 100) * 100); } }, 3.95);
+        tl.to("#g2b", { scale: 1.12, duration: 0.1, yoyo: true, repeat: 1, ease: "power2.out" }, 5.3);
+        pop("#g2c", 5.66);
+
+        // ---------- 5.90 · cash ----------
+        slam("#g3a", 5.9, 1.6);
+        glitch(5.86, 0.12, 0.8);
+
+        // ---------- 6.94 · only $900 are real ----------
+        push("#eye-img", 6.94, 1.96, 1.18);
+        pop("#g4a", 6.94);
+        slam("#g4b", 7.02, 1.2);
+        draw("#g4s", 7.12, 0.08);
+        stamp("#st-fake1", 7.19, -9, 12);
+        slam("#g4c", 7.88, 1.6);
+        flash(7.88, 0.3, 0.12);
+
+        // ---------- 8.90 · MVD print ----------
+        printIn("#pr-mvd", 8.9, -3);
+        tl.fromTo("#pr-mvd", { scale: 1 }, { scale: 1.04, duration: 0.8, ease: "none", immediateRender: false }, 9.1);
+        pop("#g5a", 8.9);
+        slam("#g5b", 9.52, 1.25);
+        slam("#g5c", 9.9, 1.25);
+
+        // ---------- 10.90 · the request: buy USDT for cash ----------
+        pop("#g6a", 10.98);
+        slam("#g6b", 11.54, 1.3);
+        slam("#g6c", 12.5, 1.3);
+
+        // ---------- 13.44 · vb.kg clipping, marker on the key phrases ----------
+        tl.fromTo("#vb-grp", { scale: 1.0 }, { scale: 1.3, duration: 1.36, ease: "power1.inOut", transformOrigin: "35% 47%" }, 13.44);
+        tl.fromTo("#vb-head", { opacity: 0, y: -50 }, { opacity: 1, y: 0, duration: 0.18, ease: "power3.out" }, 13.44);
+        tl.fromTo("#vb-para", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.2, ease: "power3.out" }, 13.5);
+        draw("#mk1", 13.72, 0.22);
+        draw("#mk2", 14.44, 0.3);
+
+        // ---------- 14.80 · "фальшивками": RGB split ----------
+        glitch(14.78, 0.16, 1.1);
+        tl.fromTo("#g8w", { opacity: 0, scale: 1.5 }, { opacity: 1, scale: 1, duration: 0.14, ease: "power4.out" }, 14.8);
+        for (let k = 0; k < 9; k++) {
+          const tt = 14.8 + k * 0.08;
+          tl.set("#g8r", { x: (rnd() - 0.5) * 30, y: (rnd() - 0.5) * 8 }, tt);
+          tl.set("#g8c", { x: (rnd() - 0.5) * 30, y: (rnd() - 0.5) * 8 }, tt);
+        }
+        glitch(15.48, 0.1, 1);
+
+        // ---------- 15.55 · black: loading the case ----------
+        typeIn($("#load-t"), 15.56, 60);
+
+        // ---------- 16.00 · DROP: case title over the city ----------
+        flash(16.0, 0.95, 0.22);
+        shake(16.0, 22, 0.3);
+        tl.fromTo("#g9a", { opacity: 0, scaleX: 1.6 }, { opacity: 1, scaleX: 1, duration: 0.3, ease: "power3.out" }, 16.0);
+        slam("#g9b", 16.04, 1.7);
+        pop("#g9c", 16.3);
+        stamp("#st-secret", 16.947, 11, 10);
+
+        // ---------- 17.26 · operative footage print ----------
+        tl.set("#pw-op1", { opacity: 0 }, 0);
+        tl.fromTo("#pw-op1", { opacity: 0, scale: 1.22, rotation: -6, y: -40 }, { opacity: 1, scale: 1, rotation: 2, y: 0, duration: 0.2, ease: "power3.out", immediateRender: false }, 17.26);
+        flash(17.26, 0.55, 0.14);
+        tl.fromTo("#pw-op1", { scale: 1 }, { scale: 1.05, duration: 1.6, ease: "none", immediateRender: false }, 17.46);
+        tl.set("#pw-op1", { opacity: 0 }, 19.14);
+        slam("#g10a", 17.3, 1.25);
+        pop("#g10b", 18.2);
+        slam("#g10c", 18.88, 1.3);
+
+        // ---------- 19.14 · mousetrap snaps on "приманку" ----------
+        slam("#g11a", 19.79, 1.6);
+        flash(19.79, 0.45, 0.1);
+        shake(19.79, 20);
+
+        // ---------- 20.60 · cuffs lock ----------
+        slam("#g12a", 21.682, 1.7);
+        flash(21.682, 0.5, 0.12);
+        shake(21.682, 16);
+
+        // ---------- 22.20 · dossier (VO 1642: 23 года · по данным МВД · ранее неоднократно судим) ----------
+        tl.fromTo("#dos", { opacity: 0, y: 260, rotation: 4 }, { opacity: 1, y: 0, rotation: -1.5, duration: 0.3, ease: "power3.out" }, 22.2);
+        tl.fromTo("#dos-photo", { opacity: 0, scale: 1.3, rotation: -9 }, { opacity: 1, scale: 1, rotation: -3, duration: 0.18, ease: "power3.out" }, 22.42);
+        tl.fromTo("#dos", { scale: 1 }, { scale: 1.04, duration: 3.3, ease: "none", immediateRender: false }, 22.5);
+        typeIn($("#f-age"), 22.35, 22);
+        typeIn($("#f-src"), 23.45, 30);
+        typeIn($("#f-prior"), 24.63, 40);
+        stamp("#st-sudim", 25.47, -10, 12);
+
+        // ---------- 26.00 · door slam ----------
+        flash(26.5, 0.35, 0.1);
+        shake(26.5, 14);
+
+        // ---------- 26.90 · the rest of the group is wanted (text only, no VO) ----------
+        pop("#g15a", 26.94);
+        slam("#g15b", 27.12, 1.25);
+        stamp("#st-wanted", 27.364, -7, 14);
+        tl.fromTo("#want1", { opacity: 0, x: -420, rotation: -14 }, { opacity: 1, x: 0, rotation: -6, duration: 0.2, ease: "power3.out" }, 28.05);
+        tl.fromTo("#want2", { opacity: 0, x: 420, rotation: 14 }, { opacity: 1, x: 0, rotation: 5, duration: 0.2, ease: "power3.out" }, 28.1);
+        tl.set("#st-wanted", { opacity: 0 }, 28.05);
+        stamp("#st-want1", 28.311, -12, 0);
+        stamp("#st-want2", 28.311, 9, 14);
+        glitch(29.19, 0.12, 1);
+
+        // ---------- 29.258 · splice into the breakdown ----------
+        // ---------- 29.55 · evidence pile (VO 1645) ----------
+        tl.fromTo("#pile", { scale: 1 }, { scale: 1.06, duration: 3.2, ease: "none" }, 29.55);
+        tl.set(["#pw-op2", "#pw-op4"], { opacity: 0 }, 0);
+        tl.fromTo("#pw-op2", { opacity: 0, scale: 1.22, rotation: -9, y: -40 }, { opacity: 1, scale: 1, rotation: -4, y: 0, duration: 0.2, ease: "power3.out", immediateRender: false }, 29.55);
+        flash(29.55, 0.55, 0.14);
+        tl.set("#pw-op2", { opacity: 0 }, 32.75);
+        printIn("#pr-bag", 30.55, 3);
+        tl.set("#pr-bag", { opacity: 0 }, 32.75);
+        tl.fromTo("#pw-op4", { opacity: 0, scale: 1.22, rotation: -7, y: -40 }, { opacity: 1, scale: 1, rotation: -2, y: 0, duration: 0.2, ease: "power3.out", immediateRender: false }, 31.6);
+        flash(31.6, 0.5, 0.14);
+        tl.set("#pw-op4", { opacity: 0 }, 32.75);
+        pop("#g17a", 29.55);
+        slam("#g17b", 30.55, 1.4);
+        tl.fromTo("#g17b2", { opacity: 0 }, { opacity: 1, duration: 0.06 }, 31.25);
+        tl.to("#g17b", { scale: 1.08, duration: 0.08, yoyo: true, repeat: 1 }, 31.25);
+        pop("#g17c", 31.85);
+
+        // ---------- 32.75 · UV check ----------
+        slam("#g20a", 32.75, 1.3);
+        // ---------- 33.40 · detector: only $900 ----------
+        pop("#g21a", 33.45);
+        slam("#g21b", 33.73, 1.6);
+        flash(33.8, 0.25, 0.1);
+        // ---------- 34.20 · callback card ----------
+        push("#eye2-img", 34.2, 0.8, 1.22, 1.12);
+        slam("#g22a", 34.2, 1.15);
+        pop("#g22b", 34.3);
+        pop("#g22c", 34.36);
+
+        // ---------- 35.00 · not the rate, the dollars (VO 1647) ----------
+        pop("#g23a", 35.0);
+        pop("#g23b", 36.02);
+        slam("#g23c", 36.42, 1.3);
+        draw("#g23s", 36.834, 0.14);
+        shake(36.834, 8);
+        slam("#g23d", 37.0, 1.2);
+        slam("#g23e", 37.42, 1.6);
+        flash(37.42, 0.25, 0.12);
+
+        // ---------- 38.57 · selling crypto for cash? (VO 1651) ----------
+        printIn("#pr-ex", 38.57, -2);
+        tl.fromTo("#pr-ex", { scale: 1 }, { scale: 1.05, duration: 1.1, ease: "none", immediateRender: false }, 38.77);
+        slam("#g24a", 38.57, 1.3);
+        slam("#g24b", 39.85, 1.3);
+        pop("#g25a", 40.99);
+        slam("#g25b", 41.69, 1.2);
+        slam("#g25c", 42.33, 1.3);
+
+        // ---------- 43.37 · "иначе тебе заплатят…" ----------
+        glitch(43.33, 0.14, 0.9);
+        tl.fromTo("#redglow", { opacity: 0.4 }, { opacity: 1, duration: 1.0, ease: "power1.in" }, 43.37);
+        pop("#g26a", 43.37);
+        slam("#g26b", 43.87, 1.2);
+
+        // ---------- 44.41 · "вот этим": fake bills, stamp ----------
+        slam("#g27a", 44.41, 1.8);
+        stamp("#st-fake2", 44.41, -8, 26);
+        flash(44.41, 0.7, 0.16);
+
+        // ---------- 45.30 · end card ----------
+        glitch(45.26, 0.16, 1);
+        tl.fromTo("#end-logo", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "steps(5)" }, 45.32);
+        tl.fromTo("#end-r", { x: -30 }, { x: -5, duration: 0.8, ease: "steps(7)" }, 45.32);
+        tl.fromTo("#end-c", { x: 28 }, { x: 4, duration: 0.8, ease: "steps(7)" }, 45.32);
+        tl.fromTo("#end-track", { y: -120 }, { y: 1980, duration: 1.2, ease: "none" }, 45.4);
+        slam("#end-link", 45.9, 1.2);
+        tl.set("#end-src", { opacity: 1 }, 46.3);
+        typeIn($("#end-src"), 46.3, 40);
+        pop("#end-disc", 47.3);
+        tl.fromTo("#end-logo", { scale: 1 }, { scale: 1.06, duration: 4.6, ease: "none", immediateRender: false }, 45.4);
+
+        window.__timelines = window.__timelines || {};
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>
