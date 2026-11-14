@@ -22,7 +22,7 @@ One handover in the middle, so the story stays in one line: first the deal and t
 
 **Two syllabus rules that shape the deck**
 
-- Drawings and illustrations made by GenAI are prohibited. The deck will be text and tables only. Slide 8 has a marked empty space for a route map that you add yourselves from a cited source.
+- Drawings and illustrations made by GenAI are prohibited. The deck uses text, tables and plain layout boxes only. It contains no map; if you want one on slide 8, add it yourselves from a cited source.
 - The last slide must name the GenAI used and list the prompts. A draft is in slide 16.
 
 ---
@@ -97,19 +97,17 @@ Price build-up, our assumptions: goods ex works EUR 530,000 · agent commission 
 
 ---
 
-### Slide 2 — Agenda and who presents what
+### Slide 2 — Case overview and who presents what
 
 **On the slide**
 
-| Part | Topic | Presenter |
-|---|---|---|
-| 1 | The transaction and the goods | Student A |
-| 2 | Risks, intermediary, CPT, route | Student A |
-| 3 | Documents and the payment method | Student B |
-| 4 | Seller's and buyer's rights and duties | Student B |
-| 5 | Possible breaches and our assessment | Student B |
+- **Situation:** NordNeuro Systems AS (Norway) sells 12 neural computers, a dual-use item, to Tengri Analytics LLC (Mongolia) for EUR 576,000.
+- **Question:** How do CPT and a promissory note with clean collection divide risk, cost and duties between seller and buyer, and how does each side protect itself?
+- **Answer:** Risk passes in Norway, cost at Ulaanbaatar airport, and payment follows 90 days later with no bank undertaking. The seller needs credit cover; the buyer needs cargo insurance.
+- **Who presents what:** Student A (team leader) — the transaction and the goods, risks, the intermediary, CPT, route and carriers. Student B — documents, the payment method, seller's and buyer's rights and duties, breaches, our assessment.
+- Three figures: EUR 576,000 contract value · 90 days of credit · dual-use entry 4A004.b.
 
-**Say (15 s):** "We are two, so we split the three aspects between us. I cover the deal and the physical flow: the goods, the risks, the intermediary, the delivery term and the route. My colleague covers the money and the legal flow: the documents, the payment, both parties' rights and duties, and our critical view."
+**Say (20 s):** "We are two, so we split the three aspects between us. I cover the deal and the physical flow: the goods, the risks, the intermediary, the delivery term and the route. My colleague covers the money and the legal flow: the documents, the payment, both parties' rights and duties, and our critical view. Our answer in one sentence: risk passes in Norway, cost passes in Ulaanbaatar, and payment comes ninety days later with no bank behind it."
 
 ---
 
@@ -168,7 +166,7 @@ Price build-up, our assumptions: goods ex works EUR 530,000 · agent commission 
 | **Legal and documentary** | Note with a formal defect is not a valid note. Missing licence copy stops the goods at customs. | Note drafted by the bank. Document checklist. |
 | **Currency** | Buyer earns tugrik, owes euros. Seller's costs are in kroner. | Invoice in euros. Forward cover on both sides. |
 
-**Say (45 s):** "We see six groups of risk. The product risk is the licence and diversion. The country risk is geography: Mongolia's only neighbours are Russia and China, and it has a new trade agreement with the Eurasian Economic Union, so re-export to Russia is the scenario the Norwegian authority will worry about. The counterparty risk is the biggest commercial one, and my colleague comes back to it. The transport risk has one surprising number: under the Montreal Convention the airline's liability is limited by weight, here roughly fifteen thousand euros for a shipment worth 576,000. So insurance is not optional."
+**Say (45 s):** "We see six groups of risk. The product risk is the licence and diversion. The country risk is geography: Mongolia's only neighbours are Russia and China, and it has a new trade agreement with the Eurasian Economic Union, so re-export to Russia is the scenario the Norwegian authority will worry about. The counterparty risk is the biggest commercial one, and my colleague comes back to it. The transport risk has one surprising number: under the Montreal Convention the airline's liability is limited by weight, here less than twenty thousand euros for a shipment worth 576,000. So insurance is not optional."
 
 **Backup for questions:** ratings at the time of writing — S&P BB- (October 2025), Moody's B1 (October 2025). The carrier limit is 26 SDR per kg × 480 kg ≈ 12,480 SDR.
 
@@ -212,7 +210,7 @@ Price build-up, our assumptions: goods ex works EUR 530,000 · agent commission 
 | Sends the air waybill and notice of dispatch | On-carriage airport to city, 52 km |
 | No duty to insure | No duty to insure, but every reason to |
 
-**Say (45 s):** "CPT means Carriage Paid To. It has two critical points, and they are five thousand kilometres apart. Risk passes in Kjeller, the moment the seller hands the cartons to the first carrier. Cost passes at Ulaanbaatar airport, because the seller pays the freight that far. So the buyer carries the risk of a journey that the seller organised and paid for. And CPT obliges neither party to insure. That gap is the main weakness of this term, and our recommendation is that the buyer takes out cargo insurance from door to door."
+**Say (45 s):** "CPT means Carriage Paid To. It has two critical points, and they are more than five thousand kilometres apart. Risk passes in Kjeller, the moment the seller hands the cartons to the first carrier. Cost passes at Ulaanbaatar airport, because the seller pays the freight that far. So the buyer carries the risk of a journey that the seller organised and paid for. And CPT obliges neither party to insure. That gap is the main weakness of this term, and our recommendation is that the buyer takes out cargo insurance from door to door."
 
 **Backup for questions:** CPT suits any mode of transport, including air. If the parties want the seller to insure, the matching term is CIP, where Incoterms 2020 requires all-risks cover.
 
@@ -236,9 +234,7 @@ Price build-up, our assumptions: goods ex works EUR 530,000 · agent commission 
 - **Rejected:** sea to Tianjin and rail through China — 40 to 50 days and many more handlings. Rail through Russia — Norway prohibits the transit of dual-use goods through Russian territory.
 - **Others involved:** DEKSA (licence) · DNB and Khan Bank (collection) · Eksfin (seller's credit insurance) · Mongol Daatgal (buyer's cargo insurance) · Blue Sky Trade Agency (agent).
 
-*[Space for a route map — added by the team from a cited map source, not AI-generated.]*
-
-**Say (45 s):** "The goods go by air. They are light, valuable and sensitive, and Mongolia has no sea port. A forwarder collects them in Kjeller, clears export at Oslo airport, and Turkish Airlines flies them through Istanbul to Ulaanbaatar. There the buyer's broker clears import and a local truck brings them to the lab. We rejected sea and rail through China because it takes six weeks with many handlings. We rejected rail through Russia for a legal reason: Norway prohibits the transit of dual-use goods through Russia. That is the end of my part. My colleague continues with the documents and the payment."
+**Say (45 s):** "The goods go by air. They are light, valuable and sensitive, and Mongolia has no sea port. A forwarder collects them in Kjeller, clears export at Oslo airport, and Turkish Airlines flies them through Istanbul to Ulaanbaatar. There the buyer's broker clears import and a local truck brings them to the lab. We rejected sea and rail through China because it takes about six weeks with many handlings. We rejected rail through Russia for a legal reason: Norway prohibits the transit of dual-use goods through Russia. That is the end of my part. My colleague continues with the documents and the payment."
 
 ---
 
@@ -375,9 +371,9 @@ Price build-up, our assumptions: goods ex works EUR 530,000 · agent commission 
 2. **CPT leaves the cargo uninsured by default.** We would move to **CIP**, where the seller must buy all-risks cover. The seller already controls the route, which is right for a licensed item.
 3. **Compliance is a commercial term here.** Licence as a condition precedent, no-re-export clause, audit right. Route with no stop in Russia.
 4. **The agent should share the payment risk.** A del credere commission would give the agent a real interest in the buyer's solvency.
-5. **Open question for research:** entry 4A004.b dates from the 1990s. Does it still describe the hardware that matters, now that AI runs mostly on conventional accelerator chips?
+5. **Open question for research:** entry 4A004.b has been on the control list for decades. Does it still describe the hardware that matters, now that AI runs mostly on conventional accelerator chips?
 
-**Say (40 s):** "Our conclusion is that the given terms work, but they are unbalanced. The seller gives ninety days of credit to a new buyer in a high-risk country, with no bank behind the note. We would ask Khan Bank to add its aval, which turns company risk into bank risk. We would also change CPT to CIP so that the cargo is insured by contract and not by good advice. And we leave one open question: the control entry for neural computers is thirty years old, while most AI today runs on ordinary accelerator chips. Whether the list still controls the right hardware would be worth researching. Thank you."
+**Say (40 s):** "Our conclusion is that the given terms work, but they are unbalanced. The seller gives ninety days of credit to a new buyer in a high-risk country, with no bank behind the note. We would ask Khan Bank to add its aval, which turns company risk into bank risk. We would also change CPT to CIP so that the cargo is insured by contract and not by good advice. And we leave one open question: the control entry for neural computers has been on the list for decades, while most AI today runs on ordinary accelerator chips. Whether the list still controls the right hardware would be worth researching. Thank you."
 
 ---
 
